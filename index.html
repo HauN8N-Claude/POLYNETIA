@@ -36,35 +36,41 @@
   /*  charte PolynetIA. Tout le reste de la page s'adapte.           */
   /* =============================================================== */
   :root {
-    /* Couleurs principales */
-    --ink:          #17232a;   /* Texte foncé principal */
-    --ink-soft:     #40525a;   /* Texte secondaire */
-    --muted:        #5f7076;   /* Texte discret */
+    /* -- Palette « tech » (thème sombre) ------------------------- */
+    /* TODO COULEURS : ajuste ces variables pour ta charte. */
+    --ink:          #eef2fb;   /* Titres — texte clair */
+    --ink-soft:     #c3cbe0;   /* Texte courant */
+    --muted:        #8b95b3;   /* Texte discret */
 
-    --brand:        #0e5b61;   /* Teal profond — couleur PolynetIA */
-    --brand-dark:   #0a464b;
-    --brand-tint:   #e4f0ef;   /* Fond teal très clair */
+    --brand:        #5b8cff;   /* Bleu électrique — couleur principale */
+    --brand-dark:   #9db4ff;   /* Bleu clair (texte sur fonds sombres) */
+    --brand-tint:   rgba(91, 140, 255, .12); /* Voile bleu */
 
-    --accent:       #d1521f;   /* Terracotta — bouton de conversion */
-    --accent-dark:  #b3441a;
-    --accent-tint:  #fbeadf;
+    --accent:       #6366f1;   /* Indigo */
+    --accent-dark:  #22d3ee;   /* Cyan — accents et libellés */
+    --accent-tint:  rgba(34, 211, 238, .12);
 
-    --cream:        #faf6ef;   /* Fond général chaleureux */
-    --sand:         #f2ebdd;   /* Fond de section alterné */
-    --card:         #ffffff;   /* Fond des cartes */
-    --line:         #e6ddcd;   /* Bordures douces */
+    --cream:        #0a0e1a;   /* Fond général sombre */
+    --sand:         #0d1424;   /* Fond de section alterné */
+    --card:         #121a2e;   /* Fond des cartes */
+    --line:         rgba(255, 255, 255, .10); /* Bordures douces */
+    --line-strong:  rgba(255, 255, 255, .18);
 
-    --ok:           #1f7a4d;   /* Succès / positif */
-    --warn-bg:      #fff4e8;
+    --ok:           #34d399;   /* Succès / positif */
+    --warn-bg:      rgba(251, 113, 133, .08);
+
+    /* Dégradé de conversion */
+    --grad: linear-gradient(135deg, #4f7cff 0%, #22d3ee 100%);
 
     /* Typographie */
     --font: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
 
     /* Rythme */
     --radius:   16px;
     --radius-sm: 10px;
-    --shadow:   0 8px 30px rgba(23, 35, 42, 0.08);
-    --shadow-lg:0 18px 50px rgba(23, 35, 42, 0.14);
+    --shadow:   0 10px 30px rgba(0, 0, 0, .35);
+    --shadow-lg:0 24px 60px rgba(0, 0, 0, .5);
     --wrap:     1120px;
     --gap:      clamp(56px, 8vw, 104px); /* Espace vertical entre sections */
   }
@@ -89,6 +95,16 @@
     font-size: 17px;
     overflow-x: hidden;
   }
+  /* Fond « tech » : halos lumineux + grille discrète */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(900px 520px at 82% -8%, rgba(91,140,255,.18), transparent 60%),
+      radial-gradient(760px 520px at -5% 2%, rgba(34,211,238,.12), transparent 55%),
+      linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+    background-size: auto, auto, 46px 46px, 46px 46px;
+  }
 
   h1, h2, h3 { line-height: 1.15; color: var(--ink); font-weight: 800; margin: 0 0 .4em; letter-spacing: -0.01em; }
   h1 { font-size: clamp(2rem, 6vw, 3.4rem); }
@@ -104,7 +120,13 @@
 
   section { padding: var(--gap) 0; }
   .section-sand { background: var(--sand); }
-  .section-brand { background: var(--brand); color: #fff; }
+  .section-brand {
+    background:
+      radial-gradient(700px 380px at 85% 0%, rgba(34, 211, 238, .16), transparent 60%),
+      linear-gradient(160deg, #17204a 0%, #0b1226 65%);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    color: #fff;
+  }
   .section-brand h2, .section-brand h3 { color: #fff; }
 
   .eyebrow {
@@ -115,9 +137,15 @@
     text-transform: uppercase;
     color: var(--accent-dark);
     background: var(--accent-tint);
+    border: 1px solid rgba(34, 211, 238, .28);
     padding: 6px 14px;
     border-radius: 999px;
     margin-bottom: 18px;
+  }
+  /* Libellés en style « mono » pour l'ambiance tech */
+  .eyebrow, .card .kicker, .service .kicker, .result-note .lbl,
+  .phase .tag, .placeholder .tag, .testi .badge {
+    font-family: var(--mono);
   }
   .section-brand .eyebrow { color: #fff; background: rgba(255,255,255,.18); }
 
@@ -144,17 +172,20 @@
     transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
   }
   .btn-primary {
-    background: var(--accent);
-    color: #fff;
-    box-shadow: 0 10px 24px rgba(209, 82, 31, .32);
+    background: var(--grad);
+    color: #061024;
+    box-shadow: 0 10px 30px rgba(34, 211, 238, .28);
   }
-  .btn-primary:hover, .btn-primary:focus-visible { background: var(--accent-dark); transform: translateY(-2px); }
+  .btn-primary:hover, .btn-primary:focus-visible {
+    filter: brightness(1.06); transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(34, 211, 238, .38);
+  }
   .btn-ghost {
     background: transparent;
     color: var(--brand);
     border-color: var(--brand);
   }
-  .btn-ghost:hover, .btn-ghost:focus-visible { background: var(--brand); color: #fff; }
+  .btn-ghost:hover, .btn-ghost:focus-visible { background: var(--brand); color: #061024; }
   .section-brand .btn-ghost { color:#fff; border-color: rgba(255,255,255,.7); }
   .section-brand .btn-ghost:hover { background:#fff; color: var(--brand); }
   .btn-lg { padding: 18px 34px; font-size: 1.1rem; }
@@ -173,8 +204,8 @@
   /* =============================================================== */
   header.site {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(250, 246, 239, .92);
-    backdrop-filter: saturate(140%) blur(8px);
+    background: rgba(10, 14, 26, .78);
+    backdrop-filter: saturate(140%) blur(10px);
     border-bottom: 1px solid var(--line);
   }
   .nav {
@@ -234,7 +265,11 @@
     display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(24px, 4vw, 56px);
     align-items: center;
   }
-  .hero h1 { margin-top: 10px; }
+  .hero h1 {
+    margin-top: 10px;
+    background: linear-gradient(92deg, #eef2fb 0%, #9db4ff 52%, #22d3ee 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
   .hero .promise {
     font-weight: 700; font-size: 1.14rem; color: var(--ink);
     background: var(--brand-tint); border-left: 4px solid var(--brand);
@@ -275,9 +310,14 @@
   /*  troué. Le SVG ci-dessous est autonome et sans dépendance.      */
   /* =============================================================== */
   .bucket-card {
-    background: linear-gradient(180deg, #ffffff, #fbf7f0);
-    border: 1px solid var(--line); border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(30, 41, 73, .55), rgba(15, 20, 36, .55));
+    border: 1px solid var(--line-strong); border-radius: var(--radius);
     padding: 18px 18px 20px; box-shadow: var(--shadow-lg);
+    position: relative;
+  }
+  .bucket-card::after {
+    content: ""; position: absolute; inset: 0; border-radius: var(--radius);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06); pointer-events: none;
   }
   .bucket-caption {
     text-align: center; font-weight: 800; color: var(--ink);
@@ -306,6 +346,15 @@
   }
   .card h3 { margin-bottom: 8px; }
   .card p { color: var(--ink-soft); margin-bottom: 0; }
+  /* Réaction discrète au survol (ambiance tech) */
+  .card, .service, .phase, .incl, .obj, .reassure .item {
+    transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover, .service:hover, .incl:hover, .obj:hover {
+    border-color: var(--line-strong);
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(91, 140, 255, .18);
+    transform: translateY(-2px);
+  }
 
   .section-head { max-width: 760px; margin-bottom: 44px; }
   .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
@@ -318,11 +367,12 @@
   }
   .section-brand .pullquote { color:#fff; border-color:#fff; }
   .transition-band {
-    background: var(--ink); color:#fff; border-radius: var(--radius);
+    background: linear-gradient(135deg, #16204a, #0b1226); color: var(--ink);
+    border: 1px solid var(--line-strong); border-radius: var(--radius);
     padding: 28px 30px; font-size: 1.15rem; font-weight: 700; line-height: 1.4;
-    margin-top: 40px;
+    margin-top: 40px; box-shadow: var(--shadow);
   }
-  .transition-band strong { color: #ffcdb6; }
+  .transition-band strong { color: var(--accent-dark); }
 
   /* =============================================================== */
   /*  8. SCÉNARIO                                                     */
@@ -401,13 +451,13 @@
   .beforeafter { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   @media (max-width: 780px){ .beforeafter { grid-template-columns: 1fr; } }
   .ba-col { border-radius: var(--radius); padding: 28px; border: 1px solid var(--line); }
-  .ba-before { background: var(--warn-bg); }
-  .ba-after { background: #eaf6ef; }
+  .ba-before { background: var(--warn-bg); border-color: rgba(251, 113, 133, .28); }
+  .ba-after { background: rgba(52, 211, 153, .07); border-color: rgba(52, 211, 153, .28); }
   .ba-col h3 { display: flex; align-items: center; gap: 10px; }
   .ba-list { list-style: none; padding: 0; margin: 0; }
   .ba-list li { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; color: var(--ink-soft); }
   .ba-list .mk { flex: none; margin-top: 3px; }
-  .ba-before .mk { color: #c0562a; }
+  .ba-before .mk { color: #fb7185; }
   .ba-after .mk { color: var(--ok); }
 
   /* =============================================================== */
@@ -432,7 +482,7 @@
   /* PLACEHOLDER visuel — remplacer par une capture réelle */
   .placeholder {
     border: 2px dashed var(--brand); border-radius: var(--radius);
-    background: repeating-linear-gradient(45deg, #fff, #fff 12px, var(--brand-tint) 12px, var(--brand-tint) 24px);
+    background: repeating-linear-gradient(45deg, #0e1626, #0e1626 12px, #131c33 12px, #131c33 24px);
     min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center;
     text-align: center; padding: 24px; color: var(--brand-dark);
   }
@@ -538,15 +588,16 @@
   .field label { display: block; font-weight: 700; margin-bottom: 7px; color: var(--ink); }
   .field .opt { font-weight: 500; color: var(--muted); font-size: .9rem; }
   .field input, .field select {
-    width: 100%; font: inherit; padding: 13px 14px; border: 1.5px solid var(--line);
-    border-radius: var(--radius-sm); background: #fff; color: var(--ink);
+    width: 100%; font: inherit; padding: 13px 14px; border: 1.5px solid var(--line-strong);
+    border-radius: var(--radius-sm); background: #0e1626; color: var(--ink);
   }
-  .field input:focus, .field select:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-tint); }
+  .field input::placeholder { color: var(--muted); }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px rgba(91, 140, 255, .25); }
   .field.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 0; }
   .field.two > div { margin-bottom: 18px; }
   @media (max-width: 620px){ .field.two { grid-template-columns: 1fr; gap: 0; } }
-  .err { color: #b3261e; font-size: .88rem; margin-top: 6px; display: none; }
-  .field.invalid input, .field.invalid select { border-color: #b3261e; background: #fff6f5; }
+  .err { color: #fda4af; font-size: .88rem; margin-top: 6px; display: none; }
+  .field.invalid input, .field.invalid select { border-color: #fb7185; background: rgba(251, 113, 133, .08); }
   .field.invalid .err { display: block; }
 
   fieldset { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 18px; margin: 0 0 18px; }
@@ -564,16 +615,24 @@
     display: none; text-align: center; padding: 20px;
   }
   .form-success .tick {
-    width: 68px; height: 68px; border-radius: 50%; background: #eaf6ef; color: var(--ok);
+    width: 68px; height: 68px; border-radius: 50%; background: rgba(52, 211, 153, .14); color: var(--ok);
     display: grid; place-items: center; margin: 0 auto 18px;
+    box-shadow: 0 0 0 6px rgba(52, 211, 153, .06);
   }
   .form-success.show { display: block; }
   .form-hidden { display: none; }
 
+  /* Calendrier intégré (Google Agenda) */
+  .cal-embed { margin-top: 20px; }
+  .cal-embed iframe {
+    width: 100%; min-height: 640px; border: 1px solid var(--line-strong);
+    border-radius: var(--radius); background: #fff;
+  }
+
   /* =============================================================== */
   /* 21. FOOTER                                                      */
   /* =============================================================== */
-  footer.site { background: var(--ink); color: #cdd8dc; padding: 56px 0 120px; }
+  footer.site { background: #070b14; border-top: 1px solid var(--line); color: #cdd8dc; padding: 56px 0 120px; }
   footer.site h3 { color:#fff; }
   footer.site p { color: #aebbc0; max-width: 60ch; }
   .foot-links { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 18px; }
@@ -587,7 +646,7 @@
   .mobile-cta {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
     padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
-    background: rgba(250,246,239,.96); backdrop-filter: blur(6px);
+    background: rgba(10,14,26,.92); backdrop-filter: blur(8px);
     border-top: 1px solid var(--line); display: none;
   }
   .mobile-cta .btn { width: 100%; }
@@ -677,8 +736,8 @@
 
               <!-- Robinet + étiquette PUBLICITÉ -->
               <g>
-                <rect x="150" y="18" width="120" height="30" rx="8" fill="#17232a"/>
-                <text x="210" y="38" text-anchor="middle" fill="#fff" font-size="15" font-weight="800" font-family="Segoe UI, sans-serif">PUBLICITÉ</text>
+                <rect x="150" y="18" width="120" height="30" rx="8" fill="#22d3ee"/>
+                <text x="210" y="38" text-anchor="middle" fill="#061024" font-size="15" font-weight="800" font-family="Segoe UI, sans-serif">PUBLICITÉ</text>
                 <rect x="196" y="48" width="28" height="26" fill="#9aa7ac"/>
                 <path d="M224 54 h34 a8 8 0 0 1 8 8 v10 h-14 v-8 h-28 z" fill="#7d8c92"/>
                 <rect x="248" y="70" width="10" height="18" rx="3" fill="#6a787e"/>
@@ -702,40 +761,40 @@
               <circle cx="150" cy="262" r="5" fill="#17232a"/>
               <path class="leak-drop" d="M145 264 q-24 8 -40 22" stroke="#3ba7c4" stroke-width="5" fill="none" stroke-linecap="round"/>
               <g>
-                <rect x="8" y="278" width="96" height="26" rx="13" fill="#fbeadf" stroke="#d1521f"/>
-                <text x="56" y="295" text-anchor="middle" fill="#b3441a" font-size="12.5" font-weight="700" font-family="Segoe UI, sans-serif">Offre floue</text>
+                <rect x="8" y="278" width="96" height="26" rx="13" fill="#141d33" stroke="#fb7185"/>
+                <text x="56" y="295" text-anchor="middle" fill="#fda4af" font-size="12.5" font-weight="700" font-family="Segoe UI, sans-serif">Offre floue</text>
               </g>
 
               <!-- Fuite 2 : Réponse lente -->
               <circle cx="140" cy="322" r="5" fill="#17232a"/>
               <path class="leak-drop" style="animation-delay:.3s" d="M135 324 q-26 10 -44 26" stroke="#3ba7c4" stroke-width="5" fill="none" stroke-linecap="round"/>
               <g>
-                <rect x="2" y="334" width="112" height="26" rx="13" fill="#fbeadf" stroke="#d1521f"/>
-                <text x="58" y="351" text-anchor="middle" fill="#b3441a" font-size="12.5" font-weight="700" font-family="Segoe UI, sans-serif">Réponse lente</text>
+                <rect x="2" y="334" width="112" height="26" rx="13" fill="#141d33" stroke="#fb7185"/>
+                <text x="58" y="351" text-anchor="middle" fill="#fda4af" font-size="12.5" font-weight="700" font-family="Segoe UI, sans-serif">Réponse lente</text>
               </g>
 
               <!-- Fuite 3 : Pas de site clair (bas centre) -->
               <circle cx="210" cy="360" r="5" fill="#17232a"/>
               <path class="leak-drop" style="animation-delay:.6s" d="M210 366 q0 18 -6 34" stroke="#3ba7c4" stroke-width="5" fill="none" stroke-linecap="round"/>
               <g>
-                <rect x="150" y="386" width="120" height="26" rx="13" fill="#fbeadf" stroke="#d1521f"/>
-                <text x="210" y="403" text-anchor="middle" fill="#b3441a" font-size="12.5" font-weight="700" font-family="Segoe UI, sans-serif">Pas de site clair</text>
+                <rect x="150" y="386" width="120" height="26" rx="13" fill="#141d33" stroke="#fb7185"/>
+                <text x="210" y="403" text-anchor="middle" fill="#fda4af" font-size="12.5" font-weight="700" font-family="Segoe UI, sans-serif">Pas de site clair</text>
               </g>
 
               <!-- Fuite 4 : Peu d'avis -->
               <circle cx="278" cy="322" r="5" fill="#17232a"/>
               <path class="leak-drop" style="animation-delay:.45s" d="M283 324 q26 10 44 26" stroke="#3ba7c4" stroke-width="5" fill="none" stroke-linecap="round"/>
               <g>
-                <rect x="322" y="334" width="90" height="26" rx="13" fill="#fbeadf" stroke="#d1521f"/>
-                <text x="367" y="351" text-anchor="middle" fill="#b3441a" font-size="12.5" font-weight="700" font-family="Segoe UI, sans-serif">Peu d'avis</text>
+                <rect x="322" y="334" width="90" height="26" rx="13" fill="#141d33" stroke="#fb7185"/>
+                <text x="367" y="351" text-anchor="middle" fill="#fda4af" font-size="12.5" font-weight="700" font-family="Segoe UI, sans-serif">Peu d'avis</text>
               </g>
 
               <!-- Fuite 5 : Fiche Google vide -->
               <circle cx="268" cy="262" r="5" fill="#17232a"/>
               <path class="leak-drop" style="animation-delay:.15s" d="M273 264 q24 8 40 22" stroke="#3ba7c4" stroke-width="5" fill="none" stroke-linecap="round"/>
               <g>
-                <rect x="308" y="278" width="106" height="26" rx="13" fill="#fbeadf" stroke="#d1521f"/>
-                <text x="361" y="295" text-anchor="middle" fill="#b3441a" font-size="12" font-weight="700" font-family="Segoe UI, sans-serif">Fiche Google vide</text>
+                <rect x="308" y="278" width="106" height="26" rx="13" fill="#141d33" stroke="#fb7185"/>
+                <text x="361" y="295" text-anchor="middle" fill="#fda4af" font-size="12" font-weight="700" font-family="Segoe UI, sans-serif">Fiche Google vide</text>
               </g>
             </svg>
             <p class="bucket-caption">Répare les fuites avant d'ouvrir le robinet.</p>
@@ -1539,8 +1598,10 @@
             </div>
             <h3>Merci&nbsp;! Ta demande est bien reçue.</h3>
             <p>Choisis maintenant le créneau qui te convient pour ton diagnostic gratuit de 30&nbsp;minutes. Nous préparons l'échange à partir des informations que tu viens de nous transmettre.</p>
+            <!-- Le calendrier Google Agenda s'insère ici si CALENDAR_EMBED_URL est renseigné (voir <script>). -->
+            <div class="cal-embed" id="calendarMount" hidden></div>
             <!-- PLACEHOLDER LIEN DE RÉSERVATION : le bouton pointe vers CALENDAR_URL (voir <script>). -->
-            <a class="btn btn-primary btn-lg" id="calendarBtn" href="#" target="_blank" rel="noopener">Choisir mon créneau</a>
+            <a class="btn btn-primary btn-lg" id="calendarBtn" href="#reserver" rel="noopener">Choisir mon créneau</a>
           </div>
         </div>
       </div>
@@ -1577,11 +1638,21 @@
   /* =============================================================== */
   /*  CONFIGURATION À COMPLÉTER                                       */
   /* =============================================================== */
-  // TODO CALENDRIER : colle ici le lien de ton outil de réservation
-  // (Calendly, Google Agenda, etc.). Tant qu'il reste vide, le bouton
-  // "Choisir mon créneau" de l'écran de succès ramène simplement vers
-  // le formulaire au lieu d'ouvrir un calendrier.
-  var CALENDAR_URL = ""; // ex : "https://calendly.com/polynetia/diagnostic"
+  /* ---- Google Agenda (Planning de rendez-vous) ---------------- */
+  // 1) Dans Google Agenda : « Créer » > « Planning de rendez-vous ».
+  //    Crée un service de 30 min, puis ouvre « Partager » / « Intégrer ».
+  // 2) Colle le lien public « Prendre rendez-vous » ci-dessous :
+  var CALENDAR_URL = ""; // ex : "https://calendar.google.com/calendar/appointments/schedules/AcZssZxxxxxxxxxxxx"
+  // 3) (Recommandé) Colle l'URL d'intégration iframe (bouton « Intégrer »,
+  //    elle se termine généralement par "?gv=true"). Si elle est fournie,
+  //    le calendrier s'affiche DIRECTEMENT dans la page après l'envoi.
+  var CALENDAR_EMBED_URL = ""; // ex : "https://calendar.google.com/calendar/appointments/schedules/AcZssZxxxx?gv=true"
+
+  /* ---- Réception du formulaire dans Google Sheets ------------- */
+  // Déploie le fichier "google-apps-script.gs" (fourni à la racine du
+  // dépôt) comme « Application web », puis colle l'URL en /exec ci-dessous.
+  // Tant qu'elle est vide, AUCUNE donnée n'est envoyée.
+  var SHEET_ENDPOINT = ""; // ex : "https://script.google.com/macros/s/AKfyc.../exec"
 
   (function () {
     "use strict";
@@ -1632,10 +1703,29 @@
     var success = document.getElementById("formSuccess");
     var calendarBtn = document.getElementById("calendarBtn");
 
-    // Prépare le bouton de réservation de l'écran de succès
+    // Prépare le bouton de réservation (lien de repli si pas d'iframe)
     if (calendarBtn) {
       calendarBtn.setAttribute("href", CALENDAR_URL || "#reserver");
-      if (!CALENDAR_URL) { calendarBtn.removeAttribute("target"); }
+      if (CALENDAR_URL) { calendarBtn.setAttribute("target", "_blank"); }
+    }
+
+    // Affiche le calendrier après un envoi réussi.
+    function monterCalendrier() {
+      var mount = document.getElementById("calendarMount");
+      // Priorité à l'intégration iframe (Google Agenda) si fournie.
+      if (mount && CALENDAR_EMBED_URL) {
+        if (!mount.querySelector("iframe")) {
+          var f = document.createElement("iframe");
+          f.src = CALENDAR_EMBED_URL;
+          f.title = "Choisir un créneau pour le diagnostic";
+          f.loading = "lazy";
+          mount.appendChild(f);
+        }
+        mount.hidden = false;
+        if (calendarBtn) { calendarBtn.style.display = "none"; }
+      }
+      // Sinon, le bouton « Choisir mon créneau » reste visible et pointe
+      // vers CALENDAR_URL (ou revient au formulaire si rien n'est configuré).
     }
 
     function setError(field, on) {
@@ -1692,28 +1782,30 @@
           return;
         }
 
-        // ------------------------------------------------------------
-        // ENVOI DES DONNÉES — à compléter lorsqu'une destination existe.
-        // Tant que ce bloc n'est pas complété, les données ne partent PAS.
-        // Exemple d'intégration :
-        //   var data = Object.fromEntries(new FormData(form).entries());
-        //   fetch("https://TON-ENDPOINT", {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify(data)
-        //   }).then(...).catch(...);
-        // ------------------------------------------------------------
-        envoyerFormulaire();
+        // Rassemble les réponses du formulaire
+        var data = {
+          date: new Date().toISOString(),
+          prenom: document.getElementById("prenom").value.trim(),
+          entreprise: document.getElementById("entreprise").value.trim(),
+          metier: document.getElementById("metier").value.trim(),
+          commune: document.getElementById("commune").value.trim(),
+          tel: document.getElementById("tel").value.trim(),
+          email: document.getElementById("email").value.trim(),
+          site: document.getElementById("site").value.trim(),
+          google: document.getElementById("google").value.trim(),
+          probleme: (form.querySelector('input[name="probleme"]:checked') || {}).value || "",
+          capacite: (form.querySelector('input[name="capacite"]:checked') || {}).value || "",
+          source: location.href
+        };
 
-        // Affiche l'état de succès
+        // Envoi vers Google Sheets (voir SHEET_ENDPOINT plus haut)
+        envoyerFormulaire(data);
+
+        // Affiche l'état de succès puis le calendrier de réservation
         form.classList.add("form-hidden");
         success.classList.add("show");
-        success.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
-
-        // Si un calendrier est configuré, on peut l'ouvrir directement :
-        if (CALENDAR_URL) {
-          // window.open(CALENDAR_URL, "_blank", "noopener");
-        }
+        monterCalendrier();
+        success.scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
       });
 
       // Retire l'erreur dès que l'utilisateur corrige un champ
@@ -1727,11 +1819,20 @@
       });
     }
 
-    // Point d'entrée pour connecter le traitement réel du formulaire.
-    function envoyerFormulaire() {
-      // TODO TRAITEMENT : brancher ici l'envoi vers l'adresse de réception
-      // (e-mail, tableur, service externe). Laisser vide = aucun envoi.
-      return;
+    // Envoie les réponses vers Google Sheets via une application web
+    // Google Apps Script. Renseigne SHEET_ENDPOINT plus haut (URL /exec).
+    function envoyerFormulaire(data) {
+      if (!SHEET_ENDPOINT) { return; } // rien n'est envoyé tant que l'URL est vide
+      try {
+        fetch(SHEET_ENDPOINT, {
+          method: "POST",
+          // Apps Script renvoie une réponse « opaque » (no-cors) :
+          // on ne lit pas le retour, mais l'enregistrement a bien lieu.
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(data)
+        }).catch(function () {});
+      } catch (e) { /* réseau indisponible : on n'interrompt pas l'utilisateur */ }
     }
   })();
   </script>
