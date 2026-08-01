@@ -32,20 +32,26 @@ Tant qu'une variable est vide, la fonction associée reste **inactive** (aucune 
 
 ---
 
-## 2. Google Sheets — réception des demandes
+## 2. Google Sheets — réception et suivi des demandes
 
-Le fichier **`google-apps-script.gs`** (à la racine) contient le script prêt
-à l'emploi et les instructions détaillées. En résumé :
+Le fichier **`google-apps-script.gs`** (à la racine) est déjà relié à la
+feuille (ID `1OdmUsqg5Lx1chK9YKD0ryp7rT_gABr_xZZVjSYFlQok`). En résumé :
 
-1. Feuille Google Sheets → menu **Extensions → Apps Script**.
+1. Ouvre la feuille → menu **Extensions → Apps Script**.
 2. Colle le contenu de `google-apps-script.gs`, enregistre.
-3. **Déployer → Nouveau déploiement → Application web**
+3. Choisis la fonction **`initialiser`** en haut, clique **Exécuter**,
+   autorise l'accès. → crée l'onglet **Demandes**, l'en-tête et le menu
+   déroulant de statut.
+4. **Déployer → Nouveau déploiement → Application web**
    - Exécuter en tant que : **Moi**
    - Qui a accès : **Tout le monde**
-4. Copie l'URL qui se termine par **`/exec`** → variable `SHEET_ENDPOINT`.
+5. Copie l'URL qui se termine par **`/exec`** → variable `SHEET_ENDPOINT`
+   dans `index.html`.
 
-Les colonnes créées automatiquement : `date, prenom, entreprise, metier,
-commune, tel, email, site, google, probleme, capacite, source`.
+Colonnes de la demande : `date, prenom, entreprise, metier, commune, tel,
+email, site, google, probleme, capacite, source`.
+Colonnes de suivi (remplies à la main) : `statut, relance, notes`.
+Chaque nouvelle demande arrive avec le statut **« Nouveau »**.
 
 > Remarque technique : l'envoi utilise `mode: "no-cors"`. Le navigateur ne
 > lit pas la réponse (normal avec Apps Script depuis un site statique), mais
