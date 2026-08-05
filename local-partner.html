@@ -195,6 +195,9 @@
   /* PLACEHOLDER LOGO — remplacer par <img src="logo-polynetia.svg" alt="PolynetIA"> */
   .logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; font-size: 1.12rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
   .logo .mark { width: 30px; height: 30px; border-radius: 8px; background: var(--panel-2); border: 1px solid var(--line-2); color: var(--accent); display: grid; place-items: center; font-size: .88rem; font-weight: 800; }
+  .logo .logo-img { height: 44px; width: auto; display: block; border-radius: 8px; }
+  .logo .logo-fallback { display: inline-flex; align-items: center; gap: 9px; }
+  .logo .logo-fallback[hidden] { display: none; }
   .nav .btn { padding: 9px 18px; font-size: .92rem; }
   @media (max-width: 560px) { .nav .btn { display: none; } }
 
@@ -271,6 +274,12 @@
   .card-demo .caption small { color: var(--muted); }
   @keyframes leak { 0%,100% { opacity: .9; } 50% { opacity: .35; } }
   .drip { animation: leak 2.6s ease-in-out infinite; }
+
+  /* Illustrations générées — fichiers attendus dans assets/ (voir assets/README.md).
+     Les <img> se masquent d'elles-mêmes tant que le fichier est absent. */
+  .figure-img { margin: 0 auto; }
+  .figure-img img { width: 100%; height: auto; display: block; border-radius: var(--r-lg); border: 1px solid var(--line); }
+  .card-demo .visual-img img { width: 100%; height: auto; display: block; }
 
   /* ============================================================== */
   /* CARTES / TIMELINE / PARCOURS                                   */
@@ -575,9 +584,12 @@
 
   <header class="site">
     <div class="wrap nav">
-      <!-- PLACEHOLDER LOGO : remplacer par le fichier logo-polynetia.svg -->
-      <a class="logo" href="#top" aria-label="PolynetIA — haut de page">
-        <span class="mark" aria-hidden="true">P</span> PolynetIA
+      <!-- Logo : fichier attendu assets/logo-polynetia.png (version fond TRANSPARENT
+           recommandée pour le header sombre). Repli automatique sur le monogramme
+           tant que le fichier est absent. -->
+      <a class="logo" href="#top" aria-label="Polynetia — haut de page">
+        <img class="logo-img" src="assets/logo-polynetia.png" alt="Polynetia Agency" height="44" loading="eager" decoding="async" onerror="this.hidden=true;this.nextElementSibling.hidden=false" />
+        <span class="logo-fallback" hidden><span class="mark" aria-hidden="true">P</span> PolynetIA</span>
       </a>
       <a class="btn btn-primary" href="#diagnostic" data-event="diagnostic-cta-header">Demander mon diagnostic <span class="arrow" aria-hidden="true">→</span></a>
     </div>
@@ -743,27 +755,12 @@
           <p class="lede">Mais si le parcours derrière la publicité fuit déjà, augmenter le trafic augmente aussi le nombre de demandes perdues.</p>
         </div>
 
-        <figure class="card-demo reveal" style="max-width:520px;margin:0 auto" aria-label="Le seau sous plus de trafic">
-          <div class="visual">
-            <svg viewBox="0 0 400 260" role="img" aria-labelledby="bk2T bk2D" style="width:100%;height:auto;display:block">
-              <title id="bk2T">Avec plus de publicité, plus d'eau entre et plus d'eau s'échappe</title>
-              <desc id="bk2D">Le robinet est grand ouvert mais les fuites du seau laissent échapper encore davantage d'eau.</desc>
-              <rect x="136" y="8" width="128" height="26" rx="6" fill="#ffffff"/>
-              <text x="200" y="26" text-anchor="middle" fill="#0b0c0e" font-size="12.5" font-weight="800" font-family="Segoe UI, sans-serif">PUBLICITÉ ×2</text>
-              <rect x="186" y="34" width="28" height="16" fill="#383c44"/>
-              <rect x="234" y="48" width="10" height="44" rx="4" fill="#2fd3e0" opacity=".9"/>
-              <rect x="220" y="48" width="7" height="44" rx="3" fill="#2fd3e0" opacity=".5"/>
-              <path d="M110 98 L290 98 L274 240 L126 240 Z" fill="#14161a" stroke="#5a6070" stroke-width="1.6"/>
-              <rect x="106" y="90" width="188" height="15" rx="7" fill="#383c44"/>
-              <path d="M117 118 L283 118 L280 142 L120 142 Z" fill="#2fd3e0" opacity=".3"/>
-              <g stroke="#ff6b4a" stroke-width="5" fill="none" stroke-linecap="round">
-                <path class="drip" d="M140 158 q-26 12 -44 28"/>
-                <path class="drip" style="animation-delay:.3s" d="M134 202 q-28 12 -46 30"/>
-                <path class="drip" style="animation-delay:.6s" d="M200 236 q-2 14 -8 24"/>
-                <path class="drip" style="animation-delay:.45s" d="M266 202 q28 12 46 30"/>
-                <path class="drip" style="animation-delay:.15s" d="M260 158 q26 12 44 28"/>
-              </g>
-            </svg>
+        <!-- Visuel généré — fichier attendu : assets/seau-publicite-x2.png (1024×1536).
+             La figure se masque toute seule tant que le fichier est absent.
+             (L'ancien schéma SVG reste récupérable dans l'historique git.) -->
+        <figure class="card-demo reveal" style="max-width:440px;margin:0 auto" aria-label="Le seau sous plus de trafic">
+          <div class="visual-img">
+            <img src="assets/seau-publicite-x2.png" alt="Un robinet étiqueté « Publicité ×2 » verse deux jets d'eau dans un seau percé : l'eau s'échappe par de nombreuses fuites, plus abondantes que ce qui entre." width="1024" height="1536" loading="lazy" decoding="async" onerror="this.closest('figure').style.display='none'" />
           </div>
           <figcaption class="caption"><strong style="font-size:1.1rem">La publicité ne répare pas un seau troué.</strong></figcaption>
         </figure>
@@ -965,6 +962,10 @@
           <h2>Voici ce que PolynetIA construit derrière Local Partner.</h2>
           <p class="lede">Six composants pensés comme un seul système. Chacun est vendu pour son résultat — l'outil n'est que le moyen.</p>
         </div>
+        <!-- Visuel généré — fichier attendu : assets/systeme-local-partner.png (carré 1248×1248) -->
+        <figure class="figure-img reveal" style="max-width:540px;margin:0 auto 40px">
+          <img src="assets/systeme-local-partner.png" alt="Schéma : ton entreprise au centre, reliée à six éléments — offre claire, site, réponse rapide, fiche Google, avis et publicité." width="1248" height="1248" loading="lazy" decoding="async" onerror="this.closest('figure').style.display='none'" />
+        </figure>
         <div class="system">
           <article class="sys card reveal">
             <h3>Clarté commerciale</h3>
@@ -1048,6 +1049,10 @@
           <span class="eyebrow">De la découverte à la recommandation</span>
           <h2>Voici ce que vit ton prochain client.</h2>
         </div>
+        <!-- Visuel généré — fichier attendu : assets/parcours-client.png (paysage 1536×1024) -->
+        <figure class="figure-img reveal" style="margin:0 0 40px">
+          <img src="assets/parcours-client.png" alt="Parcours client en six étapes : recherche, fiche Google, site, avis, réponse en moins d'une minute, client — avec une boucle qui ramène du client vers les avis." width="1536" height="1024" loading="lazy" decoding="async" onerror="this.closest('figure').style.display='none'" />
+        </figure>
         <ol class="journey reveal">
           <li>Il découvre ton entreprise.</li>
           <li>Il vérifie Google.</li>
@@ -1217,38 +1222,33 @@
           <span class="eyebrow">Avant de te décider</span>
           <h2>Les questions qu'on nous pose avant de se lancer.</h2>
         </div>
+        <!-- FAQ construite sur le top 5 des objections du client cible
+             (déception passée, prix, temps, contrôle de la relation,
+             bouche-à-oreille), puis 3 questions pratiques. -->
         <div class="faq reveal">
           <div class="faq-item">
-            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Pourquoi ne pas simplement lancer des publicités&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-            <div class="faq-a"><div class="faq-a-inner"><p>Parce que la publicité amplifie le parcours existant. Si l'entreprise est difficile à comprendre, inspire peu confiance ou répond trop lentement, davantage de trafic ne corrige pas ces problèmes.</p></div></div>
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>«&nbsp;J'ai déjà testé la publicité — ou une agence — et ça n'a rien donné.&nbsp;»</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>C'est le cas le plus fréquent — et la raison d'être de Local Partner. La plupart du temps, la publicité a été lancée sur un parcours qui fuyait&nbsp;: les demandes arrivaient, mais la réponse tardait, l'offre restait floue, rien n'était relié. Nous commençons par réparer ce parcours. La publicité ne revient qu'ensuite, quand chaque demande a une vraie chance d'aboutir.</p></div></div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>J'ai déjà un site. Pourquoi Local Partner&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-            <div class="faq-a"><div class="faq-a-inner"><p>Parce qu'un site n'est qu'une étape. Local Partner regarde aussi la clarté de l'offre, la réponse aux demandes, Google, les avis et l'acquisition.</p></div></div>
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>«&nbsp;Combien ça coûte&nbsp;? Est-ce que ça vaut le coup pour une entreprise comme la mienne&nbsp;?&nbsp;»</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>L'investissement dépend de ta situation et du niveau de mise en place nécessaire — tu reçois une proposition claire en F&nbsp;CFP après le diagnostic, avant toute décision. Et la question se calcule dans l'autre sens&nbsp;: combien vaut un client chez toi, et combien de demandes se perdent chaque mois&nbsp;? Si les chiffres ne justifient pas l'investissement, on te le dit pendant le diagnostic.</p></div></div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>J'ai déjà quelqu'un qui gère mes réseaux.</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-            <div class="faq-a"><div class="faq-a-inner"><p>Les réseaux sont un canal de visibilité. Local Partner travaille sur l'ensemble du parcours qui mène de la découverte à la prise de contact et à l'avis client.</p></div></div>
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>«&nbsp;Je n'ai pas le temps de m'occuper de ça.&nbsp;»</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>C'est justement pour ça que la mise en place est faite pour toi. Ton implication se limite à trois choses&nbsp;: transmettre tes informations (prestations, tarifs, horaires, photos), valider les contenus avant publication, et reprendre les demandes qui nécessitent ton expertise. Le reste est construit, installé et suivi par PolynetIA.</p></div></div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>J'ai déjà beaucoup de demandes.</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-            <div class="faq-a"><div class="faq-a-inner"><p>Local Partner peut aussi servir à répondre plus rapidement, mieux préparer les demandes et réduire le temps perdu.</p></div></div>
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>«&nbsp;Qui répond à mes clients&nbsp;? Je veux garder la main sur ma relation client.&nbsp;»</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>Toi, toujours — mais plus vite. Les premières réponses et les questions posées aux clients sont rédigées avec toi et validées par toi&nbsp;: tes mots, tes prestations, ta façon de parler. Elles servent à accueillir la demande et à réunir les informations utiles. Ensuite, c'est toujours toi qui reprends la conversation pour le devis, le rendez-vous et la relation.</p></div></div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Comment savoir si l'investissement est pertinent&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-            <div class="faq-a"><div class="faq-a-inner"><p>Le diagnostic examine notamment la valeur d'un client, les demandes actuelles, les points de perte et la capacité de l'entreprise à accueillir de nouveaux clients.</p></div></div>
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>«&nbsp;Le bouche-à-oreille me suffit, j'ai toujours travaillé comme ça.&nbsp;»</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>Et il continuera — c'est la meilleure source de clients du fenua. Mais aujourd'hui, même un client recommandé vérifie ta fiche Google, tes avis et ton site avant de t'écrire. Si ce qu'il trouve est vide ou pas à jour, la recommandation perd de sa force. Local Partner fait en sorte que ce qu'il trouve confirme ce qu'on lui a dit de toi.</p></div></div>
           </div>
           <div class="faq-item">
             <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Est-ce que vous garantissez des résultats&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
             <div class="faq-a"><div class="faq-a-inner"><p>Aucun nombre de clients ou de positions Google ne doit être promis sans conditions et données suffisantes. La proposition précise ce qui est mis en place et les objectifs suivis.</p></div></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Combien de temps cela va me prendre&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-            <div class="faq-a"><div class="faq-a-inner"><p>L'implication du client consiste principalement à transmettre les informations nécessaires, valider les contenus et reprendre les demandes qui nécessitent son expertise.</p></div></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Pourquoi PolynetIA plutôt que plusieurs prestataires&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-            <div class="faq-a"><div class="faq-a-inner"><p>Parce que chaque élément est construit comme une partie du même parcours et coordonné par un seul partenaire.</p></div></div>
           </div>
           <div class="faq-item">
             <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Est-ce que je dois utiliser la publicité immédiatement&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
