@@ -195,9 +195,7 @@
   /* PLACEHOLDER LOGO — remplacer par <img src="logo-polynetia.svg" alt="PolynetIA"> */
   .logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; font-size: 1.12rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
   .logo .mark { width: 30px; height: 30px; border-radius: 8px; background: var(--panel-2); border: 1px solid var(--line-2); color: var(--accent); display: grid; place-items: center; font-size: .88rem; font-weight: 800; }
-  .logo .logo-img { height: 44px; width: auto; display: block; border-radius: 8px; }
-  .logo .logo-fallback { display: inline-flex; align-items: center; gap: 9px; }
-  .logo .logo-fallback[hidden] { display: none; }
+  .logo .logo-svg { height: 44px; width: auto; display: block; }
   .nav .btn { padding: 9px 18px; font-size: .92rem; }
   @media (max-width: 560px) { .nav .btn { display: none; } }
 
@@ -275,11 +273,13 @@
   @keyframes leak { 0%,100% { opacity: .9; } 50% { opacity: .35; } }
   .drip { animation: leak 2.6s ease-in-out infinite; }
 
-  /* Illustrations générées — fichiers attendus dans assets/ (voir assets/README.md).
-     Les <img> se masquent d'elles-mêmes tant que le fichier est absent. */
+  /* Illustrations — versions vectorielles intégrées directement dans la page
+     (aucun fichier externe requis). Un PNG exporté peut les remplacer plus
+     tard, voir assets/README.md. */
   .figure-img { margin: 0 auto; }
-  .figure-img img { width: 100%; height: auto; display: block; border-radius: var(--r-lg); border: 1px solid var(--line); }
-  .card-demo .visual-img img { width: 100%; height: auto; display: block; }
+  .figure-img img, .figure-img svg { width: 100%; height: auto; display: block; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--bg-2); }
+  .figure-scroll { overflow-x: auto; }
+  .figure-scroll svg { min-width: 720px; }
 
   /* ============================================================== */
   /* CARTES / TIMELINE / PARCOURS                                   */
@@ -584,12 +584,27 @@
 
   <header class="site">
     <div class="wrap nav">
-      <!-- Logo : fichier attendu assets/logo-polynetia.png (version fond TRANSPARENT
-           recommandée pour le header sombre). Repli automatique sur le monogramme
-           tant que le fichier est absent. -->
-      <a class="logo" href="#top" aria-label="Polynetia — haut de page">
-        <img class="logo-img" src="assets/logo-polynetia.png" alt="Polynetia Agency" height="44" loading="eager" decoding="async" onerror="this.hidden=true;this.nextElementSibling.hidden=false" />
-        <span class="logo-fallback" hidden><span class="mark" aria-hidden="true">P</span> PolynetIA</span>
+      <!-- Logo vectoriel intégré (d'après le logo fourni, adapté au fond
+           sombre : wordmark blanc). Remplaçable par le fichier PNG officiel
+           une fois déposé dans assets/. -->
+      <a class="logo" href="#top" aria-label="Polynetia Agency — haut de page">
+        <svg class="logo-svg" viewBox="0 0 306 76" role="img" aria-label="Polynetia Agency">
+          <defs>
+            <linearGradient id="lgP" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#a78bfa"/>
+              <stop offset="1" stop-color="#5b21b6"/>
+            </linearGradient>
+          </defs>
+          <g fill="url(#lgP)">
+            <path d="M40 8 C60 2 76 12 74 26 C60 16 48 18 43 25 C40 20 38 13 40 8 Z"/>
+            <path d="M40 8 C60 2 76 12 74 26 C60 16 48 18 43 25 C40 20 38 13 40 8 Z" transform="rotate(90 39 38)"/>
+            <path d="M40 8 C60 2 76 12 74 26 C60 16 48 18 43 25 C40 20 38 13 40 8 Z" transform="rotate(180 39 38)"/>
+            <path d="M40 8 C60 2 76 12 74 26 C60 16 48 18 43 25 C40 20 38 13 40 8 Z" transform="rotate(270 39 38)"/>
+            <circle cx="39" cy="38" r="6.5"/>
+          </g>
+          <text x="88" y="45" font-weight="800" font-size="30" letter-spacing="1" fill="#f4f5f7" font-family="inherit">POLYNETIA</text>
+          <text x="90" y="66" font-weight="600" font-size="13" letter-spacing="7.5" fill="#a78bfa" font-family="inherit">AGENCY</text>
+        </svg>
       </a>
       <a class="btn btn-primary" href="#diagnostic" data-event="diagnostic-cta-header">Demander mon diagnostic <span class="arrow" aria-hidden="true">→</span></a>
     </div>
@@ -755,12 +770,44 @@
           <p class="lede">Mais si le parcours derrière la publicité fuit déjà, augmenter le trafic augmente aussi le nombre de demandes perdues.</p>
         </div>
 
-        <!-- Visuel généré — fichier attendu : assets/seau-publicite-x2.png (1024×1536).
-             La figure se masque toute seule tant que le fichier est absent.
-             (L'ancien schéma SVG reste récupérable dans l'historique git.) -->
+        <!-- Visuel vectoriel intégré (d'après l'illustration générée) -->
         <figure class="card-demo reveal" style="max-width:440px;margin:0 auto" aria-label="Le seau sous plus de trafic">
-          <div class="visual-img">
-            <img src="assets/seau-publicite-x2.png" alt="Un robinet étiqueté « Publicité ×2 » verse deux jets d'eau dans un seau percé : l'eau s'échappe par de nombreuses fuites, plus abondantes que ce qui entre." width="1024" height="1536" loading="lazy" decoding="async" onerror="this.closest('figure').style.display='none'" />
+          <div class="visual">
+            <svg viewBox="0 0 400 348" role="img" aria-labelledby="bk2T bk2D" style="width:100%;height:auto;display:block">
+              <title id="bk2T">Avec deux fois plus de publicité, encore plus d'eau s'échappe du seau</title>
+              <desc id="bk2D">Un robinet grand ouvert verse deux jets dans un seau percé ; de larges fuites laissent échapper l'eau de toutes parts.</desc>
+              <rect x="176" y="8" width="48" height="20" rx="4" fill="#383c44"/>
+              <rect x="196" y="26" width="10" height="12" fill="#2c3037"/>
+              <rect x="212" y="34" width="9" height="82" rx="4" fill="#2fd3e0"/>
+              <rect x="226" y="34" width="9" height="82" rx="4" fill="#2fd3e0" opacity=".8"/>
+              <rect x="140" y="52" width="128" height="26" rx="13" fill="#ffffff"/>
+              <text x="204" y="70" text-anchor="middle" fill="#0b0c0e" font-size="13.5" font-weight="800" font-family="Segoe UI, sans-serif">PUBLICITÉ ×2</text>
+              <path d="M106 112 L294 112 L276 306 L124 306 Z" fill="#16181d" stroke="#545a66" stroke-width="1.8"/>
+              <rect x="102" y="104" width="196" height="15" rx="7" fill="#383c44"/>
+              <path d="M114 134 L286 134 L283 158 L117 158 Z" fill="#2fd3e0" opacity=".3"/>
+              <g fill="#3a2320">
+                <ellipse cx="134" cy="176" rx="5" ry="3"/><ellipse cx="128" cy="224" rx="5" ry="3"/><ellipse cx="146" cy="272" rx="5" ry="3"/>
+                <ellipse cx="266" cy="176" rx="5" ry="3"/><ellipse cx="272" cy="224" rx="5" ry="3"/><ellipse cx="254" cy="272" rx="5" ry="3"/>
+              </g>
+              <g stroke="#ff6b4a" fill="none" stroke-linecap="round">
+                <path class="drip" stroke-width="7" d="M134 176 q-34 12 -58 32"/>
+                <path class="drip" style="animation-delay:.35s" stroke-width="8" d="M128 224 q-38 16 -60 40"/>
+                <path class="drip" style="animation-delay:.7s" stroke-width="6" d="M146 272 q-28 20 -40 46"/>
+                <path class="drip" style="animation-delay:.5s" stroke-width="7" d="M200 306 q-4 16 -10 30"/>
+                <path class="drip" style="animation-delay:.15s" stroke-width="7" d="M266 176 q34 12 58 32"/>
+                <path class="drip" style="animation-delay:.55s" stroke-width="8" d="M272 224 q38 16 60 40"/>
+                <path class="drip" style="animation-delay:.85s" stroke-width="6" d="M254 272 q28 20 40 46"/>
+              </g>
+              <g fill="#ff6b4a" opacity=".85">
+                <circle class="drip" cx="70" cy="214" r="4"/>
+                <circle class="drip" style="animation-delay:.4s" cx="62" cy="270" r="5"/>
+                <circle class="drip" style="animation-delay:.75s" cx="102" cy="324" r="4"/>
+                <circle class="drip" style="animation-delay:.55s" cx="188" cy="342" r="3.5"/>
+                <circle class="drip" style="animation-delay:.2s" cx="330" cy="214" r="4"/>
+                <circle class="drip" style="animation-delay:.6s" cx="338" cy="270" r="5"/>
+                <circle class="drip" style="animation-delay:.9s" cx="298" cy="324" r="4"/>
+              </g>
+            </svg>
           </div>
           <figcaption class="caption"><strong style="font-size:1.1rem">La publicité ne répare pas un seau troué.</strong></figcaption>
         </figure>
@@ -962,9 +1009,48 @@
           <h2>Voici ce que PolynetIA construit derrière Local Partner.</h2>
           <p class="lede">Six composants pensés comme un seul système. Chacun est vendu pour son résultat — l'outil n'est que le moyen.</p>
         </div>
-        <!-- Visuel généré — fichier attendu : assets/systeme-local-partner.png (carré 1248×1248) -->
+        <!-- Visuel vectoriel intégré (d'après l'illustration générée) -->
         <figure class="figure-img reveal" style="max-width:540px;margin:0 auto 40px">
-          <img src="assets/systeme-local-partner.png" alt="Schéma : ton entreprise au centre, reliée à six éléments — offre claire, site, réponse rapide, fiche Google, avis et publicité." width="1248" height="1248" loading="lazy" decoding="async" onerror="this.closest('figure').style.display='none'" />
+          <svg viewBox="0 0 720 760" role="img" aria-labelledby="hbT hbD">
+            <title id="hbT">Le système Local Partner autour de ton entreprise</title>
+            <desc id="hbD">Ton entreprise au centre, reliée à six éléments interconnectés : offre claire, site, réponse rapide, fiche Google, avis et publicité.</desc>
+            <circle cx="360" cy="380" r="250" fill="none" stroke="#6e747e" stroke-width="1.5" stroke-dasharray="5 10" opacity=".55"/>
+            <g stroke="#2fd3e0" stroke-width="7" opacity=".16" stroke-linecap="round">
+              <path d="M360 230 V186 M489.9 305 L528 283 M489.9 455 L528 477 M360 530 V574 M230.1 455 L192 477 M230.1 305 L192 283"/>
+            </g>
+            <g stroke="#2fd3e0" stroke-width="2.5" stroke-linecap="round">
+              <path d="M360 230 V186 M489.9 305 L528 283 M489.9 455 L528 477 M360 530 V574 M230.1 455 L192 477 M230.1 305 L192 283"/>
+            </g>
+            <polygon points="360,230 489.9,305 489.9,455 360,530 230.1,455 230.1,305" fill="none" stroke="#2fd3e0" stroke-width="10" opacity=".15"/>
+            <polygon points="360,230 489.9,305 489.9,455 360,530 230.1,455 230.1,305" fill="#0f1216" stroke="#2fd3e0" stroke-width="2.5"/>
+            <text x="360" y="390" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="27" font-weight="700" letter-spacing="2" fill="#f4f5f7">TON ENTREPRISE</text>
+            <g fill="#14161a" stroke="#43474f" stroke-width="2">
+              <circle cx="360" cy="130" r="56"/><circle cx="576.5" cy="255" r="56"/><circle cx="576.5" cy="505" r="56"/><circle cx="360" cy="630" r="56"/><circle cx="143.5" cy="505" r="56"/><circle cx="143.5" cy="255" r="56"/>
+            </g>
+            <g fill="none" stroke="#f4f5f7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="360" cy="130" r="19"/><circle cx="360" cy="130" r="9.5"/>
+              <rect x="562" y="231" width="29" height="48" rx="7"/>
+              <rect x="552" y="486" width="49" height="35" rx="10"/>
+              <path d="M360 606 c-13 0 -22 9 -22 21 c0 15 22 31 22 31 c0 0 22 -16 22 -31 c0 -12 -9 -21 -22 -21 Z"/><circle cx="360" cy="628" r="5.5"/>
+              <path d="M128 262 l24 -15 v30 z"/><path d="M152 247 h7 v30 h-7"/>
+              <path d="M164 244 l9 -7 M167 256 h11 M164 268 l9 7"/>
+            </g>
+            <circle cx="360" cy="130" r="2.6" fill="#f4f5f7"/>
+            <circle cx="576.5" cy="271" r="1.8" fill="#f4f5f7"/>
+            <path d="M563 521 l-8 13 16 -6 Z" fill="#f4f5f7"/>
+            <path d="M580 490 l-10 17 h9 l-7 16 16 -19 h-9 Z" fill="#f4f5f7"/>
+            <text x="143.5" y="515" text-anchor="middle" font-size="30" fill="#f4f5f7">★</text>
+            <text x="111" y="509" text-anchor="middle" font-size="16" fill="#f4f5f7">★</text>
+            <text x="176" y="509" text-anchor="middle" font-size="16" fill="#f4f5f7">★</text>
+            <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="19" font-weight="600" letter-spacing="2.5" fill="#e8eaf0" text-anchor="middle">
+              <text x="360" y="52">OFFRE CLAIRE</text>
+              <text x="576.5" y="341">SITE</text>
+              <text x="576.5" y="591">RÉPONSE RAPIDE</text>
+              <text x="360" y="716">FICHE GOOGLE</text>
+              <text x="143.5" y="591">AVIS</text>
+              <text x="143.5" y="341">PUBLICITÉ</text>
+            </g>
+          </svg>
         </figure>
         <div class="system">
           <article class="sys card reveal">
@@ -1049,9 +1135,45 @@
           <span class="eyebrow">De la découverte à la recommandation</span>
           <h2>Voici ce que vit ton prochain client.</h2>
         </div>
-        <!-- Visuel généré — fichier attendu : assets/parcours-client.png (paysage 1536×1024) -->
-        <figure class="figure-img reveal" style="margin:0 0 40px">
-          <img src="assets/parcours-client.png" alt="Parcours client en six étapes : recherche, fiche Google, site, avis, réponse en moins d'une minute, client — avec une boucle qui ramène du client vers les avis." width="1536" height="1024" loading="lazy" decoding="async" onerror="this.closest('figure').style.display='none'" />
+        <!-- Visuel vectoriel intégré (d'après l'illustration générée).
+             Défilement horizontal sur mobile pour rester lisible. -->
+        <figure class="figure-img figure-scroll reveal" style="margin:0 0 40px">
+          <svg viewBox="0 0 1200 400" role="img" aria-labelledby="pcT pcD">
+            <title id="pcT">Le parcours de ton prochain client en six étapes</title>
+            <desc id="pcD">Recherche, fiche Google, site, avis, réponse en moins d'une minute, client — et une boucle qui ramène du client vers les avis.</desc>
+            <path d="M1096 166 C1040 58 806 52 722 156" fill="none" stroke="#2fd3e0" stroke-width="3" stroke-dasharray="2 11" stroke-linecap="round" opacity=".9"/>
+            <path d="M712 143 L718 172 L742 156 Z" fill="#2fd3e0"/>
+            <g stroke="#2fd3e0" stroke-width="2.5" stroke-linecap="round">
+              <path d="M762 118 v18 M753 127 h18"/>
+              <path d="M756 121 l12 12 M768 121 l-12 12" opacity=".6"/>
+            </g>
+            <path d="M146 230 C182 244 218 216 254 230 M346 230 C382 244 418 216 454 230 M546 230 C582 244 618 216 654 230 M746 230 C782 244 818 216 854 230 M946 230 C982 244 1018 216 1054 230" fill="none" stroke="#2fd3e0" stroke-width="3"/>
+            <g fill="#14161a" stroke="#4a4f58" stroke-width="2">
+              <circle cx="100" cy="230" r="46"/><circle cx="300" cy="230" r="46"/><circle cx="500" cy="230" r="46"/><circle cx="700" cy="230" r="46"/><circle cx="900" cy="230" r="46"/><circle cx="1100" cy="230" r="46"/>
+            </g>
+            <g fill="none" stroke="#f4f5f7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="96" cy="226" r="14"/><path d="M106 236 L118 248"/>
+              <path d="M300 208 c-11 0 -19 8 -19 18 c0 13 19 27 19 27 c0 0 19 -14 19 -27 c0 -10 -8 -18 -19 -18 Z"/>
+              <rect x="488" y="209" width="25" height="42" rx="6"/>
+              <rect x="878" y="207" width="45" height="33" rx="9"/>
+              <circle cx="1100" cy="219" r="8"/><path d="M1084 250 c2 -12 30 -12 32 0"/>
+            </g>
+            <circle cx="300" cy="226" r="4" fill="#f4f5f7"/>
+            <circle cx="500.5" cy="243" r="1.8" fill="#f4f5f7"/>
+            <path d="M888 240 l-7 12 14 -5 Z" fill="#f4f5f7"/>
+            <path d="M903 212 l-8 14 h7 l-5 13 12 -16 h-7 Z" fill="#f4f5f7"/>
+            <path d="M1112 206 l5 6 9 -11" fill="none" stroke="#2fd3e0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="700" y="230" text-anchor="middle" font-size="16" fill="#f4f5f7" letter-spacing="3">★ ★ ★</text>
+            <text x="700" y="249" text-anchor="middle" font-size="13" fill="#f4f5f7" letter-spacing="3">★ ★</text>
+            <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18" font-weight="600" letter-spacing="2.5" fill="#e8eaf0" text-anchor="middle">
+              <text x="100" y="154">RECHERCHE</text>
+              <text x="300" y="154">GOOGLE</text>
+              <text x="500" y="154">SITE</text>
+              <text x="700" y="154">AVIS</text>
+              <text x="900" y="154">RÉPONSE &lt; 1 MIN</text>
+              <text x="1100" y="154">CLIENT</text>
+            </g>
+          </svg>
         </figure>
         <ol class="journey reveal">
           <li>Il découvre ton entreprise.</li>
