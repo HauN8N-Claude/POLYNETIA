@@ -432,14 +432,32 @@
     color: var(--muted); text-align: center;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-  .browser .slot {
-    min-height: 150px; display: flex; flex-direction: column; align-items: center;
-    justify-content: center; gap: 6px; text-align: center; padding: 20px;
-    border: 1px dashed var(--line-2); border-radius: var(--r-sm); margin: 14px;
-  }
-  .browser .slot .tag { font-family: var(--mono); background: var(--bg); border: 1px solid var(--line-2); color: var(--accent); font-size: .66rem; font-weight: 600; letter-spacing: .1em; padding: 4px 12px; border-radius: var(--r-pill); }
-  .browser .slot strong { color: var(--ink); font-size: .96rem; }
-  .browser .slot small { color: var(--muted); }
+  .browser .pane { padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 12px; min-height: 200px; }
+  .pane .pane-t { margin: 0; font-size: .95rem; color: var(--ink); }
+  .demo-meta { margin: auto 0 0; padding-top: 12px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: .64rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  /* Mini-conversation type WhatsApp (texte, pas d'image) */
+  .chat { display: grid; gap: 8px; }
+  .chat .b { max-width: 90%; margin: 0; padding: 9px 12px; border-radius: 12px; font-size: .89rem; line-height: 1.45; color: var(--ink); }
+  .chat .in { background: var(--panel-2); border: 1px solid var(--line-2); border-bottom-left-radius: 4px; justify-self: start; }
+  .chat .out { background: rgba(47,211,224,.09); border: 1px solid rgba(47,211,224,.32); border-bottom-right-radius: 4px; justify-self: end; }
+  .chat time { display: block; font-family: var(--mono); font-size: .6rem; color: var(--muted); margin-top: 5px; text-align: right; }
+  /* Fiche de demande préparée */
+  .kv { display: grid; gap: 7px; }
+  .kv > div { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-bottom: 7px; border-bottom: 1px dashed var(--line); font-size: .89rem; }
+  .kv span { font-family: var(--mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+  .kv b { color: var(--ink); font-weight: 600; text-align: right; }
+  /* Checklists */
+  .demo-check { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .demo-check li { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; color: var(--body); margin: 0; }
+  .demo-check .mk { color: var(--ok); font-weight: 700; flex: none; }
+  .demo-check .mk.n { color: var(--accent); font-family: var(--mono); font-size: .78rem; padding-top: 2px; }
+  /* Modèle de message (avis) */
+  .demo-quote { margin: 0; background: var(--bg); border: 1px solid var(--line); border-left: 2px solid var(--accent); border-radius: 0 var(--r-sm) var(--r-sm) 0; padding: 13px 15px; font-size: .91rem; line-height: 1.55; color: var(--ink); font-style: italic; }
+  /* Mini-parcours publicité */
+  .demo-flow { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; }
+  .demo-flow li { position: relative; margin: 0; padding: 9px 12px; background: var(--bg); border: 1px solid var(--line-2); border-radius: var(--r-sm); font-size: .89rem; font-weight: 600; color: var(--ink); }
+  .demo-flow li:not(:first-child)::before { content: "↓"; position: absolute; top: -17px; left: 13px; color: var(--accent); font-size: .8rem; line-height: 1; }
+  .proof-note { margin: 22px auto 0; max-width: 640px; text-align: center; font-size: .88rem; color: var(--muted); }
 
   /* ============================================================== */
   /* FAQ                                                            */
@@ -767,37 +785,83 @@
         <div class="section-head reveal">
           <span class="eyebrow">Du concret, pas des promesses</span>
           <h2>Concrètement, voici ce que nous mettons en place.</h2>
+          <p class="lede">Voici, poste par poste, à quoi ressemble le dispositif une fois en place dans ton entreprise.</p>
         </div>
-        <!-- RÈGLE ABSOLUE : jamais de fausse preuve. Cadres « fenêtre »
-             à remplacer par des captures RÉELLES. -->
+        <!-- Version 100 % texte : démonstrations types du dispositif,
+             présentées comme des exemples (jamais de fausse preuve).
+             Des captures réelles pourront remplacer ces cadres plus tard. -->
         <div class="proof-grid">
           <div class="browser reveal">
+            <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">WHATSAPP — RÉPONSE_IMMÉDIATE</span></div>
+            <div class="pane">
+              <div class="chat" aria-label="Exemple de conversation">
+                <p class="b in">Bonjour, vous intervenez à Punaauia&nbsp;? C'est pour un devis.<time>Dimanche · 19:42</time></p>
+                <p class="b out">Ia ora na&nbsp;! Oui, on couvre toute la côte ouest. C'est pour une maison ou un local&nbsp;?<time>Dimanche · 19:42</time></p>
+              </div>
+              <p class="demo-meta">Première réponse : moins d'une minute, 7 j/7</p>
+            </div>
+          </div>
+          <div class="browser reveal">
+            <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">WHATSAPP — DEMANDE_PRÉPARÉE</span></div>
+            <div class="pane">
+              <p class="pane-t"><strong>Ce que tu reçois, prêt à traiter&nbsp;:</strong></p>
+              <div class="kv">
+                <div><span>Besoin</span><b>Devis entretien clim ×2</b></div>
+                <div><span>Commune</span><b>Punaauia</b></div>
+                <div><span>Délai</span><b>Cette semaine</b></div>
+                <div><span>Contact</span><b>Nom + numéro direct</b></div>
+              </div>
+              <p class="demo-meta">Tu reprends la main avec tout sous les yeux</p>
+            </div>
+          </div>
+          <div class="browser reveal">
             <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">GOOGLE — FICHE_ENTREPRISE</span></div>
-            <div class="slot"><span class="tag">À REMPLACER</span><strong>Capture Google réelle</strong><small>[À REMPLACER — CAPTURE GOOGLE RÉELLE]</small></div>
+            <div class="pane">
+              <p class="pane-t"><strong>Ce qu'un client vérifie avant de te contacter&nbsp;:</strong></p>
+              <ul class="demo-check">
+                <li><span class="mk" aria-hidden="true">✓</span> Description claire&nbsp;: métier + zone d'intervention.</li>
+                <li><span class="mk" aria-hidden="true">✓</span> Horaires à jour, week-end compris.</li>
+                <li><span class="mk" aria-hidden="true">✓</span> Photos récentes de vraies réalisations.</li>
+                <li><span class="mk" aria-hidden="true">✓</span> Une réponse apportée à chaque avis.</li>
+              </ul>
+              <p class="demo-meta">Complétée ligne par ligne, photo par photo</p>
+            </div>
           </div>
           <div class="browser reveal">
             <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">SITE_CLIENT — MOBILE</span></div>
-            <div class="slot"><span class="tag">À REMPLACER</span><strong>Capture site mobile réelle</strong><small>[À REMPLACER — CAPTURE SITE MOBILE RÉELLE]</small></div>
-          </div>
-          <div class="browser reveal">
-            <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">WHATSAPP_BUSINESS</span></div>
-            <div class="slot"><span class="tag">À REMPLACER</span><strong>Conversation WhatsApp</strong><small>[À REMPLACER — CONVERSATION RÉELLE OU DÉMO IDENTIFIÉE]</small></div>
+            <div class="pane">
+              <p class="pane-t"><strong>En 5 secondes sur téléphone, ton site répond à&nbsp;:</strong></p>
+              <ul class="demo-check">
+                <li><span class="mk n" aria-hidden="true">01</span> Ce que tu fais, exactement.</li>
+                <li><span class="mk n" aria-hidden="true">02</span> Où tu interviens.</li>
+                <li><span class="mk n" aria-hidden="true">03</span> Pourquoi on peut te faire confiance.</li>
+                <li><span class="mk n" aria-hidden="true">04</span> Comment te joindre — un bouton WhatsApp, pas un formulaire froid.</li>
+              </ul>
+              <p class="demo-meta">Pensé d'abord pour le téléphone</p>
+            </div>
           </div>
           <div class="browser reveal">
             <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">DEMANDE_AVIS</span></div>
-            <div class="slot"><span class="tag">À REMPLACER</span><strong>Message de demande d'avis</strong><small>[À REMPLACER — MESSAGE D'AVIS RÉEL]</small></div>
+            <div class="pane">
+              <p class="pane-t"><strong>Le message envoyé après chaque prestation&nbsp;:</strong></p>
+              <blockquote class="demo-quote">«&nbsp;Merci pour ta confiance&nbsp;! Si tout s'est bien passé, ton avis nous aide énormément — 30 secondes suffisent&nbsp;: [lien vers ta fiche Google]&nbsp;»</blockquote>
+              <p class="demo-meta">Chaque client satisfait aide le suivant à te choisir</p>
+            </div>
           </div>
           <div class="browser reveal">
-            <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">META_ADS — CAMPAGNE</span></div>
-            <div class="slot"><span class="tag">À REMPLACER</span><strong>Publicité Meta reliée au parcours</strong><small>[À REMPLACER — CAPTURE PUBLICITÉ META RÉELLE]</small></div>
-          </div>
-          <!-- Étude de cas : uniquement avec des données réelles.
-               Format : Situation → fuite identifiée → intervention → résultat réel -->
-          <div class="browser reveal">
-            <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">ÉTUDE_DE_CAS</span></div>
-            <div class="slot"><span class="tag">OPTIONNEL</span><strong>Étude de cas réelle</strong><small>[SITUATION → FUITE IDENTIFIÉE → INTERVENTION → RÉSULTAT RÉEL]</small></div>
+            <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">META_ADS — PHASE_3</span></div>
+            <div class="pane">
+              <p class="pane-t"><strong>La publicité arrive branchée sur un parcours prêt&nbsp;:</strong></p>
+              <ol class="demo-flow">
+                <li>Publicité locale, ciblée sur ta zone</li>
+                <li>Page claire&nbsp;: offre, photos, avis</li>
+                <li>WhatsApp&nbsp;: réponse immédiate</li>
+              </ol>
+              <p class="demo-meta">Activée en phase 3 — jamais avant</p>
+            </div>
           </div>
         </div>
+        <p class="proof-note reveal">Exemples types du dispositif. Chaque élément est ensuite rédigé pour ton métier, ta commune et tes tarifs, puis validé avec toi avant publication.</p>
       </div>
     </section>
 
