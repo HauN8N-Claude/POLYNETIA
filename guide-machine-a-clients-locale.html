@@ -1,0 +1,1042 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --ink: #1c2733;
+    --muted: #5a6b7a;
+    --brand: #0e6ba8;
+    --brand-dark: #0a4d78;
+    --accent: #f4a259;
+    --line: #dce4ec;
+    --soft: #f4f7fa;
+    --box: #eef4f9;
+  }
+  * { box-sizing: border-box; }
+  @page {
+    size: A4;
+    margin: 20mm 18mm 22mm 18mm;
+    @bottom-center { content: counter(page); }
+  }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    font-size: 11.2pt;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .pb { page-break-before: always; }
+  p { margin: 0 0 9pt; }
+  strong { color: var(--brand-dark); }
+
+  h1 {
+    font-size: 21pt;
+    line-height: 1.2;
+    color: var(--brand-dark);
+    margin: 0 0 14pt;
+    padding-bottom: 8pt;
+    border-bottom: 3px solid var(--accent);
+  }
+  h2 {
+    font-size: 14.5pt;
+    color: var(--brand);
+    margin: 20pt 0 8pt;
+  }
+  h3 {
+    font-size: 12pt;
+    color: var(--ink);
+    margin: 15pt 0 6pt;
+    font-weight: 700;
+  }
+
+  ul, ol { margin: 0 0 10pt; padding-left: 20pt; }
+  li { margin: 3pt 0; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12pt 0;
+    font-size: 10pt;
+    page-break-inside: avoid;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 6pt 8pt;
+    text-align: left;
+    vertical-align: top;
+  }
+  thead th {
+    background: var(--brand);
+    color: #fff;
+    font-weight: 600;
+  }
+  tbody tr:nth-child(even) { background: var(--soft); }
+  /* Rows used as section separators inside the fuites test */
+  tbody td[colspan], tbody th[colspan] { }
+
+  /* Blockquotes = value blocks */
+  blockquote {
+    margin: 12pt 0;
+    padding: 12pt 16pt;
+    background: var(--box);
+    border-left: 4px solid var(--brand);
+    border-radius: 4px;
+    page-break-inside: avoid;
+  }
+  blockquote p { margin: 0 0 6pt; }
+  blockquote p:last-child { margin-bottom: 0; }
+  blockquote strong { color: var(--brand-dark); }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 16pt 0;
+  }
+
+  /* Cover */
+  .cover {
+    page-break-after: always;
+    height: 253mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(160deg, var(--brand-dark) 0%, var(--brand) 55%, #1583c4 100%);
+    color: #fff;
+    margin: -20mm -18mm 0 -18mm;
+    padding: 0 24mm;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .cover .kicker {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 10pt;
+    opacity: .85;
+    margin-bottom: 18pt;
+  }
+  .cover h1 {
+    font-size: 38pt;
+    line-height: 1.1;
+    color: #fff;
+    border: none;
+    margin: 0 0 20pt;
+    padding: 0;
+  }
+  .cover .sub {
+    font-size: 14pt;
+    line-height: 1.5;
+    opacity: .95;
+    max-width: 130mm;
+    margin: 0 auto 26pt;
+  }
+  .cover .rule {
+    width: 60mm;
+    height: 3px;
+    background: var(--accent);
+    margin: 0 auto 26pt;
+    border: none;
+  }
+  .cover .audience {
+    font-size: 10.5pt;
+    opacity: .85;
+    max-width: 120mm;
+    margin: 0 auto;
+  }
+  .cover .brand {
+    margin-top: 34pt;
+    font-size: 12pt;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  /* The first real <h1> after cover shouldn't force an extra blank page break */
+  .content > .pb:first-child { page-break-before: avoid; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="kicker">Guide pratique &middot; Polynésie française</div>
+  <h1>La Machine à Clients Locale</h1>
+  <hr class="rule">
+  <div class="sub">Repère où ton entreprise perd des clients, répare les fuites les plus coûteuses et vérifie si tu es prêt à investir dans la publicité — en 30 à 45 minutes.</div>
+  <div class="audience">Pour les artisans, indépendants et entreprises de services qui veulent arrêter de laisser partir les clients qu'ils ont déjà.</div>
+  <div class="brand">PolynetIA</div>
+</div>
+
+<div class="content">
+<h2>Sommaire</h2>
+<p><strong>Introduction — La pub ne répare pas un seau troué</strong></p>
+<p><strong>1. Où est-ce que tu perds des clients ?</strong>
+- Le test des 5 fuites</p>
+<p><strong>2. Répare tes 5 principales fuites</strong>
+- Est-ce qu'on comprend ce que tu fais ?
+- Est-ce que ta vitrine donne confiance ?
+- Que se passe-t-il quand un client t'écrit ?
+- Que voit un client quand il te cherche sur Google ?
+- Tes clients sont contents. Est-ce que ça se voit ?</p>
+<p><strong>3. Ne perds plus les demandes en route</strong>
+- Pourquoi certaines demandes disparaissent
+- Le CRM expliqué simplement
+- Les étapes d'une demande
+- Le mini-test
+- Le tableau de suivi</p>
+<p><strong>4. Ton parcours client en une page</strong></p>
+<p><strong>5. Es-tu vraiment prêt pour la pub ?</strong>
+- La checklist « Entreprise prête pour la pub »
+- Le verdict</p>
+<p><strong>6. Ton plan d'action</strong>
+- Tes 3 priorités
+- Ce que tu fais cette semaine</p>
+<p><strong>Boîte à outils</strong></p>
+<p><strong>Conclusion</strong></p>
+<hr />
+<div class="pb"></div><h1>Introduction — La pub ne répare pas un seau troué</h1>
+<p>Imagine un plombier de la presqu'île. Il travaille bien. Ses clients sont contents. Mais il se dit : « J'aimerais plus de travail. Je devrais faire de la pub. »</p>
+<p>Alors il paie pour être plus visible. Des gens le voient. Ils l'appellent.</p>
+<p>Mais il est en intervention. Il répond le soir, parfois le lendemain. Sa fiche Google a un vieux numéro. Il n'a que 3 avis. Résultat : la moitié des personnes qui l'ont contacté ont déjà trouvé quelqu'un d'autre.</p>
+<p>Il a payé pour attirer plus de monde. Mais l'argent est parti dans un seau troué.</p>
+<h2>L'idée que tu dois retenir</h2>
+<blockquote>
+<p><strong>La pub ne répare pas un seau troué.</strong></p>
+</blockquote>
+<p>Faire de la publicité, c'est ouvrir le robinet plus grand. Si ton seau fuit, tu remplis plus vite… mais tu perds toujours autant par les trous. Tu dépenses plus pour garder à peu près le même résultat.</p>
+<p>La bonne nouvelle : la plupart des entreprises locales ont <strong>déjà</strong> des clients qui les regardent, les appellent ou leur écrivent. Le problème n'est pas toujours d'en attirer plus. C'est souvent de ne plus laisser partir ceux qui sont déjà intéressés.</p>
+<h2>Ce que ce guide va t'aider à faire</h2>
+<p>C'est simple. Une entreprise qui gagne des clients suit ce chemin :</p>
+<blockquote>
+<p><strong>ÊTRE CHOISI → BIEN RÉPONDRE → BIEN SUIVRE → ATTIRER PLUS</strong></p>
+</blockquote>
+<p>Ce guide t'aide à vérifier chaque étape, dans cet ordre :</p>
+<ol>
+<li><strong>Réparer</strong> ce qui fuit chez toi aujourd'hui.</li>
+<li><strong>Convertir</strong> les demandes que tu reçois déjà en vrais clients.</li>
+<li><strong>Accélérer</strong> avec la publicité — seulement quand tes fondations tiennent.</li>
+</ol>
+<h2>Comment utiliser ce guide</h2>
+<p>Ce n'est pas un livre à lire. C'est un outil de travail.</p>
+<ul>
+<li>Tu vas <strong>cocher</strong> des cases.</li>
+<li>Tu vas <strong>repérer</strong> tes fuites.</li>
+<li>Tu vas <strong>copier</strong> des modèles de messages.</li>
+<li>Tu vas <strong>choisir</strong> 3 priorités et t'y tenir.</li>
+</ul>
+<p>Prends 30 à 45 minutes. Fais le premier diagnostic. Reviens sur les checklists et les modèles quand tu en as besoin.</p>
+<p>Tu peux tout mettre en place toi-même. C'est fait pour ça.</p>
+<blockquote>
+<p><strong>Commence maintenant. Tourne la page et fais le test des 5 fuites.</strong></p>
+</blockquote>
+<hr />
+<div class="pb"></div><h1>1. Où est-ce que tu perds des clients ?</h1>
+<p>Avant de réparer, il faut savoir où ça fuit.</p>
+<p>La plupart des entreprises locales perdent des clients de <strong>5 façons</strong>. Presque toujours les mêmes. Voici lesquelles.</p>
+<h2>Les 5 fuites</h2>
+<h3>Fuite 1 — Ton offre n'est pas assez claire</h3>
+<p>Le client tombe sur toi, mais il ne comprend pas tout de suite :
+- ce que tu fais ;
+- pour qui ;
+- où tu travailles ;
+- comment te contacter.</p>
+<p>S'il doit deviner, il passe au suivant.</p>
+<h3>Fuite 2 — Ta vitrine ne rassure pas assez</h3>
+<p>Ta « vitrine », c'est ce que le client voit de toi : ta page, ta fiche, tes photos.</p>
+<p>Ça fuit quand :
+- tu n'as pas de site ni de page claire ;
+- il y a peu de photos ;
+- les informations sont difficiles à trouver ;
+- la présentation est datée ou incomplète.</p>
+<h3>Fuite 3 — Tu réponds trop tard</h3>
+<p>Le client écrit pendant que tu travailles. Tu réponds plusieurs heures après.</p>
+<p>Entre-temps, il a contacté quelqu'un d'autre. Et quelqu'un d'autre a répondu avant toi.</p>
+<h3>Fuite 4 — On te trouve mal</h3>
+<p>Quand quelqu'un te cherche sur Google, il tombe sur :
+- une fiche incomplète ;
+- de mauvais horaires ;
+- un téléphone incorrect ;
+- peu de photos ;
+- une zone d'intervention mal indiquée.</p>
+<p>Il doute. Il ferme.</p>
+<h3>Fuite 5 — Tes clients sont contents, mais ça ne se voit pas</h3>
+<p>Tu fais du bon travail. Mais un inconnu ne le sait pas.</p>
+<p>Ça fuit quand :
+- tu as peu d'avis ;
+- tes avis sont anciens ;
+- tu n'as aucune habitude pour en demander.</p>
+<h2>Le test des 5 fuites</h2>
+<p>Réponds honnêtement. Pour chaque question : <strong>Oui</strong>, <strong>Un peu</strong> ou <strong>Non</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th style="text-align: center;">Oui</th>
+<th style="text-align: center;">Un peu</th>
+<th style="text-align: center;">Non</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Fuite 1 — Ton offre est-elle claire ?</strong></td>
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Un inconnu comprend ce que tu fais en 5 secondes</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>2</td>
+<td>On voit tout de suite dans quelle zone tu travailles</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>3</td>
+<td>On sait immédiatement comment te contacter</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td><strong>Fuite 2 — Ta vitrine rassure-t-elle ?</strong></td>
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Tu as une page ou un endroit clair qui présente ton activité</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Il y a des photos récentes de ton travail</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Un nouveau client trouve tes infos sans galérer</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td><strong>Fuite 3 — Réponds-tu à temps ?</strong></td>
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Tu réponds aux nouvelles demandes le jour même</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Tu as une façon de répondre vite même en intervention</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Tu perds rarement une demande faute de réponse</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td><strong>Fuite 4 — Te trouve-t-on bien ?</strong></td>
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Ta fiche Google existe et les infos sont justes</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Tes horaires, ton numéro et ta zone sont corrects</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Il y a des photos récentes sur ta fiche</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td><strong>Fuite 5 — Ta satisfaction se voit-elle ?</strong></td>
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>13</td>
+<td>Tu as des avis clients récents</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Tu demandes un avis après un travail bien fait</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Tu réponds aux avis qu'on te laisse</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+</tbody>
+</table>
+<h3>Comment lire ton résultat</h3>
+<p>Regarde chaque groupe de 3 questions (une fuite).</p>
+<ul>
+<li><strong>Surtout des « Oui »</strong> → 🟢 <strong>Solide.</strong> Cette partie tient.</li>
+<li><strong>Un mélange</strong> → 🟠 <strong>À améliorer.</strong> Il y a des trous à boucher.</li>
+<li><strong>Surtout des « Non »</strong> → 🔴 <strong>À réparer en priorité.</strong> C'est ici que tu perds le plus.</li>
+</ul>
+<p>Repère la fuite la plus rouge. C'est ta plus grosse perte. C'est par là qu'on commence.</p>
+<blockquote>
+<p><strong>Ma priorité n°1 : <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>____</strong></p>
+</blockquote>
+<hr />
+<div class="pb"></div><h1>2. Répare tes 5 principales fuites</h1>
+<p>Tu sais maintenant où ça fuit. On répare, une fuite à la fois.</p>
+<p>Chaque fiche suit la même logique : une situation, une règle simple, ce que tu vérifies, ce que tu fais, et un outil à copier.</p>
+<p>Ne fais pas tout d'un coup. Commence par ta priorité n°1.</p>
+<hr />
+<h2>Fiche 1 — Est-ce qu'on comprend ce que tu fais ?</h2>
+<h3>Situation</h3>
+<p>Un client demande à un ami : « Tu connais quelqu'un pour refaire une terrasse ? » L'ami donne ton nom. Le client cherche ta page.</p>
+<p>Il lit. Il voit une longue liste : maçonnerie, carrelage, peinture, rénovation, dépannage, et dix autres choses. Il ne sait plus si tu fais vraiment les terrasses. Il hésite. Il retourne demander un autre nom.</p>
+<h3>Pourquoi c'est important</h3>
+<p>Un client pressé ne fait pas d'effort pour te comprendre. Si ton activité n'est pas claire en quelques secondes, il croit que tu n'es pas la bonne personne — même si tu es exactement la bonne personne.</p>
+<p>Une offre claire ne veut pas dire faire moins de choses. Ça veut dire que le client <strong>comprend vite</strong> qu'il est au bon endroit.</p>
+<h3>Vérifie chez toi</h3>
+<ul>
+<li>☐ On comprend ton métier principal en une phrase.</li>
+<li>☐ On sait pour quel type de client tu travailles.</li>
+<li>☐ On voit ta zone (commune, île, secteur).</li>
+<li>☐ Tu n'as pas une liste de 15 prestations qui noie l'essentiel.</li>
+</ul>
+<h3>Fais ceci</h3>
+<ol>
+<li>Choisis <strong>le</strong> service que tu veux mettre en avant.</li>
+<li>Résume ton activité en une seule phrase simple.</li>
+<li>Mets cette phrase là où on te voit en premier (fiche, page, profil).</li>
+</ol>
+<h3>Outil — Modèle « Mon offre en une phrase »</h3>
+<blockquote>
+<p><strong>Je propose [service] pour [type de client] à [zone], pour [résultat concret].</strong></p>
+</blockquote>
+<p>Exemples :</p>
+<blockquote>
+<p>« Je répare et j'installe la plomberie pour les particuliers de Papeete à la presqu'île, pour de l'eau qui coule sans souci. »</p>
+<p>« Je fais l'entretien de jardins pour les maisons et les résidences de Punaauia, pour un extérieur toujours propre. »</p>
+</blockquote>
+<p>Écris la tienne :</p>
+<blockquote>
+<p><strong>Je propose <strong><em>_</em></strong><strong><em>_</em></strong> pour <strong><em>_</em></strong><strong><em>_</em></strong> à <strong><em>_</em></strong><strong><em>_</em></strong>, pour <strong><em>_</em></strong><strong><em>_</em></strong>.</strong></p>
+</blockquote>
+<h3>À faire maintenant</h3>
+<p>Écris <strong>une seule phrase</strong> qu'un inconnu comprend en 5 secondes. Lis-la à voix haute. Si tu hésites, simplifie encore.</p>
+<hr />
+<h2>Fiche 2 — Est-ce que ta vitrine donne confiance ?</h2>
+<h3>Situation</h3>
+<p>Un client a ton nom. Il regarde ta page sur son téléphone, le soir, dans son canapé.</p>
+<p>Pas de photo. Une description vague. Il ne trouve pas ton numéro tout de suite. Il se dit : « Bof, je ne sais pas trop qui c'est. » Il referme et cherche quelqu'un qui inspire plus confiance.</p>
+<h3>Pourquoi c'est important</h3>
+<p>Avant de te contacter, le client te <strong>regarde</strong>. Il se demande une seule chose : « Est-ce que je peux faire confiance à cette personne ? »</p>
+<p>Ta vitrine répond à cette question à ta place. Si elle est vide ou floue, elle répond « je ne sais pas ». Et dans le doute, le client s'en va.</p>
+<p>Tu n'as pas besoin d'un beau site compliqué. Tu as besoin que l'essentiel soit <strong>visible et rassurant</strong>.</p>
+<h3>Vérifie chez toi</h3>
+<p>Un nouveau client doit trouver rapidement :</p>
+<ul>
+<li>☐ Ce que tu fais.</li>
+<li>☐ Où tu travailles.</li>
+<li>☐ Des photos de ton travail.</li>
+<li>☐ Des preuves ou des avis.</li>
+<li>☐ Tes coordonnées.</li>
+<li>☐ Comment te contacter (le bon bouton, le bon numéro).</li>
+<li>☐ Des infos utiles sur tes prestations.</li>
+</ul>
+<h3>Fais ceci</h3>
+<ol>
+<li>Ajoute <strong>3 à 5 photos</strong> récentes de ton vrai travail (avant/après si possible).</li>
+<li>Mets ton numéro et ton mode de contact <strong>bien visibles</strong>.</li>
+<li>Vérifie que ta zone d'intervention est écrite noir sur blanc.</li>
+</ol>
+<h3>Outil — Checklist « Ma vitrine rassure-t-elle ? »</h3>
+<blockquote>
+<p><strong>Quand un inconnu regarde ma vitrine, il trouve :</strong>
+- ☐ Mon métier, en clair
+- ☐ Ma zone de travail
+- ☐ Des photos récentes et réelles
+- ☐ Au moins un avis ou une preuve
+- ☐ Mon numéro / WhatsApp
+- ☐ Un moyen de me contacter en un geste
+- ☐ De quoi comprendre mes prestations</p>
+<p><strong>Chaque case non cochée est une raison de partir pour le client.</strong></p>
+</blockquote>
+<h3>À faire maintenant</h3>
+<p>Prends ton téléphone. Regarde ta propre entreprise <strong>comme si tu étais un nouveau client</strong>. Note la première chose qui manque ou qui fait douter.</p>
+<hr />
+<h2>Fiche 3 — Que se passe-t-il quand un client t'écrit ?</h2>
+<h3>Situation</h3>
+<p>Il est 19 h. Un client t'écrit sur WhatsApp : « Bonjour, vous seriez dispo cette semaine pour un devis ? »</p>
+<p>Tu es encore sur un chantier, ou à table avec ta famille. Tu vois le message plus tard. Tu réponds le lendemain midi.</p>
+<p>Trop tard. Il a écrit à trois entreprises. Deux ont déjà répondu. Il a pris rendez-vous avec la première qui l'a rassuré.</p>
+<h3>Pourquoi c'est important</h3>
+<p>Le premier qui répond a une longueur d'avance énorme. Pas parce qu'il est meilleur. Parce qu'il est <strong>là au bon moment</strong>.</p>
+<p>Tu ne peux pas répondre à tout, tout le temps. C'est normal, tu travailles. Mais tu peux préparer des réponses à l'avance pour ne pas laisser refroidir une demande.</p>
+<p>Répondre vite, même une phrase courte, garde le client au chaud le temps que tu reviennes vers lui.</p>
+<h3>Vérifie chez toi</h3>
+<ul>
+<li>☐ Tu as une première réponse rapide, même quand tu es occupé.</li>
+<li>☐ Tu poses les bonnes questions pour comprendre le besoin.</li>
+<li>☐ Tu dis toujours quelle est la prochaine étape.</li>
+<li>☐ Tu relances si le client ne répond pas.</li>
+</ul>
+<h3>Fais ceci</h3>
+<ol>
+<li>Enregistre les <strong>3 messages</strong> ci-dessous dans ton téléphone.</li>
+<li>Quand une demande arrive, envoie la première réponse <strong>tout de suite</strong>.</li>
+<li>Note le contact quelque part pour ne pas l'oublier (voir Partie 3).</li>
+</ol>
+<h3>Outil — 3 messages prêts à adapter</h3>
+<blockquote>
+<p><strong>1. Première réponse (à envoyer vite)</strong>
+« Bonjour [prénom], merci pour votre message 🙏 Je suis en intervention là, je reviens vers vous d'ici [ce soir / demain matin] avec une réponse claire. Vous êtes bien sur [commune] ? »</p>
+<p><strong>2. Demande d'informations</strong>
+« Pour vous répondre au plus juste, j'ai besoin de 3 infos :
+1. De quoi avez-vous besoin exactement ?
+2. Où se situe le chantier / l'intervention ?
+3. C'est pour quand idéalement ?
+Merci ! »</p>
+<p><strong>3. Message de suivi (si pas de réponse)</strong>
+« Bonjour [prénom], je reviens vers vous concernant votre demande de [besoin]. Toujours d'actualité ? Je peux vous proposer [un créneau / un devis] si vous voulez. »</p>
+</blockquote>
+<h3>À faire maintenant</h3>
+<p>Enregistre le <strong>message n°1</strong> dans les réponses rapides de ton téléphone. La prochaine demande, tu réponds en 10 secondes.</p>
+<p><em>Note : personne ne peut promettre qu'aucune demande ne sera jamais perdue. Le but est simplement d'en perdre beaucoup moins.</em></p>
+<hr />
+<h2>Fiche 4 — Que voit un client quand il te cherche sur Google ?</h2>
+<h3>Situation</h3>
+<p>Un client tape « électricien + [ta commune] » sur son téléphone. Trois entreprises s'affichent.</p>
+<p>La première a des photos, des horaires justes, des avis récents. La deuxième — la tienne — a un ancien numéro et aucune photo. La troisième n'a presque rien.</p>
+<p>Devine qui il appelle en premier.</p>
+<h3>Pourquoi c'est important</h3>
+<p>Quand on te cherche sur Google, ta fiche parle à ta place. C'est souvent la <strong>première impression</strong>. Une fiche complète et à jour rassure. Une fiche vide ou fausse fait douter — ou pire, envoie le client chez un concurrent mieux présenté.</p>
+<p>C'est gratuit à corriger. Et ça prend quelques minutes.</p>
+<h3>Vérifie chez toi</h3>
+<p>Sur ta fiche Google (ta fiche d'établissement) :</p>
+<ul>
+<li>☐ Le nom est correct.</li>
+<li>☐ Le numéro est correct.</li>
+<li>☐ Les horaires sont à jour.</li>
+<li>☐ La zone d'intervention est indiquée.</li>
+<li>☐ Les catégories correspondent à ton métier.</li>
+<li>☐ Tes prestations sont listées.</li>
+<li>☐ Il y a des photos récentes.</li>
+<li>☐ Il y a des avis récents.</li>
+</ul>
+<h3>Fais ceci</h3>
+<ol>
+<li>Corrige d'abord ce qui est <strong>faux</strong> (numéro, horaires) — c'est ce qui fait le plus de dégâts.</li>
+<li>Ajoute quelques photos récentes.</li>
+<li>Vérifie que ta commune ou ta zone est bien indiquée.</li>
+</ol>
+<h3>Outil — Checklist Google</h3>
+<blockquote>
+<p><strong>Ma fiche Google est-elle prête ?</strong>
+- ☐ Nom correct
+- ☐ Numéro correct
+- ☐ Horaires à jour
+- ☐ Zone d'intervention
+- ☐ Bonnes catégories
+- ☐ Prestations listées
+- ☐ Photos récentes
+- ☐ Avis récents</p>
+</blockquote>
+<h3>À faire maintenant</h3>
+<p>Cherche toi-même <strong>[ton métier] + [ta commune]</strong> sur ton téléphone. Regarde ta fiche comme un client. Corrige la première erreur que tu vois.</p>
+<blockquote>
+<p><strong>Garde-fou :</strong> personne ne peut te garantir la première place, la première page ou un classement précis sur Google. Ce que tu peux faire, c'est présenter une fiche complète et crédible. C'est déjà énorme.</p>
+</blockquote>
+<hr />
+<h2>Fiche 5 — Tes clients sont contents. Est-ce que ça se voit ?</h2>
+<h3>Situation</h3>
+<p>Tu finis une intervention. Le client est ravi, il te remercie chaleureusement, il te dit qu'il parlera de toi autour de lui.</p>
+<p>Tu repars. Tu ne demandes rien. Le client, content mais occupé, ne pense jamais à laisser un avis. Sa satisfaction reste dans sa tête. Le prochain client, lui, ne la verra jamais.</p>
+<h3>Pourquoi c'est important</h3>
+<p>Un inconnu ne te connaît pas. Il fait confiance à <strong>ce que les autres disent de toi</strong>. Les avis, c'est le bouche-à-oreille qui reste visible, en ligne, tout le temps.</p>
+<p>Tes clients contents ne laissent pas d'avis parce qu'ils sont méchants. Ils n'y pensent pas, tout simplement. Ton travail, c'est de leur demander — simplement, au bon moment.</p>
+<h3>Vérifie chez toi</h3>
+<ul>
+<li>☐ Tu demandes un avis quand le client est le plus content (juste après un bon travail).</li>
+<li>☐ Tu rends la démarche facile (un lien direct).</li>
+<li>☐ Tu réponds aux avis reçus, bons comme moins bons.</li>
+<li>☐ Tu le fais régulièrement, pas une fois par an.</li>
+</ul>
+<h3>Fais ceci</h3>
+<ol>
+<li>Choisis <strong>un moment</strong> pour demander : juste après la fin du travail, quand le client est satisfait.</li>
+<li>Prépare un <strong>lien direct</strong> vers ta fiche pour laisser un avis (à envoyer par message).</li>
+<li>Prends l'habitude de <strong>répondre</strong> à chaque avis.</li>
+</ol>
+<h3>Outil — Messages de demande d'avis</h3>
+<blockquote>
+<p><strong>Demande simple (sur place ou par message)</strong>
+« Merci pour votre confiance 🙏 Si le travail vous a plu, un petit avis Google m'aiderait beaucoup, ça prend 30 secondes. Voici le lien : [ton lien] »</p>
+<p><strong>Demande douce (le lendemain)</strong>
+« Bonjour [prénom], j'espère que tout va bien depuis [l'intervention]. Si vous avez été satisfait, un avis me ferait très plaisir et aide d'autres personnes du coin à me trouver : [ton lien]. Merci ! »</p>
+<p><strong>Réponse type à un bon avis</strong>
+« Merci beaucoup [prénom] pour votre retour 🙏 Ravi que le travail vous ait plu. À bientôt ! »</p>
+<p><strong>Réponse type à un avis mitigé</strong>
+« Merci pour votre retour, [prénom]. Je note vos remarques et j'en tiens compte. N'hésitez pas à me recontacter directement, je reste disponible. »</p>
+</blockquote>
+<h3>À faire maintenant</h3>
+<p>Récupère le lien direct de ta fiche pour laisser un avis. Envoie le premier message de demande à <strong>un client récent et content</strong>.</p>
+<blockquote>
+<p><strong>Garde-fou :</strong> demande un avis à tous tes clients de la même façon. Ne trie pas les clients contents et mécontents pour choisir qui a le droit de s'exprimer. Un avis honnête vaut mieux qu'un avis arrangé.</p>
+</blockquote>
+<hr />
+<div class="pb"></div><h1>3. Ne perds plus les demandes en route</h1>
+<p>Tu as réparé tes fuites principales. Maintenant, on s'occupe de ce qui se passe <strong>après</strong> la première réponse.</p>
+<h2>Recevoir une demande ne veut pas dire gagner un client.</h2>
+<h3>Situation concrète</h3>
+<p>Lundi, un client t'écrit pour un devis. Tu réponds, tu passes voir, tu envoies le devis mercredi.</p>
+<p>Puis… plus rien. Tu es pris par d'autres chantiers. Tu oublies de relancer. Le client, lui, hésitait juste sur un détail. Un petit message aurait suffi.</p>
+<p>Deux semaines plus tard, tu te souviens de lui. Trop tard : il a signé ailleurs.</p>
+<p>Ce client n'était pas perdu à cause d'un manque de demandes. Il était perdu par <strong>manque de suivi</strong>.</p>
+<h3>Le vrai problème n'est pas toujours le nombre de demandes</h3>
+<p>Beaucoup d'entreprises pensent : « Il me faut plus de demandes. »</p>
+<p>Mais souvent, les demandes sont là. Elles arrivent par téléphone, WhatsApp, Messenger, Facebook, Google, le bouche-à-oreille. Le problème, c'est qu'elles se perdent en route :</p>
+<ul>
+<li>un devis jamais relancé ;</li>
+<li>un message noyé dans le téléphone ;</li>
+<li>un client « à rappeler » qu'on oublie ;</li>
+<li>un ancien client qu'on ne recontacte jamais.</li>
+</ul>
+<p>Chaque demande perdue, c'est de l'argent que tu avais déjà à portée de main.</p>
+<h2>Le CRM expliqué simplement</h2>
+<p>Le mot fait peur. La chose est simple.</p>
+<blockquote>
+<p><strong>Un CRM est simplement un endroit où tu regroupes tes demandes et où tu vois ce qu'il faut faire ensuite.</strong></p>
+</blockquote>
+<p>Ce n'est pas un logiciel compliqué obligatoire. Ça peut être un carnet, un tableau, une appli simple. L'important, c'est ce que ça te permet de <strong>voir</strong> :</p>
+<ul>
+<li>qui t'a contacté ;</li>
+<li>pour quel besoin ;</li>
+<li>quand ;</li>
+<li>où en est la demande ;</li>
+<li>quelle est la prochaine action ;</li>
+<li>quel devis doit être relancé ;</li>
+<li>qui est devenu client.</li>
+</ul>
+<p>Le suivi ne doit pas reposer uniquement sur ta mémoire. Ta mémoire est déjà pleine. Un endroit unique pour tout voir, c'est ça qui change tout.</p>
+<h2>Les étapes d'une demande</h2>
+<p>Chaque demande suit un parcours. Ton rôle : savoir à tout moment <strong>où en est chaque client</strong>.</p>
+<blockquote>
+<p><strong>NOUVELLE DEMANDE</strong>
+↓
+<strong>À CONTACTER</strong>
+↓
+<strong>BESOIN IDENTIFIÉ</strong>
+↓
+<strong>DEVIS / RDV</strong>
+↓
+<strong>À RELANCER</strong>
+↓
+<strong>CLIENT</strong>
+↓
+<strong>AVIS À DEMANDER</strong></p>
+</blockquote>
+<p>Une demande qui s'arrête entre deux étapes, c'est une demande qui refroidit. Ton tableau te montre exactement où elles sont bloquées.</p>
+<p>[VISUEL : schéma vertical en escalier des 7 étapes, avec une goutte d'eau qui « fuit » entre les étapes non suivies]</p>
+<h2>Le mini-test</h2>
+<p>Réponds par <strong>Oui</strong> ou <strong>Non</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th style="text-align: center;">Oui</th>
+<th style="text-align: center;">Non</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Je sais combien de demandes j'ai reçues cette semaine</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>Je sais lesquelles attendent encore une réponse</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>Je sais quels devis doivent être relancés</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>Je retrouve facilement les coordonnées et le besoin d'un client</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>Je sais pourquoi certaines demandes n'ont pas abouti</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td>Je sais quels anciens clients pourraient avoir besoin de moi à nouveau</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Beaucoup de « Non » ?</strong> Ce n'est pas un défaut. C'est simplement le signe qu'un suivi organisé te ferait gagner des clients que tu as déjà sous la main.</p>
+<h2>L'outil — Ton tableau de suivi</h2>
+<p>Tu n'as pas besoin de plus compliqué que ça pour commencer :</p>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Besoin</th>
+<th>Commune</th>
+<th>Date</th>
+<th>Où ça en est ?</th>
+<th>Prochaine action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Teva</td>
+<td>Devis terrasse</td>
+<td>Paea</td>
+<td>03/08</td>
+<td>Devis envoyé</td>
+<td>Relancer le 10/08</td>
+</tr>
+<tr>
+<td>Hina</td>
+<td>Fuite salle de bain</td>
+<td>Faaa</td>
+<td>05/08</td>
+<td>À contacter</td>
+<td>Appeler ce soir</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Remplis-le à chaque nouvelle demande. Regarde-le une fois par jour. C'est tout.</p>
+<h3>À faire maintenant</h3>
+<p>Crée ce tableau (papier, tableur ou appli). Note <strong>les 3 dernières demandes</strong> en cours. Décide de la prochaine action pour chacune.</p>
+<p><em>Le but ici n'est pas de comparer des logiciels. C'est d'avoir un seul endroit où tu vois tout. L'outil viendra après ; l'habitude d'abord.</em></p>
+<hr />
+<div class="pb"></div><h1>4. Ton parcours client en une page</h1>
+<p>Voici, en un coup d'œil, toute la Machine à Clients Locale. Chaque étape est un endroit où tu peux gagner ou perdre un client.</p>
+<p>Pour chaque étape, coche : <strong>✅ Ça fonctionne</strong> ou <strong>⚠️ À améliorer</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Étape</th>
+<th>Ce que ça veut dire</th>
+<th style="text-align: center;">✅</th>
+<th style="text-align: center;">⚠️</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IL TE TROUVE</strong></td>
+<td>On te trouve sur Google, en ligne, par le bouche-à-oreille</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td><strong>IL REGARDE TON ENTREPRISE</strong></td>
+<td>Ta vitrine et tes avis le rassurent</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td><strong>IL TE CONTACTE</strong></td>
+<td>Il sait comment et il ose le faire</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td><strong>TU RÉPONDS</strong></td>
+<td>Tu réponds vite et clairement</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td><strong>TU SUIS SA DEMANDE</strong></td>
+<td>Tu gardes une trace et tu relances</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td><strong>DEVIS / RDV</strong></td>
+<td>Tu proposes une étape concrète</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td><strong>IL DEVIENT CLIENT</strong></td>
+<td>Le travail se fait, il est satisfait</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+<tr>
+<td><strong>TU DEMANDES UN AVIS</strong></td>
+<td>Sa satisfaction devient visible</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: center;">☐</td>
+</tr>
+</tbody>
+</table>
+<p>[VISUEL : le parcours en 8 étapes sous forme de chemin descendant, chaque étape avec sa case ✅ / ⚠️]</p>
+<h2>Ce que tu dois voir</h2>
+<p>Regarde la colonne ⚠️. Là où tu as coché « À améliorer », c'est là que ton parcours se casse.</p>
+<p>Une chaîne casse toujours à son maillon le plus faible. Inutile de renforcer les maillons solides : trouve le plus faible et répare-le en premier.</p>
+<blockquote>
+<p><strong>Mon maillon le plus faible aujourd'hui : <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>____</strong></p>
+</blockquote>
+<hr />
+<div class="pb"></div><h1>5. Es-tu vraiment prêt pour la pub ?</h1>
+<p>Tu as réparé tes fuites. Tu suis mieux tes demandes. Maintenant, la question de la publicité peut se poser.</p>
+<p>Faire de la pub, c'est ouvrir le robinet plus grand pour attirer plus de monde. Ça peut marcher — <strong>à condition que ton seau ne fuie plus</strong>.</p>
+<p>Avant de mettre 1 F CFP dans la publicité, vérifie tes fondamentaux.</p>
+<h2>La checklist « Entreprise prête pour la pub »</h2>
+<p>Coche chaque case honnêtement.</p>
+<ul>
+<li>☐ Mon offre est claire.</li>
+<li>☐ Ma vitrine donne confiance.</li>
+<li>☐ Mes informations sont faciles à trouver.</li>
+<li>☐ J'ai des photos crédibles.</li>
+<li>☐ J'ai des avis clients.</li>
+<li>☐ Je réponds correctement aux premières demandes.</li>
+<li>☐ Je suis mes demandes et mes devis.</li>
+<li>☐ Je sais quelle prestation je veux mettre en avant.</li>
+<li>☐ Je sais dans quelle zone je veux travailler.</li>
+<li>☐ Je sais ce que je veux que le client fasse ensuite.</li>
+</ul>
+<p>Compte tes « Oui ».</p>
+<h2>Le verdict</h2>
+<h3>8 à 10 Oui — 🟢 PRÊT À TESTER</h3>
+<p>Tes fondations tiennent. Tu peux envisager un premier test de publicité locale, prudemment, sur une prestation et une zone précises.</p>
+<p>Quand tu attires plus de monde, ton système est prêt à le transformer en clients.</p>
+<h3>5 à 7 Oui — 🟠 PRESQUE PRÊT</h3>
+<p>Tu es sur la bonne voie. Mais il reste des points faibles.</p>
+<p>Corrige-les <strong>avant</strong> d'augmenter ta dépense. Sinon, tu paieras pour attirer des clients que ton système laissera encore partir.</p>
+<h3>0 à 4 Oui — 🔴 RÉPARE D'ABORD LES FUITES</h3>
+<p>La publicité serait une mauvaise idée maintenant. Elle amplifierait tes fuites au lieu de te faire gagner.</p>
+<p>Reprends les Parties 2 et 3. Répare. Reviens faire ce test ensuite.</p>
+<h2>Le message clé</h2>
+<blockquote>
+<p><strong>N'ouvre pas davantage le robinet tant que le seau fuit encore.</strong></p>
+</blockquote>
+<h2>Ce que tu dois retenir sur la pub</h2>
+<p>Ce guide ne t'apprend pas à faire de la publicité en détail. Ce n'est pas le but.</p>
+<p>Tu dois seulement comprendre trois choses :</p>
+<ol>
+<li><strong>Quand</strong> la publicité devient logique : une fois tes fondations solides.</li>
+<li><strong>Ce qui doit être prêt</strong> avant : offre, vitrine, réponses, suivi, avis.</li>
+<li><strong>Ce que tu décides</strong> avant de lancer un test : quelle prestation, quelle zone, quelle action tu attends du client.</li>
+</ol>
+<p>Le reste — le comment technique — pourra venir plus tard, quand tu seras vraiment prêt.</p>
+<hr />
+<div class="pb"></div><h1>6. Ton plan d'action</h1>
+<p>Tu as fait le tour. Ne referme pas ce guide sans décider quoi faire.</p>
+<p>La règle d'or : <strong>ne cherche pas à tout refaire en même temps.</strong> Commence par ta plus grosse fuite. Une chose bien faite vaut mieux que dix choses commencées.</p>
+<h2>Tes 3 priorités</h2>
+<p>Choisis <strong>3 priorités maximum</strong>. Pas plus.</p>
+<h3>Ma priorité n°1</h3>
+<p><em>(ta plus grosse fuite — celle du test de la Partie 1)</em></p>
+<hr />
+<p><strong>Ce que je fais cette semaine :</strong></p>
+<hr />
+<h3>Ma priorité n°2</h3>
+<hr />
+<h3>Ma priorité n°3</h3>
+<hr />
+<h2>La checklist finale</h2>
+<p>De quoi t'y retrouver dans les semaines qui viennent :</p>
+<ul>
+<li>☐ Clarifier mon offre (Fiche 1)</li>
+<li>☐ Vérifier ma vitrine (Fiche 2)</li>
+<li>☐ Préparer mes premières réponses (Fiche 3)</li>
+<li>☐ Vérifier ma fiche Google (Fiche 4)</li>
+<li>☐ Demander plus régulièrement des avis (Fiche 5)</li>
+<li>☐ Organiser le suivi de mes demandes (Partie 3)</li>
+<li>☐ Refaire le test « Prêt pour la pub » (Partie 5)</li>
+</ul>
+<h2>Le dernier mot</h2>
+<p>Tu ne vas pas tout changer aujourd'hui. Ce n'est pas le but.</p>
+<p>Choisis la plus grosse fuite. Répare-la cette semaine. Passe à la suivante la semaine d'après.</p>
+<p>C'est comme ça qu'on construit, pas à pas, une entreprise qui ne laisse plus partir ses clients.</p>
+<hr />
+<div class="pb"></div><h1>Boîte à outils</h1>
+<p>Tous tes outils regroupés. Reviens ici quand tu en as besoin, sans relire tout le guide.</p>
+<h2>1. Le test des 5 fuites</h2>
+<p>15 questions (Oui / Un peu / Non) réparties en 5 fuites. → <strong>Voir Partie 1.</strong>
+Résultat par fuite : 🟢 Solide · 🟠 À améliorer · 🔴 À réparer en priorité.</p>
+<h2>2. Modèle « Mon offre en une phrase »</h2>
+<blockquote>
+<p>Je propose <strong>[service]</strong> pour <strong>[type de client]</strong> à <strong>[zone]</strong>, pour <strong>[résultat concret]</strong>.</p>
+</blockquote>
+<h2>3. Checklist vitrine</h2>
+<blockquote>
+<ul>
+<li>☐ Mon métier, en clair</li>
+<li>☐ Ma zone de travail</li>
+<li>☐ Des photos récentes et réelles</li>
+<li>☐ Au moins un avis ou une preuve</li>
+<li>☐ Mon numéro / WhatsApp</li>
+<li>☐ Un moyen de me contacter en un geste</li>
+<li>☐ De quoi comprendre mes prestations</li>
+</ul>
+</blockquote>
+<h2>4. Checklist Google</h2>
+<blockquote>
+<ul>
+<li>☐ Nom correct</li>
+<li>☐ Numéro correct</li>
+<li>☐ Horaires à jour</li>
+<li>☐ Zone d'intervention</li>
+<li>☐ Bonnes catégories</li>
+<li>☐ Prestations listées</li>
+<li>☐ Photos récentes</li>
+<li>☐ Avis récents</li>
+</ul>
+</blockquote>
+<h2>5. Messages WhatsApp / Messenger (réponses aux demandes)</h2>
+<blockquote>
+<p><strong>Première réponse (vite) :</strong>
+« Bonjour [prénom], merci pour votre message 🙏 Je suis en intervention là, je reviens vers vous d'ici [ce soir / demain matin]. Vous êtes bien sur [commune] ? »</p>
+<p><strong>Demande d'informations :</strong>
+« Pour vous répondre au plus juste : 1) De quoi avez-vous besoin exactement ? 2) Où se situe l'intervention ? 3) C'est pour quand ? Merci ! »</p>
+<p><strong>Message de suivi :</strong>
+« Bonjour [prénom], je reviens vers vous pour votre demande de [besoin]. Toujours d'actualité ? Je peux vous proposer [un créneau / un devis]. »</p>
+</blockquote>
+<h2>6. Messages de demande d'avis</h2>
+<blockquote>
+<p><strong>Sur place / par message :</strong>
+« Merci pour votre confiance 🙏 Si le travail vous a plu, un petit avis Google m'aiderait beaucoup (30 secondes) : [ton lien] »</p>
+<p><strong>Le lendemain :</strong>
+« Bonjour [prénom], si vous avez été satisfait, un avis me ferait très plaisir et aide d'autres personnes du coin à me trouver : [ton lien]. Merci ! »</p>
+<p><strong>Réponse à un bon avis :</strong>
+« Merci beaucoup [prénom] 🙏 Ravi que le travail vous ait plu. À bientôt ! »</p>
+<p><strong>Réponse à un avis mitigé :</strong>
+« Merci pour votre retour, [prénom]. Je note vos remarques. N'hésitez pas à me recontacter directement, je reste disponible. »</p>
+</blockquote>
+<h2>7. Tableau de suivi (CRM simple)</h2>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Besoin</th>
+<th>Commune</th>
+<th>Date</th>
+<th>Où ça en est ?</th>
+<th>Prochaine action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>8. Le mini-test de suivi</h2>
+<p>6 questions (Oui / Non) pour voir si tu gardes le contrôle de tes demandes. → <strong>Voir Partie 3.</strong></p>
+<h2>9. Checklist « Entreprise prête pour la pub »</h2>
+<p>10 points à cocher avant de dépenser en publicité. → <strong>Voir Partie 5.</strong>
+Verdict : 🟢 Prêt à tester (8-10) · 🟠 Presque prêt (5-7) · 🔴 Répare d'abord (0-4).</p>
+<h2>10. Plan d'action final</h2>
+<blockquote>
+<ul>
+<li>Ma priorité n°1 : <strong><em>_</em></strong><strong><em>_</em></strong></li>
+<li>Ce que je fais cette semaine : <strong><em>_</em></strong><strong><em>_</em></strong></li>
+<li>Ma priorité n°2 : <strong><em>_</em></strong><strong><em>_</em></strong></li>
+<li>Ma priorité n°3 : <strong><em>_</em></strong><strong><em>_</em></strong></li>
+</ul>
+</blockquote>
+<hr />
+<div class="pb"></div><h1>Conclusion</h1>
+<h2>Ce que tu as accompli</h2>
+<p>En une trentaine de minutes, tu as fait ce que beaucoup d'entreprises ne font jamais : tu as regardé ta propre entreprise avec les yeux d'un client.</p>
+<p>Tu sais maintenant :</p>
+<ul>
+<li><strong>où</strong> ton entreprise peut perdre des clients ;</li>
+<li><strong>quoi</strong> corriger en priorité ;</li>
+<li><strong>comment</strong> mieux répondre et mieux suivre tes demandes ;</li>
+<li><strong>si</strong> ton entreprise est prête à tester la publicité.</li>
+</ul>
+<p>Tu es passé de « je fais bien mon travail mais je ne sais pas où je perds des clients » à « je sais où sont mes fuites et par quoi commencer ».</p>
+<h2>Ta prochaine étape</h2>
+<p>Une seule chose : <strong>répare ta plus grosse fuite cette semaine.</strong></p>
+<p>Pas les cinq. La plus grosse. Celle que tu as écrite comme priorité n°1.</p>
+<p>Le reste suivra, une semaine après l'autre.</p>
+<h2>Et si tu préfères qu'on le fasse avec toi</h2>
+<blockquote>
+<p>Tu sais maintenant où ton entreprise peut perdre des clients et ce qu'il faut corriger en priorité.</p>
+<p>Tu peux mettre toutes ces étapes en place toi-même. Ce guide est fait pour ça.</p>
+<p>Mais si tu préfères qu'on regarde <strong>avec toi</strong> ce qui est déjà solide, ce qui fuit encore et ce qu'il faudrait mettre en place en priorité, PolynetIA propose <strong>Local Partner</strong> : la version « fait pour toi », où l'on construit et coordonne ce système à ta place pendant que tu restes concentré sur ton métier.</p>
+<p>Ça commence par un simple diagnostic de ton entreprise.</p>
+<p><strong>👉 Demande ton diagnostic Local Partner : [CTA À INSÉRER]</strong></p>
+</blockquote>
+<p>Prends soin de ton entreprise. Elle a déjà plus de clients qu'elle ne le croit — il suffit d'arrêter de les laisser partir.</p>
+</div>
+
+</body>
+</html>
