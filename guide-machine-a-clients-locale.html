@@ -30,135 +30,45 @@
   .pb { page-break-before: always; }
   p { margin: 0 0 9pt; }
   strong { color: var(--brand-dark); }
-
   h1 {
-    font-size: 21pt;
-    line-height: 1.2;
-    color: var(--brand-dark);
-    margin: 0 0 14pt;
-    padding-bottom: 8pt;
-    border-bottom: 3px solid var(--accent);
+    font-size: 21pt; line-height: 1.2; color: var(--brand-dark);
+    margin: 0 0 14pt; padding-bottom: 8pt; border-bottom: 3px solid var(--accent);
   }
-  h2 {
-    font-size: 14.5pt;
-    color: var(--brand);
-    margin: 20pt 0 8pt;
-  }
-  h3 {
-    font-size: 12pt;
-    color: var(--ink);
-    margin: 15pt 0 6pt;
-    font-weight: 700;
-  }
-
+  h2 { font-size: 14.5pt; color: var(--brand); margin: 20pt 0 8pt; }
+  h3 { font-size: 12pt; color: var(--ink); margin: 15pt 0 6pt; font-weight: 700; }
   ul, ol { margin: 0 0 10pt; padding-left: 20pt; }
   li { margin: 3pt 0; }
-
-  /* Tables */
   table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 12pt 0;
-    font-size: 10pt;
-    page-break-inside: avoid;
+    width: 100%; border-collapse: collapse; margin: 12pt 0;
+    font-size: 10pt; page-break-inside: avoid;
   }
-  th, td {
-    border: 1px solid var(--line);
-    padding: 6pt 8pt;
-    text-align: left;
-    vertical-align: top;
-  }
-  thead th {
-    background: var(--brand);
-    color: #fff;
-    font-weight: 600;
-  }
+  th, td { border: 1px solid var(--line); padding: 6pt 8pt; text-align: left; vertical-align: top; }
+  thead th { background: var(--brand); color: #fff; font-weight: 600; }
   tbody tr:nth-child(even) { background: var(--soft); }
-  /* Rows used as section separators inside the fuites test */
-  tbody td[colspan], tbody th[colspan] { }
-
-  /* Blockquotes = value blocks */
   blockquote {
-    margin: 12pt 0;
-    padding: 12pt 16pt;
-    background: var(--box);
-    border-left: 4px solid var(--brand);
-    border-radius: 4px;
-    page-break-inside: avoid;
+    margin: 12pt 0; padding: 12pt 16pt; background: var(--box);
+    border-left: 4px solid var(--brand); border-radius: 4px; page-break-inside: avoid;
   }
   blockquote p { margin: 0 0 6pt; }
   blockquote p:last-child { margin-bottom: 0; }
   blockquote strong { color: var(--brand-dark); }
-
-  hr {
-    border: none;
-    border-top: 1px solid var(--line);
-    margin: 16pt 0;
-  }
-
-  /* Cover */
+  hr { border: none; border-top: 1px solid var(--line); margin: 16pt 0; }
   .cover {
-    page-break-after: always;
-    height: 253mm;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+    page-break-after: always; height: 253mm; display: flex; flex-direction: column;
+    justify-content: center; text-align: center;
     background: linear-gradient(160deg, var(--brand-dark) 0%, var(--brand) 55%, #1583c4 100%);
-    color: #fff;
-    margin: -20mm -18mm 0 -18mm;
-    padding: 0 24mm;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    color: #fff; margin: -20mm -18mm 0 -18mm; padding: 0 24mm;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
-  .cover .kicker {
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 10pt;
-    opacity: .85;
-    margin-bottom: 18pt;
-  }
-  .cover h1 {
-    font-size: 38pt;
-    line-height: 1.1;
-    color: #fff;
-    border: none;
-    margin: 0 0 20pt;
-    padding: 0;
-  }
-  .cover .sub {
-    font-size: 14pt;
-    line-height: 1.5;
-    opacity: .95;
-    max-width: 130mm;
-    margin: 0 auto 26pt;
-  }
-  .cover .rule {
-    width: 60mm;
-    height: 3px;
-    background: var(--accent);
-    margin: 0 auto 26pt;
-    border: none;
-  }
-  .cover .audience {
-    font-size: 10.5pt;
-    opacity: .85;
-    max-width: 120mm;
-    margin: 0 auto;
-  }
-  .cover .brand {
-    margin-top: 34pt;
-    font-size: 12pt;
-    font-weight: 700;
-    letter-spacing: 1px;
-  }
-
-  /* The first real <h1> after cover shouldn't force an extra blank page break */
-  .content > .pb:first-child { page-break-before: avoid; }
+  .cover .kicker { text-transform: uppercase; letter-spacing: 3px; font-size: 10pt; opacity: .85; margin-bottom: 18pt; }
+  .cover h1 { font-size: 38pt; line-height: 1.1; color: #fff; border: none; margin: 0 0 20pt; padding: 0; }
+  .cover .sub { font-size: 14pt; line-height: 1.5; opacity: .95; max-width: 130mm; margin: 0 auto 26pt; }
+  .cover .rule { width: 60mm; height: 3px; background: var(--accent); margin: 0 auto 26pt; border: none; }
+  .cover .audience { font-size: 10.5pt; opacity: .85; max-width: 120mm; margin: 0 auto; }
+  .cover .brand { margin-top: 34pt; font-size: 12pt; font-weight: 700; letter-spacing: 1px; }
 </style>
 </head>
 <body>
-
 <div class="cover">
   <div class="kicker">Guide pratique &middot; Polynésie française</div>
   <h1>La Machine à Clients Locale</h1>
@@ -167,7 +77,6 @@
   <div class="audience">Pour les artisans, indépendants et entreprises de services qui veulent arrêter de laisser partir les clients qu'ils ont déjà.</div>
   <div class="brand">PolynetIA</div>
 </div>
-
 <div class="content">
 <h2>Sommaire</h2>
 <p><strong>Introduction — La pub ne répare pas un seau troué</strong></p>
@@ -1033,10 +942,9 @@ Verdict : 🟢 Prêt à tester (8-10) · 🟠 Presque prêt (5-7) · 🔴 Répar
 <p>Tu peux mettre toutes ces étapes en place toi-même. Ce guide est fait pour ça.</p>
 <p>Mais si tu préfères qu'on regarde <strong>avec toi</strong> ce qui est déjà solide, ce qui fuit encore et ce qu'il faudrait mettre en place en priorité, PolynetIA propose <strong>Local Partner</strong> : la version « fait pour toi », où l'on construit et coordonne ce système à ta place pendant que tu restes concentré sur ton métier.</p>
 <p>Ça commence par un simple diagnostic de ton entreprise.</p>
-<p><strong>👉 Demande ton diagnostic Local Partner : [CTA À INSÉRER]</strong></p>
+<p><strong>👉 Demande ton diagnostic Local Partner.</strong></p>
 </blockquote>
 <p>Prends soin de ton entreprise. Elle a déjà plus de clients qu'elle ne le croit — il suffit d'arrêter de les laisser partir.</p>
 </div>
-
 </body>
 </html>

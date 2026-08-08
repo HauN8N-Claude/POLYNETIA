@@ -815,6 +815,6 @@ Le reste suivra, une semaine après l'autre.
 >
 > Ça commence par un simple diagnostic de ton entreprise.
 >
-> **👉 Demande ton diagnostic Local Partner : [CTA À INSÉRER]**
+> **👉 Demande ton diagnostic Local Partner.**
 
 Prends soin de ton entreprise. Elle a déjà plus de clients qu'elle ne le croit — il suffit d'arrêter de les laisser partir.
