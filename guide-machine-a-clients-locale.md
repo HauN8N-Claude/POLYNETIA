@@ -20,12 +20,11 @@
 - Que voit un client quand il te cherche sur Google ?
 - Tes clients sont contents. Est-ce que ça se voit ?
 
-**3. Ne perds plus les demandes en route**
-- Pourquoi certaines demandes disparaissent
+**3. Ne perds plus les demandes en route — ton suivi (CRM)**
+- Le point d'entrée : formulaire ou « Appelle-nous » ?
 - Le CRM expliqué simplement
 - Les étapes d'une demande
-- Le mini-test
-- Le tableau de suivi
+- Le mini-test et le tableau de suivi
 
 **4. Ton parcours client en une page**
 
@@ -33,7 +32,9 @@
 - La checklist « Entreprise prête pour la pub »
 - Le verdict
 
-**6. Ton plan d'action**
+**6. Un seul système, pas dix outils qui ne se parlent pas**
+
+**7. Ton plan d'action**
 - Tes 3 priorités
 - Ce que tu fais cette semaine
 
@@ -56,6 +57,8 @@ Il a payé pour attirer plus de monde. Mais l'argent est parti dans un seau trou
 ## L'idée que tu dois retenir
 
 > **La pub ne répare pas un seau troué.**
+
+[VISUEL : le schéma du seau — un robinet (la pub) remplit un seau percé de plusieurs trous étiquetés ; l'eau qui fuit = les clients perdus. Couleurs violet PolynetIA]
 
 Faire de la publicité, c'est ouvrir le robinet plus grand. Si ton seau fuit, tu remplis plus vite… mais tu perds toujours autant par les trous. Tu dépenses plus pour garder à peu près le même résultat.
 
@@ -95,6 +98,8 @@ Tu peux tout mettre en place toi-même. C'est fait pour ça.
 Avant de réparer, il faut savoir où ça fuit.
 
 La plupart des entreprises locales perdent des clients de **5 façons**. Presque toujours les mêmes. Voici lesquelles.
+
+[VISUEL : le seau troué vu de face, avec ses 5 trous nommés — Offre · Vitrine · Réponse · Google · Avis — chacun avec une petite icône. Sert de repère visuel pour tout le guide]
 
 ## Les 5 fuites
 
@@ -457,6 +462,8 @@ Récupère le lien direct de ta fiche pour laisser un avis. Envoie le premier me
 
 Tu as réparé tes fuites principales. Maintenant, on s'occupe de ce qui se passe **après** la première réponse.
 
+> **C'est le cœur de ta machine à clients.** Attirer et répondre, c'est bien. Mais c'est le **suivi** de tes demandes qui transforme un intéressé en client. C'est souvent là qu'on gagne le plus de clients — sans dépenser un seul franc de publicité.
+
 ## Recevoir une demande ne veut pas dire gagner un client.
 
 ### Situation concrète
@@ -481,6 +488,51 @@ Mais souvent, les demandes sont là. Elles arrivent par téléphone, WhatsApp, M
 - un ancien client qu'on ne recontacte jamais.
 
 Chaque demande perdue, c'est de l'argent que tu avais déjà à portée de main.
+
+## Le point d'entrée : un formulaire plutôt qu'un simple « Appelle-nous »
+
+### Situation
+
+Sur ta page ou ta pub, tu as mis « Appelle-nous ». Un client intéressé compose ton numéro… pendant que tu es sur un chantier, les mains prises. Tu ne peux pas décrocher. Il ne laisse pas de message. Tu ne sauras jamais qu'il a essayé.
+
+La demande a disparu avant même d'exister.
+
+### Le bouton « Appelle » a un défaut caché
+
+Un appel ne marche que si tu peux répondre **maintenant**. Et quand tu es en intervention — c'est-à-dire une bonne partie de la journée — chaque appel raté est une demande qui repart sans laisser de trace.
+
+Un **formulaire de contact** (ou un message structuré à remplir) ne dort jamais. Le client remplit 3-4 champs, à n'importe quelle heure, et sa demande arrive **complète** : qui, quoi, où, comment le joindre. Tu la traites quand tu peux — mais tu ne la perds pas.
+
+Ce n'est pas « formulaire **ou** téléphone ». Le téléphone et WhatsApp restent utiles (voir Fiche 3). Le formulaire, lui, **ajoute une porte d'entrée qui capture la demande même quand tu ne peux pas répondre**.
+
+### Et c'est là que le suivi commence
+
+Le vrai intérêt du formulaire : chaque demande arrive **déjà prête à être suivie**. Nom, besoin, commune, contact — tout est là. Elle devient tout de suite une ligne « nouvelle demande » dans ton tableau de suivi (la suite de ce chapitre).
+
+Un « Appelle-nous » raté ne laisse rien. Un formulaire rempli entre proprement dans ta machine.
+
+### Vérifie chez toi
+
+- ☐ Un client peut te laisser sa demande **sans avoir à te joindre en direct**.
+- ☐ Tu demandes seulement le minimum utile : nom, besoin, commune, un contact.
+- ☐ Chaque demande reçue atterrit à **un seul endroit** que tu regardes.
+- ☐ Tu ne comptes pas uniquement sur les appels — dont tu en rates forcément.
+
+### Outil — Les champs d'un bon formulaire
+
+> - Prénom
+> - Ce dont tu as besoin (en une phrase)
+> - Commune / lieu
+> - Téléphone ou WhatsApp
+> - *(Optionnel)* Pour quand
+>
+> **4 champs suffisent.** Trop de champs = personne ne remplit.
+
+### À faire maintenant
+
+Ajoute un moyen de te laisser une demande **sans appeler** : un petit formulaire sur ta page, ou un message bien visible « Écris-moi ton besoin + ta commune ». Puis fais atterrir ces demandes dans ton tableau de suivi.
+
+[VISUEL : comparaison côte à côte — à gauche, un bouton « Appelle-nous » avec un appel manqué qui s'efface ; à droite, un formulaire rempli qui devient une ligne « nouvelle demande » dans le tableau de suivi]
 
 ## Le CRM expliqué simplement
 
@@ -548,6 +600,8 @@ Tu n'as pas besoin de plus compliqué que ça pour commencer :
 | | | | | | |
 
 Remplis-le à chaque nouvelle demande. Regarde-le une fois par jour. C'est tout.
+
+[VISUEL : maquette du tableau de suivi (le CRM simple) avec 2-3 lignes remplies et la colonne « Prochaine action » mise en avant en violet]
 
 ### À faire maintenant
 
@@ -635,6 +689,8 @@ Reprends les Parties 2 et 3. Répare. Reviens faire ce test ensuite.
 
 > **N'ouvre pas davantage le robinet tant que le seau fuit encore.**
 
+[VISUEL : une jauge à 3 zones — 🟢 Prêt à tester · 🟠 Presque prêt · 🔴 Répare d'abord — avec un curseur, pour illustrer le verdict]
+
 ## Ce que tu dois retenir sur la pub
 
 Ce guide ne t'apprend pas à faire de la publicité en détail. Ce n'est pas le but.
@@ -649,7 +705,47 @@ Le reste — le comment technique — pourra venir plus tard, quand tu seras vra
 
 ---
 
-# 6. Ton plan d'action
+# 6. Un seul système, pas dix outils qui ne se parlent pas
+
+Tu as vu toutes les pièces : ton offre, ta vitrine, tes réponses, ta fiche Google, tes avis, ton suivi. Voici la vérité que peu de gens disent : **ces pièces ne valent que si elles marchent ensemble.**
+
+## Le piège des prestataires séparés
+
+Beaucoup d'entreprises finissent avec :
+
+- une personne pour le site,
+- une autre pour la publicité,
+- une autre pour la fiche Google,
+- une autre encore pour les avis ou les réseaux.
+
+Chacun fait « sa » partie. Mais **personne ne regarde le parcours en entier.** Résultat : la pub envoie des gens vers une vitrine qui ne rassure pas, les demandes tombent dans un téléphone que personne ne suit, et les fuites reviennent — entre les prestataires, cette fois.
+
+Tu te retrouves à jouer le chef d'orchestre : répéter la même chose à trois interlocuteurs, recoller les morceaux, et payer plusieurs fois pour un ensemble qui, au final, n'est pas vraiment un système.
+
+## Ce qui change avec un seul partenaire
+
+Un seul partenaire qui **construit ET coordonne** l'ensemble, ça donne :
+
+| Plusieurs prestataires | Un seul partenaire |
+|---|---|
+| Chacun voit un bout | Quelqu'un voit tout le parcours |
+| Les fuites tombent entre les mains | Le système est pensé d'un bout à l'autre |
+| Tu coordonnes tout toi-même | Un seul interlocuteur s'en charge |
+| Tu paies en morceaux | Un ensemble cohérent, pas des pièces |
+
+Quand une même personne pense la vitrine, les réponses, le suivi et la pub **comme un tout**, les trous entre les étapes disparaissent. C'est exactement là que se gagnent — ou se perdent — les clients.
+
+## Le lien avec Local Partner
+
+C'est précisément le rôle de **Local Partner**, l'offre de PolynetIA : être ce **seul partenaire** qui construit ta Machine à Clients Locale et la fait tourner — la vitrine, la présence Google, les réponses, le **suivi de tes demandes** et, quand les bases tiennent, la publicité. Un système, un interlocuteur, un parcours suivi de bout en bout.
+
+Tu peux tout mettre en place toi-même avec ce guide — il est fait pour ça. Mais si tu préfères ne pas jongler avec cinq prestataires, c'est là que déléguer à un seul partenaire prend tout son sens.
+
+[VISUEL : à gauche, cinq petites boîtes déconnectées (Site · Pub · Google · Avis · Suivi) reliées par des flèches cassées ; à droite, un seul cercle « Local Partner » qui relie proprement les mêmes cinq éléments]
+
+---
+
+# 7. Ton plan d'action
 
 Tu as fait le tour. Ne referme pas ce guide sans décider quoi faire.
 
@@ -811,7 +907,7 @@ Le reste suivra, une semaine après l'autre.
 >
 > Tu peux mettre toutes ces étapes en place toi-même. Ce guide est fait pour ça.
 >
-> Mais si tu préfères qu'on regarde **avec toi** ce qui est déjà solide, ce qui fuit encore et ce qu'il faudrait mettre en place en priorité, PolynetIA propose **Local Partner** : la version « fait pour toi », où l'on construit et coordonne ce système à ta place pendant que tu restes concentré sur ton métier.
+> Mais si tu préfères qu'on regarde **avec toi** ce qui est déjà solide, ce qui fuit encore et ce qu'il faudrait mettre en place en priorité, PolynetIA propose **Local Partner** : **un seul partenaire** qui construit et coordonne tout le système à ta place — vitrine, réponses, **suivi de tes demandes**, puis publicité — pendant que tu restes concentré sur ton métier.
 >
 > Ça commence par un simple diagnostic de ton entreprise.
 >
