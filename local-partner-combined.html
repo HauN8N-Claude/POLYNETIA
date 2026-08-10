@@ -1,0 +1,1629 @@
+<style>
+  /* ============================================================== */
+  /* DESIGN « NOCTURNE » — re-skin d'après la référence Dovetail     */
+  /* (fond quasi-noir, panneaux anthracite, bordures fines,          */
+  /*  étiquettes mono, CTA blanc, grille discrète).                  */
+  /* Tokens : remplacer ici pour re-brander toute la page.           */
+  /* ============================================================== */
+  :root {
+    /* Surfaces */
+    --bg:        #0b0c0e;   /* fond principal quasi-noir */
+    --bg-2:      #101216;   /* sections alternées */
+    --panel:     #14161a;   /* cartes */
+    --panel-2:   #1a1d22;   /* cartes surélevées / hover */
+
+    /* Bordures */
+    --line:      #26292f;
+    --line-2:    #383c44;
+
+    /* Texte */
+    --ink:       #f4f5f7;   /* titres */
+    --body:      #a7adb8;   /* texte courant */
+    --muted:     #6e747e;
+
+    /* Accents */
+    --accent:    #2fd3e0;   /* cyan lagon — le seul accent froid */
+    --coral:     #ff6b4a;   /* fuites, alertes */
+    --ok:        #3ddc97;
+    --bad:       #ff6b4a;
+
+    /* CTA (pillule blanche, façon Dovetail) */
+    --cta-bg:    #ffffff;
+    --cta-text:  #0b0c0e;
+
+    /* Typo */
+    --font: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --fs-h1: clamp(2rem, 4.6vw, 3.2rem);
+    --fs-h2: clamp(1.6rem, 4vw, 2.4rem);
+    --fs-h3: clamp(1.1rem, 2.3vw, 1.3rem);
+    --fs-lede: clamp(1.06rem, 1.9vw, 1.2rem);
+
+    /* Rythme */
+    --section-y: clamp(88px, 9vw, 120px);
+    --wrap: 1080px;
+
+    /* Forme */
+    --r-sm: 8px; --r-md: 14px; --r-lg: 20px; --r-pill: 999px;
+    --shadow: 0 20px 50px rgba(0,0,0,.45);
+
+    --ease: cubic-bezier(.215,.61,.355,1);
+  }
+
+  /* ============================================================== */
+  /* BASE                                                           */
+  /* ============================================================== */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+  body {
+    margin: 0; font-family: var(--font); color: var(--body);
+    background: var(--bg); line-height: 1.65; font-size: 17px;
+    overflow-x: hidden;
+  }
+  h1, h2, h3 { line-height: 1.15; margin: 0 0 .45em; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  h1 { font-size: var(--fs-h1); line-height: 1.1; text-wrap: balance; }
+  h2 { font-size: var(--fs-h2); text-wrap: balance; }
+  h3 { font-size: var(--fs-h3); }
+  p { margin: 0 0 1rem; }
+  ul, ol { margin: 0 0 1rem; padding-left: 1.25em; }
+  li { margin-bottom: .4em; }
+  img { max-width: 100%; display: block; }
+  a { color: var(--accent); }
+
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+  section { padding: var(--section-y) 0; }
+  .soft { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  /* Sections « panneau » (ex-navy) : cadre arrondi anthracite,
+     comme le grand conteneur de la référence */
+  .navy-slant { padding: calc(var(--section-y) * .7) 0; }
+  .navy-slant > .unslant {
+    max-width: calc(var(--wrap) + 48px); margin: 0 auto; padding: 0 12px;
+  }
+  .navy-slant .frame {
+    background: var(--bg-2);
+    border: 1px solid var(--line); border-radius: var(--r-lg);
+    padding: clamp(36px, 5vw, 72px) 0;
+    box-shadow: var(--shadow);
+    /* grille discrète en fond de panneau */
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 44px 44px;
+    background-position: center top;
+    position: relative; overflow: hidden;
+  }
+  .navy-slant .frame::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(120% 90% at 50% 0%, transparent 30%, var(--bg-2) 78%);
+    pointer-events: none;
+  }
+  .navy-slant .frame > * { position: relative; }
+
+  /* Étiquette mono (signature de la référence : « SYNCING ... ») */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: .74rem; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px;
+  }
+  .eyebrow::before { content: "■"; font-size: .6rem; }
+
+  .lede { font-size: var(--fs-lede); color: var(--body); max-width: 68ch; }
+
+  .punch {
+    font-size: clamp(1.15rem, 2.6vw, 1.5rem); font-weight: 700; line-height: 1.35;
+    color: var(--ink); max-width: 34ch; margin: 34px 0 0;
+  }
+  .punch::before {
+    content: ""; display: block; width: 48px; height: 3px;
+    background: var(--accent); margin-bottom: 14px; border-radius: 2px;
+  }
+  .center-block { text-align: center; }
+  .center-block .punch { margin-left: auto; margin-right: auto; }
+  .center-block .punch::before { margin-left: auto; margin-right: auto; }
+
+  .section-head { max-width: 760px; margin-bottom: 46px; }
+  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+
+  /* Deux tons de titre */
+  .t2 { color: var(--muted); }
+
+  /* ============================================================== */
+  /* BOUTONS — pillule blanche (référence) + fantôme sombre         */
+  /* ============================================================== */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font: inherit; font-weight: 700; font-size: 1rem; line-height: 1.25;
+    text-decoration: none; text-align: center;
+    padding: 13px 26px; border-radius: var(--r-pill);
+    border: 1px solid transparent; cursor: pointer;
+    transition: transform .15s var(--ease), background .15s var(--ease), border-color .15s var(--ease), color .15s var(--ease);
+  }
+  .btn .arrow { transition: transform .15s var(--ease); font-weight: 700; }
+  .btn-primary { background: var(--cta-bg); color: var(--cta-text); }
+  .btn-primary:hover, .btn-primary:focus-visible { transform: translateY(-1px); background: #e9edf3; }
+  .btn-primary:hover .arrow { transform: translateX(3px); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
+  .btn-ghost:hover, .btn-ghost:focus-visible { border-color: var(--ink); }
+  .btn-lg { padding: 16px 32px; font-size: 1.05rem; }
+  .cta-micro { font-size: .9rem; color: var(--muted); margin-top: 12px; }
+
+  :focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(47,211,224,.5); border-radius: 4px; }
+  .skip-link { position: absolute; left: -999px; top: 0; z-index: 300; background: var(--ink); color: var(--bg); padding: 12px 18px; }
+  .skip-link:focus { left: 0; }
+
+  /* ============================================================== */
+  /* NAV — pillules sombres (référence)                             */
+  /* ============================================================== */
+  header.site {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(11,12,14,.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 62px; gap: 16px; }
+  /* PLACEHOLDER LOGO — remplacer par <img src="logo-polynetia.svg" alt="PolynetIA"> */
+  .logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; font-size: 1.12rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+  .logo .mark { width: 30px; height: 30px; border-radius: 8px; background: var(--panel-2); border: 1px solid var(--line-2); color: var(--accent); display: grid; place-items: center; font-size: .88rem; font-weight: 800; }
+  .nav .btn { padding: 9px 18px; font-size: .92rem; }
+  @media (max-width: 560px) { .nav .btn { display: none; } }
+
+  /* ============================================================== */
+  /* HERO — grille en perspective + liste à rail (référence)        */
+  /* ============================================================== */
+  .hero {
+    position: relative; overflow: clip;
+    padding-top: clamp(48px, 7vw, 96px); padding-bottom: clamp(56px, 8vw, 104px);
+  }
+  /* Grille discrète qui s'évanouit vers le bas */
+  .hero::before {
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 480px;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 52px 52px;
+    -webkit-mask-image: radial-gradient(90% 100% at 50% 0%, #000 20%, transparent 75%);
+    mask-image: radial-gradient(90% 100% at 50% 0%, #000 20%, transparent 75%);
+    opacity: .5; pointer-events: none;
+  }
+  .hero .wrap { position: relative; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 5vw, 72px); align-items: center; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+
+  /* Ligne factuelle mono (équivalent « SYNCING ... ») */
+  .factline {
+    font-family: var(--mono); font-size: .76rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--body);
+    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 22px;
+    border: 1px solid var(--line); border-radius: var(--r-pill); padding: 7px 14px;
+    background: rgba(20,22,26,.7);
+  }
+  .factline .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); flex: none; }
+
+  /* Liste à rail vertical (signature de la référence) */
+  .hero-benefits { list-style: none; padding: 0; margin: 26px 0 32px; }
+  .hero-benefits li {
+    position: relative; padding: 10px 0 10px 22px; margin: 0;
+    color: var(--muted); font-weight: 600;
+  }
+  .hero-benefits li::before {
+    content: ""; position: absolute; left: 0; top: 12px; bottom: 12px; width: 2px;
+    background: var(--line-2); border-radius: 2px;
+  }
+  .hero-benefits li.active { color: var(--ink); }
+  .hero-benefits li.active::before { background: var(--accent); }
+  .hero-benefits li.active .sub { display: block; }
+  .hero-benefits .sub { display: none; font-weight: 400; color: var(--body); font-size: .95rem; margin-top: 4px; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+  /* ============================================================== */
+  /* CARTE-DÉMO sombre (le « diagramme » de la référence)           */
+  /* ============================================================== */
+  .card-demo {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: var(--r-lg); box-shadow: var(--shadow); overflow: hidden;
+  }
+  .card-demo .visual {
+    padding: 26px 22px 8px; position: relative;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .card-demo .visual::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(120% 100% at 50% 10%, transparent 25%, var(--panel) 80%);
+    pointer-events: none;
+  }
+  .card-demo .visual svg { position: relative; }
+  .card-demo .caption { padding: 14px 22px 18px; text-align: center; border-top: 1px solid var(--line); }
+  .card-demo .caption strong { display: block; color: var(--ink); font-size: 1.02rem; }
+  .card-demo .caption small { color: var(--muted); }
+  @keyframes leak { 0%,100% { opacity: .9; } 50% { opacity: .35; } }
+  .drip { animation: leak 2.6s ease-in-out infinite; }
+
+  /* ============================================================== */
+  /* CARTES / TIMELINE / PARCOURS                                   */
+  /* ============================================================== */
+  .card {
+    background: var(--panel); border-radius: var(--r-md); border: 1px solid var(--line);
+    padding: 26px 24px;
+    transition: border-color .25s var(--ease), background .25s var(--ease), transform .25s var(--ease);
+  }
+  .card:hover { border-color: var(--line-2); background: var(--panel-2); transform: translateY(-2px); }
+
+  .timeline { list-style: none; counter-reset: tl; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .timeline { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .timeline { grid-template-columns: 1fr; } }
+  .timeline li {
+    counter-increment: tl; background: var(--panel); border: 1px solid var(--line);
+    border-radius: var(--r-md); padding: 18px 16px; margin: 0;
+    transition: border-color .25s var(--ease), background .25s var(--ease);
+  }
+  .timeline li:hover { border-color: var(--line-2); background: var(--panel-2); }
+  .timeline li::before {
+    content: counter(tl, decimal-leading-zero);
+    font-family: var(--mono); font-size: .72rem; font-weight: 600; letter-spacing: .1em;
+    color: var(--accent); display: block; margin-bottom: 8px;
+  }
+  .timeline li strong { display: block; margin-bottom: 4px; color: var(--ink); }
+  .timeline li span { color: var(--muted); font-size: .92rem; }
+  .timeline li.lost { background: #1c1214; border-color: #3a2320; }
+  .timeline li.lost strong { color: #ffd9cf; }
+  .timeline li.lost::before { color: var(--coral); }
+  .timeline li.lost span { color: #b98f85; }
+
+  .journey { list-style: none; counter-reset: jy; padding: 0; margin: 0; display: grid; max-width: 640px; }
+  .journey li { counter-increment: jy; display: grid; grid-template-columns: 44px 1fr; gap: 16px; padding: 12px 0; margin: 0; align-items: start; position: relative; color: var(--body); }
+  .journey li::before {
+    content: counter(jy); width: 32px; height: 32px; border-radius: 50%;
+    background: var(--panel); border: 1px solid var(--line-2); color: var(--accent);
+    font-family: var(--mono); font-weight: 600; font-size: .84rem; display: grid; place-items: center; z-index: 1;
+  }
+  .journey li:not(:last-child)::after { content: ""; position: absolute; left: 15px; top: 45px; bottom: -7px; width: 1px; background: var(--line); }
+  .journey li:last-child::before { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
+  /* ============================================================== */
+  /* COÛT DES FUITES + CALCULATEUR                                  */
+  /* ============================================================== */
+  .cost-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: start; padding: 0 clamp(20px, 4vw, 56px); }
+  @media (max-width: 860px) { .cost-grid { grid-template-columns: 1fr; } }
+  .navy-slant .section-head { padding: 0 clamp(20px, 4vw, 56px); }
+  .cost-questions { list-style: none; padding: 0; margin: 0; }
+  .cost-questions li { padding: 14px 0 14px 30px; border-bottom: 1px solid var(--line); color: var(--ink); font-weight: 600; position: relative; margin: 0; }
+  .cost-questions li::before { content: "?"; position: absolute; left: 0; top: 14px; color: var(--accent); font-family: var(--mono); font-weight: 700; }
+  .cost-note { margin-top: 22px; padding: 18px 20px; border-left: 2px solid var(--coral); background: var(--panel); border-radius: 0 var(--r-sm) var(--r-sm) 0; color: var(--body); }
+
+  .calc { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--r-lg); padding: clamp(24px, 3vw, 34px); box-shadow: var(--shadow); }
+  .calc h3 { margin-bottom: 4px; }
+  .calc .hint { color: var(--muted); font-size: .9rem; margin-bottom: 18px; }
+  .calc label { display: block; font-weight: 600; margin: 14px 0 6px; font-size: .95rem; color: var(--ink); }
+  .calc input {
+    width: 100%; font: inherit; padding: 12px 14px;
+    border: 1px solid var(--line-2); border-radius: var(--r-sm); background: var(--bg); color: var(--ink);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .calc input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(47,211,224,.18); }
+  .calc-result { margin-top: 20px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-md); padding: 20px; text-align: center; }
+  .calc-result .label { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); font-weight: 600; }
+  .calc-result .value { font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; margin: 6px 0 12px; }
+  .meter { height: 6px; border-radius: var(--r-pill); background: var(--line); overflow: hidden; }
+  .meter .fill { height: 100%; width: 0%; border-radius: var(--r-pill); background: linear-gradient(90deg, var(--accent), var(--coral)); transition: width .4s var(--ease); }
+  .calc-result .disclaimer { font-size: .8rem; color: var(--muted); margin: 12px 0 0; }
+
+  /* ============================================================== */
+  /* MÉTHODE / PHASES / SYSTÈME                                     */
+  /* ============================================================== */
+  .method-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 780px) { .method-steps { grid-template-columns: 1fr; } }
+  .method-steps .num {
+    font-family: var(--mono); font-size: .74rem; letter-spacing: .12em;
+    color: var(--accent); display: block; margin-bottom: 12px;
+  }
+  .method-steps h3 { margin-bottom: 6px; }
+  .method-steps p { color: var(--muted); margin: 0; font-size: .96rem; }
+
+  .phase { display: grid; grid-template-columns: 130px 1fr; gap: clamp(18px, 3vw, 36px); margin-bottom: 18px; }
+  @media (max-width: 700px) { .phase { grid-template-columns: 1fr; gap: 10px; } }
+  .phase .tag { font-weight: 700; color: var(--ink); }
+  .phase .tag .n {
+    display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px;
+    background: var(--bg); border: 1px solid var(--line-2); color: var(--accent);
+    font-family: var(--mono); font-size: 1.2rem; margin-bottom: 8px;
+  }
+  .phase ul { columns: 2; column-gap: 28px; margin: 10px 0 14px; }
+  @media (max-width: 560px) { .phase ul { columns: 1; } }
+  .phase li { color: var(--muted); break-inside: avoid; }
+  .phase .result { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 13px 16px; font-weight: 600; color: var(--ink); border-left: 2px solid var(--accent); }
+  .phase .result .lbl { display: block; font-family: var(--mono); font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 3px; }
+
+  .system { counter-reset: sys; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 820px) { .system { grid-template-columns: 1fr; } }
+  .sys { counter-increment: sys; }
+  .sys::before { content: counter(sys, decimal-leading-zero); font-family: var(--mono); font-size: .72rem; font-weight: 600; letter-spacing: .12em; color: var(--accent); }
+  .sys h3 { margin: 6px 0; }
+  .sys .promise { font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+  .sys .basis { color: var(--muted); font-size: .92rem; margin: 0; }
+  .sys .basis strong { color: var(--body); font-weight: 600; }
+
+  /* ============================================================== */
+  /* AVANT/APRÈS · CONFIANCE · PROCESS · FIT · RISQUE               */
+  /* ============================================================== */
+  .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 780px) { .ba { grid-template-columns: 1fr; } }
+  .ba-col ul { list-style: none; padding: 0; margin: 0; }
+  .ba-col li { display: flex; gap: 10px; align-items: flex-start; color: var(--body); }
+  .ba-col .mk { flex: none; font-weight: 700; margin-top: 1px; }
+  .ba-col.before .mk { color: var(--bad); }
+  .ba-col.after .mk { color: var(--ok); }
+  .ba-col .pill {
+    display: inline-block; font-family: var(--mono); font-size: .72rem; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase; padding: 5px 14px;
+    border-radius: var(--r-pill); margin-bottom: 14px; border: 1px solid;
+  }
+  .ba-col.before .pill { color: var(--bad); border-color: #3a2320; background: #1c1214; }
+  .ba-col.after .pill { color: var(--ok); border-color: #1d3a2c; background: #10201a; }
+
+  .trust-points { list-style: none; padding: 0; margin: 24px 0 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 26px; }
+  @media (max-width: 640px) { .trust-points { grid-template-columns: 1fr; } }
+  .trust-points li { display: flex; gap: 10px; align-items: flex-start; color: var(--body); }
+  .trust-points .mk { color: var(--accent); font-weight: 700; }
+
+  .founder { margin-top: 44px; display: grid; grid-template-columns: 200px 1fr; gap: clamp(20px, 3.4vw, 40px); align-items: start; }
+  @media (max-width: 700px) { .founder { grid-template-columns: 1fr; } }
+  .founder .photo {
+    aspect-ratio: 1; border-radius: var(--r-md); border: 1px dashed var(--line-2);
+    display: grid; place-items: center; text-align: center; padding: 14px;
+    color: var(--muted); font-size: .86rem; background: var(--bg);
+  }
+
+  .process { list-style: none; counter-reset: pr; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px) { .process { grid-template-columns: 1fr; } }
+  .process li { counter-increment: pr; padding: 18px 20px 18px 62px; position: relative; margin: 0; }
+  .process li::before {
+    content: counter(pr); position: absolute; left: 18px; top: 18px;
+    width: 30px; height: 30px; border-radius: 8px; background: var(--bg);
+    border: 1px solid var(--line-2); color: var(--accent);
+    font-family: var(--mono); display: grid; place-items: center; font-weight: 600; font-size: .88rem;
+  }
+  .process strong { display: block; margin-bottom: 2px; color: var(--ink); }
+  .process span { color: var(--muted); font-size: .94rem; }
+
+  .fit { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 780px) { .fit { grid-template-columns: 1fr; } }
+  .fit-col ul { list-style: none; padding: 0; margin: 0; }
+  .fit-col li { display: flex; gap: 10px; align-items: flex-start; color: var(--body); }
+  .fit-col .mk { font-weight: 700; }
+  .fit-col.yes .mk { color: var(--ok); }
+  .fit-col.no .mk { color: var(--bad); }
+  .fit-col.no { background: var(--bg); }
+
+  .risk-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 860px) { .risk-list { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .risk-list { grid-template-columns: 1fr; } }
+  .risk-list li { padding: 15px 16px; margin: 0; display: flex; gap: 10px; align-items: flex-start; color: var(--ink); font-weight: 600; font-size: .94rem; }
+  .risk-list .mk { color: var(--ok); font-weight: 700; }
+
+  .components-line { font-size: 1.1rem; line-height: 1.95; color: var(--body); padding: 0 clamp(20px, 4vw, 56px); }
+  .components-line strong { color: var(--ink); font-size: 1.2rem; }
+  .navy-slant .inner-pad { padding: 0 clamp(20px, 4vw, 56px); }
+
+  /* ============================================================== */
+  /* PREUVES — cadres « fenêtre sombre » (référence : petites        */
+  /* cartes de données mono)                                        */
+  /* ============================================================== */
+  .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .proof-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .proof-grid { grid-template-columns: 1fr; } }
+  .browser { background: var(--panel); border-radius: var(--r-md); border: 1px solid var(--line); overflow: hidden; transition: border-color .25s var(--ease); }
+  .browser:hover { border-color: var(--line-2); }
+  .browser .chrome {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--bg);
+  }
+  .browser .chrome i { width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); display: block; }
+  .browser .chrome .url {
+    flex: 1; font-family: var(--mono); font-size: .68rem; letter-spacing: .04em;
+    color: var(--muted); text-align: center;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .browser .slot {
+    min-height: 150px; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 6px; text-align: center; padding: 20px;
+    border: 1px dashed var(--line-2); border-radius: var(--r-sm); margin: 14px;
+  }
+  .browser .slot .tag { font-family: var(--mono); background: var(--bg); border: 1px solid var(--line-2); color: var(--accent); font-size: .66rem; font-weight: 600; letter-spacing: .1em; padding: 4px 12px; border-radius: var(--r-pill); }
+  .browser .slot strong { color: var(--ink); font-size: .96rem; }
+  .browser .slot small { color: var(--muted); }
+
+  /* ============================================================== */
+  /* FAQ                                                            */
+  /* ============================================================== */
+  .faq { max-width: 800px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+    font: inherit; font-weight: 600; font-size: 1.04rem; color: var(--ink);
+    padding: 19px 44px 19px 2px; position: relative; line-height: 1.4;
+  }
+  .faq-q:hover { color: var(--accent); }
+  .faq-q .sign { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; color: var(--accent); transition: transform .2s var(--ease); }
+  .faq-q[aria-expanded="true"] .sign { transform: translateY(-50%) rotate(45deg); }
+  .faq-a { overflow: hidden; max-height: 0; transition: max-height .28s var(--ease); }
+  .faq-a-inner { padding: 0 2px 20px; color: var(--body); }
+
+  /* ============================================================== */
+  /* FORMULAIRE                                                     */
+  /* ============================================================== */
+  .form-card {
+    background: var(--panel); border-radius: var(--r-lg); border: 1px solid var(--line-2);
+    box-shadow: var(--shadow); padding: clamp(24px, 4vw, 44px); max-width: 740px; margin: 44px auto 0;
+    color: var(--body);
+  }
+  .f2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+  @media (max-width: 620px) { .f2 { grid-template-columns: 1fr; } }
+  .field { margin-bottom: 17px; }
+  .field label { display: block; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+  .field .opt { font-weight: 400; color: var(--muted); font-size: .86rem; }
+  .field input {
+    width: 100%; font: inherit; padding: 12px 14px;
+    border: 1px solid var(--line-2); border-radius: var(--r-sm); background: var(--bg); color: var(--ink);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .field input::placeholder { color: var(--muted); }
+  .field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(47,211,224,.18); }
+  .err { color: #ff9d87; font-size: .86rem; margin-top: 5px; display: none; }
+  .field.invalid input { border-color: var(--bad); background: #1c1214; }
+  .field.invalid .err { display: block; }
+  fieldset { border: 1px solid var(--line); border-radius: var(--r-md); padding: 18px; margin: 0 0 17px; }
+  fieldset.invalid { border-color: var(--bad); }
+  fieldset.invalid .err { display: block; }
+  legend { font-weight: 600; padding: 0 8px; color: var(--ink); }
+  .choices { display: grid; gap: 8px; }
+  .choice {
+    display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+    border: 1px solid var(--line-2); border-radius: var(--r-sm); cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  .choice:hover { border-color: var(--accent); }
+  .choice input { accent-color: var(--accent); }
+  .choice:has(input:checked) { border-color: var(--accent); background: rgba(47,211,224,.07); }
+  .privacy { font-size: .87rem; color: var(--muted); margin: 6px 0 18px; }
+  .form-success { display: none; text-align: center; padding: 12px 0; }
+  .form-success.show { display: block; }
+  .form-hidden { display: none; }
+  .form-success .tick { width: 64px; height: 64px; border-radius: 50%; background: #10201a; border: 1px solid #1d3a2c; color: var(--ok); display: grid; place-items: center; margin: 0 auto 16px; }
+  .cal-embed { margin-top: 18px; }
+  .cal-embed iframe { width: 100%; min-height: 620px; border: 1px solid var(--line-2); border-radius: var(--r-md); background: #fff; }
+
+  /* ============================================================== */
+  /* FOOTER + STICKY CTA                                            */
+  /* ============================================================== */
+  footer.site { background: var(--bg); border-top: 1px solid var(--line); color: var(--body); padding: 54px 0 120px; }
+  footer.site h3 { color: var(--ink); }
+  .foot-links { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 18px; }
+  .foot-links a { color: var(--body); text-decoration: none; font-weight: 600; }
+  .foot-links a:hover { color: var(--ink); text-decoration: underline; }
+  .copyright { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .9rem; color: var(--muted); }
+
+  .sticky-cta {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(11,12,14,.92); backdrop-filter: blur(8px);
+    border-top: 1px solid var(--line); display: none;
+  }
+  .sticky-cta .btn { width: 100%; }
+  @media (max-width: 900px) { .sticky-cta { display: block; } }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+
+  /* ============================================================== */
+  /* SECTIONS FUSIONNÉES (importées de la LP claire, re-stylées)    */
+  /* ============================================================== */
+  /* Bandeau de réassurance sous le hero */
+  .reassure { margin-top: clamp(34px, 5vw, 56px); display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 720px) { .reassure { grid-template-columns: 1fr; } }
+  .reassure .item {
+    display: flex; align-items: center; gap: 14px; padding: 16px 18px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-md);
+  }
+  .reassure .ico { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 10px; background: var(--bg); border: 1px solid var(--line-2); color: var(--accent); }
+  .reassure .item div { color: var(--body); font-size: .95rem; }
+  .reassure .item strong { color: var(--ink); }
+
+  /* Scénario narratif « 20 h 30 » */
+  .scenario { max-width: 760px; margin: 0 auto; }
+  .scenario p { color: var(--body); }
+  .chat-bubble {
+    display: inline-block; background: var(--panel-2); border: 1px solid var(--line-2);
+    border-radius: 4px 16px 16px 16px; padding: 14px 18px; color: var(--ink);
+    font-style: italic; margin: 4px 0 8px; box-shadow: var(--shadow);
+  }
+
+  /* Démo WhatsApp (échange concret) */
+  .wa-demo { margin-top: 28px; display: grid; gap: 12px; max-width: 720px; }
+  .wa-demo .bubble { padding: 14px 18px; border-radius: var(--r-md); border: 1px solid var(--line-2); }
+  .wa-demo .from-client { background: var(--panel); align-self: start; border-bottom-left-radius: 4px; }
+  .wa-demo .from-you { background: #10201a; border-color: #1d3a2c; align-self: end; border-bottom-right-radius: 4px; margin-left: auto; }
+  .wa-demo .lbl { display: block; font-family: var(--mono); font-size: .66rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 5px; }
+  .wa-demo .from-you .lbl { color: var(--ok); }
+  .wa-demo em { color: var(--ink); font-style: italic; }
+
+  /* Coût de l'inaction (panneau émotionnel) */
+  .cost-emo { max-width: 760px; margin: 0 auto; display: grid; gap: 10px; }
+  .cost-emo .row {
+    display: flex; align-items: center; gap: 12px; padding: 14px 18px;
+    background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--coral);
+    border-radius: 0 var(--r-sm) var(--r-sm) 0; color: var(--body);
+  }
+  .cost-emo .row svg { flex: none; }
+
+  /* Chips métiers */
+  .jobs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .jobs span {
+    font-family: var(--mono); font-size: .78rem; letter-spacing: .02em;
+    padding: 7px 13px; border-radius: var(--r-pill);
+    background: var(--panel); border: 1px solid var(--line-2); color: var(--body);
+  }
+  </style>
+
+
+  <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+  <header class="site">
+    <div class="wrap nav">
+      <!-- PLACEHOLDER LOGO : remplacer par le fichier logo-polynetia.svg -->
+      <a class="logo" href="#top" aria-label="PolynetIA — haut de page">
+        <span class="mark" aria-hidden="true">P</span> PolynetIA
+      </a>
+      <a class="btn btn-primary" href="#diagnostic" data-event="diagnostic-cta-header">Demander mon diagnostic <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ======================================================== -->
+    <!-- SECTION 01 — HERO : LE PROBLÈME ÉCONOMIQUE               -->
+    <!-- ======================================================== -->
+    <section class="hero" id="top" aria-label="Le problème économique">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <p class="factline"><span class="dot" aria-hidden="true"></span> Réponse &lt; 1 min • 7 j/7</p>
+            <span class="eyebrow">Pour les entreprises locales du fenua</span>
+            <h1><span class="t1">Tu n'as peut-être pas besoin de plus de publicité.</span> <span class="t2">Tu dois peut-être arrêter de perdre les clients que tu attires déjà.</span></h1>
+            <p class="lede">Local Partner identifie et répare les points de fuite entre le moment où un client découvre ton entreprise et celui où il décide de te contacter.</p>
+
+            <!-- Liste à rail (pattern de la référence) -->
+            <ul class="hero-benefits">
+              <li class="active">Répondre plus vite aux demandes.
+                <span class="sub">Chaque message reçoit une première réponse, même le soir et le dimanche.</span>
+              </li>
+              <li>Inspirer davantage confiance.</li>
+              <li>Transformer davantage de recherches en vrais projets.</li>
+            </ul>
+
+            <div class="hero-ctas">
+              <a class="btn btn-primary btn-lg" href="#diagnostic" data-event="diagnostic-cta-hero">Demander mon diagnostic Local Partner <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
+            <p class="cta-micro">30 minutes • Sans engagement • Pour les entreprises locales</p>
+          </div>
+
+          <!-- CARTE-DÉMO sombre : schéma du seau.
+               PLACEHOLDER : remplaçable par le visuel officiel. -->
+          <figure class="card-demo" style="margin:0" aria-label="Métaphore du seau troué">
+            <div class="visual">
+              <svg viewBox="0 0 400 330" role="img" aria-labelledby="bkT bkD" style="width:100%;height:auto;display:block">
+                <title id="bkT">Un robinet nommé Publicité remplit un seau percé de cinq fuites</title>
+                <desc id="bkD">L'eau entre dans le seau mais s'échappe par cinq trous : offre floue, réponse lente, vitrine faible, peu d'avis, Google incomplet.</desc>
+                <rect x="140" y="10" width="120" height="28" rx="6" fill="#ffffff"/>
+                <text x="200" y="29" text-anchor="middle" fill="#0b0c0e" font-size="13.5" font-weight="800" font-family="Segoe UI, sans-serif">PUBLICITÉ</text>
+                <rect x="188" y="38" width="24" height="20" fill="#383c44"/>
+                <path d="M212 42 h30 a7 7 0 0 1 7 7 v9 h-12 v-7 h-25 z" fill="#2c3037"/>
+                <rect x="240" y="56" width="6" height="48" rx="3" fill="#2fd3e0" opacity=".9"/>
+                <path d="M104 118 L296 118 L278 282 L122 282 Z" fill="#14161a" stroke="#5a6070" stroke-width="1.6"/>
+                <path d="M104 118 L296 118 L291 140 L109 140 Z" fill="#1a1d22"/>
+                <rect x="100" y="110" width="200" height="16" rx="8" fill="#383c44"/>
+                <path d="M112 148 L288 148 L285 174 L115 174 Z" fill="#2fd3e0" opacity=".28"/>
+                <g font-family="ui-monospace, Menlo, monospace" font-size="10.5" font-weight="600" letter-spacing=".04em">
+                  <circle cx="138" cy="180" r="4" fill="#c7ccd8"/>
+                  <path class="drip" d="M133 182 q-22 8 -36 20" stroke="#ff6b4a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                  <rect x="4" y="194" width="90" height="23" rx="6" fill="#0b0c0e" stroke="#383c44"/>
+                  <text x="49" y="209" text-anchor="middle" fill="#e8eaf0">OFFRE FLOUE</text>
+
+                  <circle cx="130" cy="234" r="4" fill="#c7ccd8"/>
+                  <path class="drip" style="animation-delay:.4s" d="M125 236 q-24 9 -40 23" stroke="#ff6b4a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                  <rect x="0" y="248" width="106" height="23" rx="6" fill="#0b0c0e" stroke="#383c44"/>
+                  <text x="53" y="263" text-anchor="middle" fill="#e8eaf0">RÉPONSE LENTE</text>
+
+                  <circle cx="200" cy="276" r="4" fill="#c7ccd8"/>
+                  <path class="drip" style="animation-delay:.8s" d="M200 282 q-2 14 -8 26" stroke="#ff6b4a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                  <rect x="142" y="300" width="112" height="23" rx="6" fill="#0b0c0e" stroke="#383c44"/>
+                  <text x="198" y="315" text-anchor="middle" fill="#e8eaf0">VITRINE FAIBLE</text>
+
+                  <circle cx="270" cy="234" r="4" fill="#c7ccd8"/>
+                  <path class="drip" style="animation-delay:.6s" d="M275 236 q24 9 40 23" stroke="#ff6b4a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                  <rect x="302" y="248" width="92" height="23" rx="6" fill="#0b0c0e" stroke="#383c44"/>
+                  <text x="348" y="263" text-anchor="middle" fill="#e8eaf0">PEU D'AVIS</text>
+
+                  <circle cx="262" cy="180" r="4" fill="#c7ccd8"/>
+                  <path class="drip" style="animation-delay:.2s" d="M267 182 q22 8 36 20" stroke="#ff6b4a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                  <rect x="280" y="194" width="118" height="23" rx="6" fill="#0b0c0e" stroke="#383c44"/>
+                  <text x="339" y="209" text-anchor="middle" fill="#e8eaf0">GOOGLE INCOMPLET</text>
+                </g>
+              </svg>
+            </div>
+            <figcaption class="caption">
+              <strong>Plus de trafic ≠ plus de clients</strong>
+              <small>L'eau entre. Les fuites la laissent partir.</small>
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- Bandeau de réassurance (importé de la LP claire) -->
+        <div class="reassure reveal">
+          <div class="item">
+            <span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></span>
+            <div><strong>Site en ligne en 3 jours</strong> après réception des éléments</div>
+          </div>
+          <div class="item">
+            <span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+            <div><strong>Première réponse</strong> en moins d'une minute</div>
+          </div>
+          <div class="item">
+            <span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+            <div><strong>Disponible</strong> 7 jours sur 7</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 02 — IDENTIFICATION : « ÇA M'ARRIVE »            -->
+    <!-- ======================================================== -->
+    <section class="soft" aria-label="Reconnais ton quotidien">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Le scénario que tu connais déjà</span>
+          <h2>Tes futurs clients ne disparaissent pas au hasard.</h2>
+        </div>
+        <ol class="timeline reveal">
+          <li><strong>Recherche</strong><span>Un client cherche ton métier sur Google.</span></li>
+          <li><strong>Comparaison</strong><span>Il compare plusieurs entreprises : prestations, photos, avis.</span></li>
+          <li><strong>Message</strong><span>Il t'écrit pendant que tu travailles.</span></li>
+          <li><strong>Attente</strong><span>Tu réponds plus tard.</span></li>
+          <li><strong>Concurrent</strong><span>Entre-temps, quelqu'un d'autre lui a répondu.</span></li>
+          <li class="lost"><strong>Client perdu</strong><span>Le chantier est parti ailleurs.</span></li>
+        </ol>
+        <p class="punch reveal">Tu n'as pas perdu ce chantier parce que ton travail était mauvais. Tu l'as perdu avant même d'avoir pu le défendre.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 02bis — SCÉNARIO CONCRET (importé LP claire)      -->
+    <!-- ======================================================== -->
+    <section aria-label="Un scénario que tu connais">
+      <div class="wrap">
+        <div class="scenario reveal">
+          <div class="section-head" style="margin-bottom:22px">
+            <span class="eyebrow">Une soirée ordinaire</span>
+            <h2>Un client t'écrit à 20&nbsp;h&nbsp;30.</h2>
+          </div>
+          <p>Il cherche un professionnel dans ta commune. Il trouve ton entreprise sur Facebook. Il consulte rapidement ta page.</p>
+          <p>Il ne voit pas clairement tes prestations ni tes tarifs. Il t'envoie tout de même un message&nbsp;:</p>
+          <p class="chat-bubble">Ia ora na, est-ce que tu peux intervenir chez moi&nbsp;? C'est combien&nbsp;?</p>
+          <p>Tu es occupé. Tu te dis que tu répondras demain matin.</p>
+          <p>Mais le client n'attend pas. Il écrit à deux autres entreprises. L'une d'elles lui répond immédiatement.</p>
+          <p>Quand tu ouvres ton téléphone le lendemain, le chantier est déjà parti.</p>
+          <p class="punch" style="margin-top:20px">Tu n'as pas perdu ce client parce que ton travail était mauvais. Tu l'as perdu avant même d'avoir pu lui montrer ce que tu savais faire.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 03 — LE COÛT DES FUITES (panneau cadré 1/3)      -->
+    <!-- ======================================================== -->
+    <section class="navy-slant" aria-label="Le coût des fuites">
+      <div class="unslant">
+        <div class="frame">
+          <div class="section-head reveal">
+            <span class="eyebrow">L'enjeu économique</span>
+            <h2>Combien valent réellement les demandes que tu perds&nbsp;?</h2>
+          </div>
+          <div class="cost-grid">
+            <div class="reveal">
+              <ul class="cost-questions">
+                <li>Combien vaut en moyenne un client chez toi&nbsp;?</li>
+                <li>Combien de demandes reçois-tu chaque mois&nbsp;?</li>
+                <li>Combien restent sans réponse pendant plusieurs heures&nbsp;?</li>
+                <li>Combien de prospects consultent ta fiche Google sans te contacter&nbsp;?</li>
+                <li>Combien de clients satisfaits repartent sans laisser d'avis&nbsp;?</li>
+              </ul>
+              <div class="cost-note">
+                Si un chantier vaut 80&nbsp;000&nbsp;F&nbsp;CFP, 150&nbsp;000&nbsp;F&nbsp;CFP ou 300&nbsp;000&nbsp;F&nbsp;CFP, quelques opportunités perdues peuvent rapidement représenter un manque à gagner important. <em>Ce sont des exemples de valeur de chantier, pas des promesses de résultat.</em>
+              </div>
+              <p class="punch reveal">Le coût du problème n'apparaît sur aucune facture.</p>
+            </div>
+
+            <!-- Mini-calculateur : estimation basée uniquement sur les chiffres saisis -->
+            <div class="calc reveal" data-event="calculator">
+              <h3>Estime ton manque à gagner</h3>
+              <p class="hint">Une simple multiplication à partir de TES chiffres. Rien n'est enregistré.</p>
+              <label for="calcValeur">Valeur moyenne d'un client (F CFP)</label>
+              <input type="number" id="calcValeur" inputmode="numeric" min="0" placeholder="ex : 150 000" />
+              <label for="calcPerdues">Demandes perdues estimées par mois</label>
+              <input type="number" id="calcPerdues" inputmode="numeric" min="0" placeholder="ex : 3" />
+              <div class="calc-result" aria-live="polite">
+                <span class="label">Manque à gagner potentiel / mois</span>
+                <div class="value" id="calcResult">—</div>
+                <div class="meter" aria-hidden="true"><div class="fill" id="calcMeter"></div></div>
+                <p class="disclaimer">Estimation mathématique basée uniquement sur les chiffres que tu saisis. Ce n'est ni une promesse ni une prévision.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 04 — LE FAUX REMÈDE                              -->
+    <!-- ======================================================== -->
+    <section aria-label="Le faux remède">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Le réflexe qui ne règle rien</span>
+          <h2>Le réflexe habituel&nbsp;: mettre plus de publicité.</h2>
+          <p class="lede">Booster une publication Facebook. Lancer des Meta Ads. Refaire un site sans revoir le parcours. Publier davantage. Ajouter un nouvel outil.</p>
+          <p class="lede">Mais si le parcours derrière la publicité fuit déjà, augmenter le trafic augmente aussi le nombre de demandes perdues.</p>
+        </div>
+
+        <figure class="card-demo reveal" style="max-width:520px;margin:0 auto" aria-label="Le seau sous plus de trafic">
+          <div class="visual">
+            <svg viewBox="0 0 400 260" role="img" aria-labelledby="bk2T bk2D" style="width:100%;height:auto;display:block">
+              <title id="bk2T">Avec plus de publicité, plus d'eau entre et plus d'eau s'échappe</title>
+              <desc id="bk2D">Le robinet est grand ouvert mais les fuites du seau laissent échapper encore davantage d'eau.</desc>
+              <rect x="136" y="8" width="128" height="26" rx="6" fill="#ffffff"/>
+              <text x="200" y="26" text-anchor="middle" fill="#0b0c0e" font-size="12.5" font-weight="800" font-family="Segoe UI, sans-serif">PUBLICITÉ ×2</text>
+              <rect x="186" y="34" width="28" height="16" fill="#383c44"/>
+              <rect x="234" y="48" width="10" height="44" rx="4" fill="#2fd3e0" opacity=".9"/>
+              <rect x="220" y="48" width="7" height="44" rx="3" fill="#2fd3e0" opacity=".5"/>
+              <path d="M110 98 L290 98 L274 240 L126 240 Z" fill="#14161a" stroke="#5a6070" stroke-width="1.6"/>
+              <rect x="106" y="90" width="188" height="15" rx="7" fill="#383c44"/>
+              <path d="M117 118 L283 118 L280 142 L120 142 Z" fill="#2fd3e0" opacity=".3"/>
+              <g stroke="#ff6b4a" stroke-width="5" fill="none" stroke-linecap="round">
+                <path class="drip" d="M140 158 q-26 12 -44 28"/>
+                <path class="drip" style="animation-delay:.3s" d="M134 202 q-28 12 -46 30"/>
+                <path class="drip" style="animation-delay:.6s" d="M200 236 q-2 14 -8 24"/>
+                <path class="drip" style="animation-delay:.45s" d="M266 202 q28 12 46 30"/>
+                <path class="drip" style="animation-delay:.15s" d="M260 158 q26 12 44 28"/>
+              </g>
+            </svg>
+          </div>
+          <figcaption class="caption"><strong style="font-size:1.1rem">La publicité ne répare pas un seau troué.</strong></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 05 — LE MÉCANISME UNIQUE                          -->
+    <!-- ======================================================== -->
+    <section class="soft" aria-label="La Méthode Local Partner">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <span class="eyebrow">La Méthode Local Partner</span>
+          <h2>Réparer → Convertir → Accélérer</h2>
+          <p class="lede" style="margin-inline:auto">Nous ne commençons pas par attirer plus de monde. Nous commençons par rendre ton entreprise plus facile à comprendre, plus rassurante et plus réactive. Ensuite seulement, nous augmentons la visibilité.</p>
+        </div>
+        <div class="method-steps reveal">
+          <div class="step card">
+            <span class="num">ÉTAPE / 01</span>
+            <h3>Réparer</h3>
+            <p>Corriger les points de fuite : clarté de l'offre, vitrine, fiche Google, parcours de contact.</p>
+          </div>
+          <div class="step card">
+            <span class="num">ÉTAPE / 02</span>
+            <h3>Convertir</h3>
+            <p>Prendre en charge chaque demande rapidement et la préparer avant qu'elle ne parte ailleurs.</p>
+          </div>
+          <div class="step card">
+            <span class="num">ÉTAPE / 03</span>
+            <h3>Accélérer</h3>
+            <p>Utiliser la publicité locale quand l'entreprise est prête à recevoir et convertir les demandes.</p>
+          </div>
+        </div>
+        <div class="center-block">
+          <p class="punch reveal">D'abord être choisi. Ensuite être davantage visible.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 06 — PREUVES RAPIDES                             -->
+    <!-- ======================================================== -->
+    <section aria-label="Preuves concrètes">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Du concret, pas des promesses</span>
+          <h2>Concrètement, voici ce que nous mettons en place.</h2>
+        </div>
+        <!-- RÈGLE ABSOLUE : jamais de fausse preuve. Cadres « fenêtre »
+             à remplacer par des captures RÉELLES. -->
+        <div class="proof-grid">
+          <div class="browser reveal">
+            <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">GOOGLE — FICHE_ENTREPRISE</span></div>
+            <div class="slot"><span class="tag">À REMPLACER</span><strong>Capture Google réelle</strong><small>[À REMPLACER — CAPTURE GOOGLE RÉELLE]</small></div>
+          </div>
+          <div class="browser reveal">
+            <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">SITE_CLIENT — MOBILE</span></div>
+            <div class="slot"><span class="tag">À REMPLACER</span><strong>Capture site mobile réelle</strong><small>[À REMPLACER — CAPTURE SITE MOBILE RÉELLE]</small></div>
+          </div>
+          <div class="browser reveal">
+            <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">WHATSAPP_BUSINESS</span></div>
+            <div class="slot"><span class="tag">À REMPLACER</span><strong>Conversation WhatsApp</strong><small>[À REMPLACER — CONVERSATION RÉELLE OU DÉMO IDENTIFIÉE]</small></div>
+          </div>
+          <div class="browser reveal">
+            <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">DEMANDE_AVIS</span></div>
+            <div class="slot"><span class="tag">À REMPLACER</span><strong>Message de demande d'avis</strong><small>[À REMPLACER — MESSAGE D'AVIS RÉEL]</small></div>
+          </div>
+          <div class="browser reveal">
+            <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">META_ADS — CAMPAGNE</span></div>
+            <div class="slot"><span class="tag">À REMPLACER</span><strong>Publicité Meta reliée au parcours</strong><small>[À REMPLACER — CAPTURE PUBLICITÉ META RÉELLE]</small></div>
+          </div>
+          <!-- Étude de cas : uniquement avec des données réelles.
+               Format : Situation → fuite identifiée → intervention → résultat réel -->
+          <div class="browser reveal">
+            <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">ÉTUDE_DE_CAS</span></div>
+            <div class="slot"><span class="tag">OPTIONNEL</span><strong>Étude de cas réelle</strong><small>[SITUATION → FUITE IDENTIFIÉE → INTERVENTION → RÉSULTAT RÉEL]</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 07 — LA MÉTHODE EN 3 PHASES                      -->
+    <!-- ======================================================== -->
+    <section class="soft" aria-label="Les trois phases">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Comment ça se déroule</span>
+          <h2>La transformation se déroule en trois phases.</h2>
+        </div>
+
+        <article class="phase card reveal">
+          <div class="tag"><span class="n" aria-hidden="true">1</span>Être choisi</div>
+          <div>
+            <p style="margin-bottom:4px;color:var(--ink)"><strong>Objectif :</strong> rendre l'entreprise claire et crédible.</p>
+            <ul>
+              <li>Clarification de l'offre</li>
+              <li>Argumentaire</li>
+              <li>Tarifs</li>
+              <li>Site</li>
+              <li>Fiche Google</li>
+              <li>Présentation professionnelle</li>
+            </ul>
+            <p class="result"><span class="lbl">Résultat</span>Ton futur client comprend rapidement ce que tu fais et pourquoi il peut te faire confiance.</p>
+          </div>
+        </article>
+
+        <article class="phase card reveal">
+          <div class="tag"><span class="n" aria-hidden="true">2</span>Convertir la demande</div>
+          <div>
+            <p style="margin-bottom:4px;color:var(--ink)"><strong>Objectif :</strong> réduire les demandes perdues et mieux préparer les conversations.</p>
+            <ul>
+              <li>WhatsApp</li>
+              <li>Messenger</li>
+              <li>Réponses rapides</li>
+              <li>Questions de qualification</li>
+              <li>Collecte d'informations</li>
+              <li>Demande d'avis</li>
+            </ul>
+            <p class="result"><span class="lbl">Résultat</span>Les demandes sont prises en charge plus rapidement et arrivent mieux préparées.</p>
+          </div>
+        </article>
+
+        <article class="phase card reveal">
+          <div class="tag"><span class="n" aria-hidden="true">3</span>Accélérer</div>
+          <div>
+            <p style="margin-bottom:4px;color:var(--ink)"><strong>Objectif :</strong> augmenter la visibilité lorsque l'entreprise est prête.</p>
+            <ul>
+              <li>Facebook Ads</li>
+              <li>Instagram Ads</li>
+              <li>Ciblage local</li>
+              <li>Créations publicitaires</li>
+              <li>Suivi mensuel</li>
+            </ul>
+            <p class="result"><span class="lbl">Résultat</span>La publicité amplifie désormais une entreprise prête à recevoir et convertir les demandes.</p>
+          </div>
+        </article>
+
+        <div class="reveal" style="text-align:center;margin-top:30px">
+          <a class="btn btn-primary btn-lg" href="#diagnostic" data-event="diagnostic-cta-phases">Demander mon diagnostic Local Partner <span class="arrow" aria-hidden="true">→</span></a>
+          <p class="cta-micro">30 minutes • Sans engagement • Pour les entreprises locales</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 08 — LE SYSTÈME COMPLET                          -->
+    <!-- ======================================================== -->
+    <section aria-label="Le système complet">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Un système, pas un catalogue</span>
+          <h2>Voici ce que PolynetIA construit derrière Local Partner.</h2>
+          <p class="lede">Six composants pensés comme un seul système. Chacun est vendu pour son résultat — l'outil n'est que le moyen.</p>
+        </div>
+        <div class="system">
+          <article class="sys card reveal">
+            <h3>Clarté commerciale</h3>
+            <p class="promise">Ton futur client comprend immédiatement ce que tu vends et pourquoi te choisir.</p>
+            <p class="basis"><strong>Basé sur :</strong> offre, positionnement, argumentaire, tarifs.</p>
+          </article>
+          <article class="sys card reveal">
+            <h3>Vitrine de confiance</h3>
+            <p class="promise">Ton entreprise inspire confiance dès la première visite, surtout sur téléphone.</p>
+            <p class="basis"><strong>Basé sur :</strong> site mobile-first, prestations, photos, zone, bouton WhatsApp.</p>
+          </article>
+          <article class="sys card reveal">
+            <h3>Réponse immédiate</h3>
+            <p class="promise">Chaque demande reçoit une première réponse au lieu d'attendre des heures.</p>
+            <p class="basis"><strong>Basé sur :</strong> WhatsApp Business + Messenger, réponse en moins d'une minute, 7j/7, dimanche compris.</p>
+          </article>
+          <article class="sys card reveal">
+            <h3>Présence locale crédible</h3>
+            <p class="promise">Quand on cherche ton métier dans ta commune, ton entreprise rassure.</p>
+            <p class="basis"><strong>Basé sur :</strong> Google Business Profile, photos, catégories, description, horaires, zone.</p>
+          </article>
+          <article class="sys card reveal">
+            <h3>Preuve sociale continue</h3>
+            <p class="promise">Chaque client satisfait aide le suivant à te choisir.</p>
+            <p class="basis"><strong>Basé sur :</strong> demande d'avis après intervention et modèles de réponses.</p>
+          </article>
+          <article class="sys card reveal">
+            <h3>Accélérateur d'acquisition</h3>
+            <p class="promise">La visibilité augmente quand l'entreprise est prête à en profiter.</p>
+            <p class="basis"><strong>Basé sur :</strong> campagnes Meta géolocalisées, créations et suivi mensuel.</p>
+          </article>
+        </div>
+
+        <!-- Démo concrète WhatsApp (importée de la LP claire) -->
+        <div class="wa-demo reveal">
+          <div class="bubble from-client">
+            <span class="lbl">Message client · 20 h 47</span>
+            <em>Ia ora na, je voudrais refaire ma salle de bain. Vous intervenez à Punaauia&nbsp;?</em>
+          </div>
+          <div class="bubble from-you">
+            <span class="lbl">Première réponse · &lt; 1 min</span>
+            <em>Ia ora na et merci pour ton message. Oui, nous intervenons à Punaauia. Pour mieux comprendre ton besoin, peux-tu préciser la surface de la salle de bain et envoyer quelques photos&nbsp;?</em>
+          </div>
+        </div>
+        <p class="punch reveal" style="margin-top:22px">Moins d'allers-retours. Plus de conversations sérieuses — et une demande déjà qualifiée quand tu la reprends.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 09 — TRANSFORMATION AVANT / APRÈS                -->
+    <!-- ======================================================== -->
+    <section class="soft" aria-label="Avant / après">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">La transformation</span>
+          <h2>Ce qui change dans ton entreprise.</h2>
+        </div>
+        <div class="ba">
+          <div class="ba-col before card reveal">
+            <span class="pill">Avant</span>
+            <ul>
+              <li><span class="mk" aria-hidden="true">✕</span> Demandes dispersées.</li>
+              <li><span class="mk" aria-hidden="true">✕</span> Réponses tardives.</li>
+              <li><span class="mk" aria-hidden="true">✕</span> Beaucoup d'allers-retours.</li>
+              <li><span class="mk" aria-hidden="true">✕</span> Peu d'avis.</li>
+              <li><span class="mk" aria-hidden="true">✕</span> Google incomplet.</li>
+              <li><span class="mk" aria-hidden="true">✕</span> Dépendance au bouche-à-oreille.</li>
+              <li><span class="mk" aria-hidden="true">✕</span> Publicité lancée sans bases solides.</li>
+            </ul>
+          </div>
+          <div class="ba-col after card reveal">
+            <span class="pill">Après</span>
+            <ul>
+              <li><span class="mk" aria-hidden="true">✓</span> Offre claire.</li>
+              <li><span class="mk" aria-hidden="true">✓</span> Présence professionnelle.</li>
+              <li><span class="mk" aria-hidden="true">✓</span> Réponse rapide.</li>
+              <li><span class="mk" aria-hidden="true">✓</span> Demandes mieux renseignées.</li>
+              <li><span class="mk" aria-hidden="true">✓</span> Avis demandés régulièrement.</li>
+              <li><span class="mk" aria-hidden="true">✓</span> Présence locale plus crédible.</li>
+              <li><span class="mk" aria-hidden="true">✓</span> Publicité utilisée au bon moment.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="punch reveal">Tu ne travailles pas davantage. Ton entreprise laisse simplement moins d'opportunités lui échapper.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 10 — PARCOURS DU CLIENT                          -->
+    <!-- ======================================================== -->
+    <section aria-label="Le parcours de ton prochain client">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">De la découverte à la recommandation</span>
+          <h2>Voici ce que vit ton prochain client.</h2>
+        </div>
+        <ol class="journey reveal">
+          <li>Il découvre ton entreprise.</li>
+          <li>Il vérifie Google.</li>
+          <li>Il visite ton site.</li>
+          <li>Il consulte tes avis.</li>
+          <li>Il clique sur WhatsApp.</li>
+          <li>Il obtient une réponse.</li>
+          <li>Il donne les informations nécessaires.</li>
+          <li>Tu reprends la demande.</li>
+          <li>Tu réalises la prestation.</li>
+          <li>Il reçoit une demande d'avis.</li>
+          <li>Son avis aide le prochain client.</li>
+        </ol>
+        <p class="punch reveal">Local Partner construit tout le chemin entre la découverte et la recommandation.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 11 — POURQUOI POLYNETIA ?                        -->
+    <!-- ======================================================== -->
+    <section class="soft" aria-label="Pourquoi PolynetIA">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Pourquoi nous</span>
+          <h2><span class="t1">Pas une agence web.</span> <span class="t2">Pas un vendeur de publicité.</span></h2>
+          <p class="lede">PolynetIA intervient sur l'ensemble du parcours qui transforme une personne intéressée en client. Chaque élément est pensé pour fonctionner avec les autres, autour de ton métier, de tes tarifs, de tes horaires et de ta zone.</p>
+        </div>
+        <ul class="trust-points reveal">
+          <li><span class="mk" aria-hidden="true">✓</span> Connaissance du marché local</li>
+          <li><span class="mk" aria-hidden="true">✓</span> Proximité</li>
+          <li><span class="mk" aria-hidden="true">✓</span> Adaptation au métier</li>
+          <li><span class="mk" aria-hidden="true">✓</span> Adaptation à la commune et aux contraintes du fenua</li>
+          <li><span class="mk" aria-hidden="true">✓</span> Accompagnement humain</li>
+          <li><span class="mk" aria-hidden="true">✓</span> Mise en place complète</li>
+          <li><span class="mk" aria-hidden="true">✓</span> Un seul partenaire pour coordonner l'ensemble</li>
+        </ul>
+
+        <!-- BLOC FONDATEUR — obligatoire, données à fournir, ne rien inventer -->
+        <div class="founder card reveal">
+          <div class="photo">[PHOTO DU FONDATEUR<br />À fournir]</div>
+          <div>
+            <h3>Haumoana Laussau</h3>
+            <p style="color:var(--muted);font-weight:600;margin-bottom:12px">Fondateur de PolynetIA</p>
+            <p style="color:var(--body)">Avant PolynetIA, j'ai vu la même scène se répéter partout au fenua&nbsp;: des artisans et des entreprises qui font un travail sérieux… mais qui perdent des clients sans jamais le savoir. Pas parce qu'ils sont mauvais — parce qu'un message reste sans réponse le dimanche, parce qu'une fiche Google est vide, parce que l'offre n'est pas claire en trois secondes sur un téléphone.</p>
+            <p style="color:var(--body);margin-bottom:0">J'ai créé Local Partner pour ça&nbsp;: réparer d'abord ce qui fait fuir tes clients, avant de dépenser un franc en publicité. Pas un site posé dans un coin, pas une pub lancée dans le vide — un seul partenaire qui relie ton offre, ta vitrine, tes réponses, ton Google et tes avis. Parce qu'ici, un client bien accueilli en parle à toute sa commune.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 12 — PROCESS D'IMPLÉMENTATION                    -->
+    <!-- ======================================================== -->
+    <section aria-label="Le déroulement">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Zéro zone d'ombre</span>
+          <h2>Tu sais exactement ce qui va se passer après ton accord.</h2>
+          <!-- Ne pas annoncer de délai d'onboarding ferme tant que le process officiel n'est pas validé -->
+        </div>
+        <ol class="process reveal">
+          <li class="card"><strong>Diagnostic</strong><span>Analyse de l'offre, de la présence, des réponses, des avis et des sources de demandes.</span></li>
+          <li class="card"><strong>Priorités</strong><span>Identification des fuites et du bon point d'entrée.</span></li>
+          <li class="card"><strong>Préparation</strong><span>Collecte des prestations, tarifs, horaires, zones, photos et questions fréquentes.</span></li>
+          <li class="card"><strong>Construction</strong><span>Création et configuration des éléments nécessaires.</span></li>
+          <li class="card"><strong>Validation</strong><span>Validation par le client avant publication.</span></li>
+          <li class="card"><strong>Lancement</strong><span>Activation progressive du système.</span></li>
+          <li class="card"><strong>Suivi</strong><span>Observation des demandes et améliorations.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 13 — POUR QUI / PAS POUR QUI                     -->
+    <!-- ======================================================== -->
+    <section class="soft" aria-label="Pour qui">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">On se choisit aussi</span>
+          <h2>Local Partner n'est pas adapté à toutes les entreprises.</h2>
+        </div>
+        <div class="fit">
+          <div class="fit-col yes card reveal">
+            <h3>Pertinent si…</h3>
+            <ul>
+              <li><span class="mk" aria-hidden="true">✓</span> Tu as une vraie activité.</li>
+              <li><span class="mk" aria-hidden="true">✓</span> Tu vends une prestation rentable.</li>
+              <li><span class="mk" aria-hidden="true">✓</span> Tu reçois déjà des demandes ou souhaites les développer.</li>
+              <li><span class="mk" aria-hidden="true">✓</span> Tu peux accueillir de nouveaux clients.</li>
+              <li><span class="mk" aria-hidden="true">✓</span> Tu veux professionnaliser ton parcours commercial.</li>
+              <li><span class="mk" aria-hidden="true">✓</span> Tu recherches un partenaire plutôt qu'un outil isolé.</li>
+            </ul>
+          </div>
+          <div class="fit-col no card reveal">
+            <h3>Probablement pas adapté si…</h3>
+            <ul>
+              <li><span class="mk" aria-hidden="true">✕</span> Tu cherches uniquement le site le moins cher.</li>
+              <li><span class="mk" aria-hidden="true">✕</span> Tu veux seulement « tester une pub ».</li>
+              <li><span class="mk" aria-hidden="true">✕</span> Tu n'as pas encore défini ton activité.</li>
+              <li><span class="mk" aria-hidden="true">✕</span> Tu ne peux accepter aucun nouveau client.</li>
+              <li><span class="mk" aria-hidden="true">✕</span> Tu recherches une solution miracle sans implication.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Chips métiers (importées de la LP claire) -->
+        <div class="reveal" style="margin-top:30px">
+          <h3 style="margin-bottom:4px">Des métiers déjà concernés</h3>
+          <div class="jobs">
+            <span>Plombiers</span><span>Électriciens</span><span>Maçons</span><span>Peintres</span>
+            <span>Menuisiers</span><span>Garages</span><span>Nettoyage</span>
+            <span>Beauté &amp; bien-être</span><span>Commerces</span>
+            <span>Prestataires de services</span><span>Location</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 13bis — COÛT DE L'INACTION (importé LP claire)   -->
+    <!-- ======================================================== -->
+    <section aria-label="Le coût de l'inaction">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Le coût invisible</span>
+          <h2>Combien de chantiers peuvent disparaître chaque mois&nbsp;?</h2>
+        </div>
+        <div class="cost-emo reveal">
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg> Un message oublié.</div>
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg> Un appel manqué.</div>
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg> Une réponse envoyée le lendemain.</div>
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg> Une fiche Google vide.</div>
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg> Un client satisfait qui ne laisse aucun avis.</div>
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg> Une publicité qui renvoie vers une offre difficile à comprendre.</div>
+        </div>
+        <div class="center-block">
+          <p class="punch reveal" style="margin-top:26px">Pris séparément, chaque problème paraît petit. Mis bout à bout, c'est le coût le plus dangereux&nbsp;: celui que tu ne vois pas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 14 — INVESTISSEMENT (panneau cadré 2/3)          -->
+    <!-- ======================================================== -->
+    <section class="navy-slant" aria-label="Comprendre l'investissement">
+      <div class="unslant">
+        <div class="frame">
+          <div class="section-head reveal" style="max-width:820px">
+            <span class="eyebrow">Comprendre l'investissement</span>
+            <h2>Local Partner n'est pas l'achat d'un site internet.</h2>
+          </div>
+          <p class="components-line reveal">
+            Un site est un composant.<br />
+            WhatsApp est un composant.<br />
+            Google est un composant.<br />
+            La publicité est un composant.<br />
+            <strong>Local Partner construit le système commercial qui relie l'ensemble.</strong>
+          </p>
+          <!-- PRICING : ne jamais inventer de tarif. Formulation provisoire validée : -->
+          <div class="inner-pad">
+            <p class="reveal" style="margin-top:26px">L'investissement dépend de la situation actuelle de ton entreprise et du niveau de mise en place nécessaire. Après le diagnostic, tu reçois une proposition claire en F&nbsp;CFP avant toute décision.</p>
+            <div class="reveal" style="margin-top:26px">
+              <a class="btn btn-primary btn-lg" href="#diagnostic" data-event="diagnostic-cta-investment">Demander mon diagnostic Local Partner <span class="arrow" aria-hidden="true">→</span></a>
+              <p class="cta-micro">30 minutes • Sans engagement • Pour les entreprises locales</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 15 — RÉDUCTION DU RISQUE                         -->
+    <!-- ======================================================== -->
+    <section aria-label="Réduction du risque">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Transparence totale</span>
+          <h2>Tu ne t'engages pas à l'aveugle.</h2>
+          <!-- GARANTIE : ne pas afficher de garantie tant que la garantie
+               officielle Local Partner n'est pas validée. -->
+        </div>
+        <ul class="risk-list reveal">
+          <li class="card"><span class="mk" aria-hidden="true">✓</span> Diagnostic avant proposition</li>
+          <li class="card"><span class="mk" aria-hidden="true">✓</span> Priorités expliquées</li>
+          <li class="card"><span class="mk" aria-hidden="true">✓</span> Périmètre défini</li>
+          <li class="card"><span class="mk" aria-hidden="true">✓</span> Validation des contenus</li>
+          <li class="card"><span class="mk" aria-hidden="true">✓</span> Étapes visibles</li>
+          <li class="card"><span class="mk" aria-hidden="true">✓</span> Prix communiqué avant démarrage</li>
+          <li class="card"><span class="mk" aria-hidden="true">✓</span> Pas de promesse irréaliste</li>
+          <li class="card"><span class="mk" aria-hidden="true">✓</span> Pas de garantie de première place Google</li>
+          <li class="card"><span class="mk" aria-hidden="true">✓</span> Pas de faux résultat</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 16 — FAQ HIGH TICKET                             -->
+    <!-- ======================================================== -->
+    <section class="soft" id="faq" aria-label="Questions fréquentes">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Avant de te décider</span>
+          <h2>Les questions qu'on nous pose avant de se lancer.</h2>
+        </div>
+        <div class="faq reveal">
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Pourquoi ne pas simplement lancer des publicités&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>Parce que la publicité amplifie le parcours existant. Si l'entreprise est difficile à comprendre, inspire peu confiance ou répond trop lentement, davantage de trafic ne corrige pas ces problèmes.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>J'ai déjà un site. Pourquoi Local Partner&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>Parce qu'un site n'est qu'une étape. Local Partner regarde aussi la clarté de l'offre, la réponse aux demandes, Google, les avis et l'acquisition.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>J'ai déjà quelqu'un qui gère mes réseaux.</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>Les réseaux sont un canal de visibilité. Local Partner travaille sur l'ensemble du parcours qui mène de la découverte à la prise de contact et à l'avis client.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>J'ai déjà beaucoup de demandes.</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>Local Partner peut aussi servir à répondre plus rapidement, mieux préparer les demandes et réduire le temps perdu.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Comment savoir si l'investissement est pertinent&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>Le diagnostic examine notamment la valeur d'un client, les demandes actuelles, les points de perte et la capacité de l'entreprise à accueillir de nouveaux clients.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Est-ce que vous garantissez des résultats&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>Aucun nombre de clients ou de positions Google ne doit être promis sans conditions et données suffisantes. La proposition précise ce qui est mis en place et les objectifs suivis.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Combien de temps cela va me prendre&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>L'implication du client consiste principalement à transmettre les informations nécessaires, valider les contenus et reprendre les demandes qui nécessitent son expertise.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Pourquoi PolynetIA plutôt que plusieurs prestataires&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>Parce que chaque élément est construit comme une partie du même parcours et coordonné par un seul partenaire.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Est-ce que je dois utiliser la publicité immédiatement&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>Non. La publicité arrive après les bases, lorsque le parcours est suffisamment solide.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Est-ce adapté aux entreprises des îles&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>La mise en place peut prendre en compte la zone d'intervention, les horaires, les déplacements et les contraintes inter-îles.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Pouvez-vous publier de faux avis&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>Non. Les avis doivent provenir de vrais clients. La demande d'avis est envoyée honnêtement, sans filtrer les clients selon leur satisfaction.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" data-event="faq-open"><span>Que dois-je fournir de mon côté&nbsp;?</span><svg class="sign" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner"><p>Principalement&nbsp;: tes prestations, tes tarifs, tes horaires, ta zone d'intervention, tes coordonnées, quelques photos et tes questions fréquentes. Nous nous occupons de la mise en place.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 17 — CTA FINAL + FORMULAIRE (panneau cadré 3/3)  -->
+    <!-- ======================================================== -->
+    <section class="navy-slant" id="diagnostic" aria-label="Demander un diagnostic">
+      <div class="unslant">
+        <div class="frame">
+          <div class="section-head center reveal">
+            <span class="eyebrow">L'étape suivante</span>
+            <h2>Vérifie si Local Partner est adapté à ton entreprise.</h2>
+            <p class="lede" style="margin-inline:auto">Pendant le diagnostic, nous examinons ton offre, ta présence en ligne, ton délai de réponse, tes avis, tes sources de demandes et les endroits où tes prospects peuvent abandonner.</p>
+          </div>
+
+          <div class="form-card reveal">
+            <!-- ========================================================== -->
+            <!-- CONNEXIONS DU FORMULAIRE                                    -->
+            <!-- - Envoi des réponses : SHEET_ENDPOINT (Google Apps Script)  -->
+            <!-- - Réservation : CALENDAR_URL / CALENDAR_EMBED_URL           -->
+            <!-- Voir les variables au début du <script> en bas de page.     -->
+            <!-- Pour brancher un autre webhook / e-mail / formulaire        -->
+            <!-- externe : remplacer le corps de envoyerFormulaire().        -->
+            <!-- ========================================================== -->
+            <form id="diagForm" novalidate data-event="form-start">
+              <div class="f2">
+                <div class="field">
+                  <label for="prenom">Prénom</label>
+                  <input type="text" id="prenom" name="prenom" autocomplete="given-name" required />
+                  <span class="err">Merci d'indiquer ton prénom.</span>
+                </div>
+                <div class="field">
+                  <label for="entreprise">Nom de l'entreprise</label>
+                  <input type="text" id="entreprise" name="entreprise" autocomplete="organization" required />
+                  <span class="err">Merci d'indiquer le nom de ton entreprise.</span>
+                </div>
+              </div>
+              <div class="f2">
+                <div class="field">
+                  <label for="metier">Métier</label>
+                  <input type="text" id="metier" name="metier" placeholder="Plombier, garage, commerce…" required />
+                  <span class="err">Merci d'indiquer ton métier.</span>
+                </div>
+                <div class="field">
+                  <label for="commune">Commune principale</label>
+                  <input type="text" id="commune" name="commune" placeholder="Papeete, Punaauia…" required />
+                  <span class="err">Merci d'indiquer ta commune principale.</span>
+                </div>
+              </div>
+              <div class="f2">
+                <div class="field">
+                  <label for="tel">Téléphone / WhatsApp</label>
+                  <input type="tel" id="tel" name="tel" autocomplete="tel" inputmode="tel" required />
+                  <span class="err">Merci d'indiquer un numéro pour te recontacter.</span>
+                </div>
+                <div class="field">
+                  <label for="email">E-mail</label>
+                  <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required />
+                  <span class="err">Merci d'indiquer une adresse e-mail valide.</span>
+                </div>
+              </div>
+              <div class="f2">
+                <div class="field">
+                  <label for="site">Site internet <span class="opt">(facultatif)</span></label>
+                  <input type="url" id="site" name="site" placeholder="https://…" />
+                  <span class="err">Vérifie le format du lien (https://…).</span>
+                </div>
+                <div class="field">
+                  <label for="google">Fiche Google <span class="opt">(facultatif)</span></label>
+                  <input type="url" id="google" name="google" placeholder="https://…" />
+                  <span class="err">Vérifie le format du lien (https://…).</span>
+                </div>
+              </div>
+
+              <fieldset id="fs-probleme">
+                <legend>Principal problème aujourd'hui</legend>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="probleme" value="Je manque de demandes" required /> Je manque de demandes.</label>
+                  <label class="choice"><input type="radio" name="probleme" value="Je réponds trop tard" /> Je réponds trop tard.</label>
+                  <label class="choice"><input type="radio" name="probleme" value="Mon offre n'est pas assez claire" /> Mon offre n'est pas assez claire.</label>
+                  <label class="choice"><input type="radio" name="probleme" value="Mon entreprise est difficile à trouver" /> Mon entreprise est difficile à trouver.</label>
+                  <label class="choice"><input type="radio" name="probleme" value="J'ai trop peu d'avis" /> J'ai trop peu d'avis.</label>
+                  <label class="choice"><input type="radio" name="probleme" value="Je dépends surtout du bouche-à-oreille" /> Je dépends surtout du bouche-à-oreille.</label>
+                  <label class="choice"><input type="radio" name="probleme" value="J'ai testé la publicité sans résultat satisfaisant" /> J'ai testé la publicité sans résultat satisfaisant.</label>
+                  <label class="choice"><input type="radio" name="probleme" value="Je veux préparer mon entreprise avant de faire de la publicité" /> Je veux préparer mon entreprise avant de faire de la publicité.</label>
+                </div>
+                <span class="err">Merci de choisir une réponse.</span>
+              </fieldset>
+
+              <fieldset id="fs-capacite">
+                <legend>Capacité à prendre de nouveaux clients</legend>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="capacite" value="Oui, je peux prendre de nouveaux clients" required /> Oui, je peux prendre de nouveaux clients.</label>
+                  <label class="choice"><input type="radio" name="capacite" value="Oui, mais en quantité limitée" /> Oui, mais en quantité limitée.</label>
+                  <label class="choice"><input type="radio" name="capacite" value="Pas immédiatement" /> Pas immédiatement.</label>
+                </div>
+                <span class="err">Merci de choisir une réponse.</span>
+              </fieldset>
+
+              <p class="privacy">Tes informations sont uniquement utilisées pour préparer le diagnostic et te recontacter au sujet de ta demande.</p>
+
+              <button type="submit" class="btn btn-primary btn-lg" style="width:100%" data-event="form-submit">Choisir mon créneau <span class="arrow" aria-hidden="true">→</span></button>
+            </form>
+
+            <!-- État de succès + réservation -->
+            <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+              <div class="tick" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <h3>Merci ! Ta demande est bien reçue.</h3>
+              <p style="color:var(--muted)">Choisis maintenant le créneau qui te convient pour ton diagnostic Local Partner de 30 minutes.</p>
+              <!-- Le calendrier s'intègre ici si CALENDAR_EMBED_URL est renseigné -->
+              <div class="cal-embed" id="calendarMount" hidden></div>
+              <a class="btn btn-primary btn-lg" id="calendarBtn" href="#diagnostic" rel="noopener" data-event="calendar-click">Choisir mon créneau <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================== -->
+  <!-- FOOTER                                                     -->
+  <!-- ========================================================== -->
+  <footer class="site">
+    <div class="wrap">
+      <h3>PolynetIA</h3>
+      <p>Le partenaire des entreprises locales du fenua qui veulent perdre moins de demandes et développer leur activité sur des bases solides.</p>
+      <ul class="foot-links">
+        <!-- LIENS JURIDIQUES [À FOURNIR] -->
+        <li><a href="#">Mentions légales</a></li>
+        <li><a href="#">Politique de confidentialité</a></li>
+        <li><a href="#">CGV</a></li>
+        <li><a href="mailto:contact@polynetia.com">Contact</a></li>
+      </ul>
+      <p class="copyright">© 2026 PolynetIA. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <!-- CTA sticky mobile -->
+  <div class="sticky-cta">
+    <a class="btn btn-primary" href="#diagnostic" data-event="diagnostic-cta-sticky">Faire analyser mon entreprise <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+
+  <script>
+  /* ============================================================ */
+  /* CONNEXIONS — mêmes branchements que la version précédente     */
+  /* ============================================================ */
+  // Page de réservation Google Agenda (ouverte dans un nouvel onglet).
+  var CALENDAR_URL = "https://calendar.app.google/AfowafMRr1SEFDhW7";
+  // URL d'intégration iframe Google Agenda (se termine par ?gv=true).
+  // Si renseignée, le calendrier s'affiche DANS la page après l'envoi.
+  var CALENDAR_EMBED_URL = "";
+  // Application web Google Apps Script (réception dans Google Sheets).
+  // Laisser vide = aucune donnée envoyée.
+  var SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbx3LxDtYDNI0455xyfoi7_2uVERKaJTI61A6vI1wbeK3pploSufREg7lBTVryfJ2JvonA/exec";
+
+  (function () {
+    "use strict";
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ---- Révélation discrète au scroll -------------------------- */
+    if ("IntersectionObserver" in window && !reduce) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+    } else {
+      document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
+    }
+
+    /* ---- FAQ accordéon ------------------------------------------ */
+    document.querySelectorAll(".faq-q").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var expanded = btn.getAttribute("aria-expanded") === "true";
+        var panel = btn.nextElementSibling;
+        btn.setAttribute("aria-expanded", expanded ? "false" : "true");
+        panel.style.maxHeight = expanded ? null : panel.scrollHeight + "px";
+      });
+    });
+
+    /* ---- Mini-calculateur (aucune donnée transmise) ------------- */
+    var vEl = document.getElementById("calcValeur");
+    var pEl = document.getElementById("calcPerdues");
+    var rEl = document.getElementById("calcResult");
+    var mEl = document.getElementById("calcMeter");
+    function fmt(n) { return n.toLocaleString("fr-FR") + " F CFP"; }
+    function calc() {
+      var v = parseFloat(vEl.value); var p = parseFloat(pEl.value);
+      if (isFinite(v) && isFinite(p) && v > 0 && p > 0) {
+        var total = Math.round(v * p);
+        rEl.textContent = fmt(total);
+        // Jauge : 100% à 1 000 000 F CFP (visuel uniquement, le chiffre fait foi)
+        if (mEl) { mEl.style.width = Math.min(100, (total / 1000000) * 100) + "%"; }
+      } else {
+        rEl.textContent = "—";
+        if (mEl) { mEl.style.width = "0%"; }
+      }
+    }
+    if (vEl && pEl) { vEl.addEventListener("input", calc); pEl.addEventListener("input", calc); }
+
+    /* ---- Réservation -------------------------------------------- */
+    var calendarBtn = document.getElementById("calendarBtn");
+    if (calendarBtn && CALENDAR_URL) {
+      calendarBtn.setAttribute("href", CALENDAR_URL);
+      calendarBtn.setAttribute("target", "_blank");
+    }
+    function monterCalendrier() {
+      var mount = document.getElementById("calendarMount");
+      if (mount && CALENDAR_EMBED_URL) {
+        if (!mount.querySelector("iframe")) {
+          var f = document.createElement("iframe");
+          f.src = CALENDAR_EMBED_URL;
+          f.title = "Choisir un créneau pour le diagnostic";
+          f.loading = "lazy";
+          mount.appendChild(f);
+        }
+        mount.hidden = false;
+        if (calendarBtn) { calendarBtn.style.display = "none"; }
+      }
+    }
+
+    /* ---- Formulaire : validation FR + envoi Sheets --------------- */
+    var form = document.getElementById("diagForm");
+    var success = document.getElementById("formSuccess");
+    function setInvalid(el, bad) { if (el) { el.classList.toggle("invalid", bad); } }
+    function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+    function validUrl(v) { return v === "" || /^https?:\/\/.+/i.test(v); }
+
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var ok = true; var first = null;
+
+        ["prenom", "entreprise", "metier", "commune", "tel"].forEach(function (id) {
+          var input = document.getElementById(id);
+          var bad = input.value.trim() === "";
+          setInvalid(input.closest(".field"), bad);
+          if (bad) { ok = false; first = first || input; }
+        });
+
+        var email = document.getElementById("email");
+        var emailBad = !validEmail(email.value.trim());
+        setInvalid(email.closest(".field"), emailBad);
+        if (emailBad) { ok = false; first = first || email; }
+
+        ["site", "google"].forEach(function (id) {
+          var input = document.getElementById(id);
+          var bad = !validUrl(input.value.trim());
+          setInvalid(input.closest(".field"), bad);
+          if (bad) { ok = false; first = first || input; }
+        });
+
+        [["probleme", "fs-probleme"], ["capacite", "fs-capacite"]].forEach(function (pair) {
+          var checked = form.querySelector('input[name="' + pair[0] + '"]:checked');
+          var fs = document.getElementById(pair[1]);
+          fs.classList.toggle("invalid", !checked);
+          if (!checked) { ok = false; first = first || fs; }
+        });
+
+        if (!ok) {
+          if (first && first.focus) { first.focus(); }
+          if (first && first.scrollIntoView) { first.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" }); }
+          return;
+        }
+
+        var data = {
+          date: new Date().toISOString(),
+          prenom: document.getElementById("prenom").value.trim(),
+          entreprise: document.getElementById("entreprise").value.trim(),
+          metier: document.getElementById("metier").value.trim(),
+          commune: document.getElementById("commune").value.trim(),
+          tel: document.getElementById("tel").value.trim(),
+          email: email.value.trim(),
+          site: document.getElementById("site").value.trim(),
+          google: document.getElementById("google").value.trim(),
+          probleme: (form.querySelector('input[name="probleme"]:checked') || {}).value || "",
+          capacite: (form.querySelector('input[name="capacite"]:checked') || {}).value || "",
+          source: location.href
+        };
+
+        envoyerFormulaire(data); // hook analytics possible : "form-completed"
+
+        form.classList.add("form-hidden");
+        success.classList.add("show");
+        monterCalendrier();
+        success.scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
+      });
+
+      form.addEventListener("input", function (e) {
+        var field = e.target.closest(".field");
+        if (field) { field.classList.remove("invalid"); }
+      });
+      form.addEventListener("change", function (e) {
+        var fs = e.target.closest("fieldset");
+        if (fs) { fs.classList.remove("invalid"); }
+      });
+    }
+
+    // Envoi vers Google Sheets (Apps Script). Aucun envoi si SHEET_ENDPOINT vide.
+    // Pour connecter un autre service (webhook, e-mail…) : remplacer ce corps.
+    function envoyerFormulaire(data) {
+      if (!SHEET_ENDPOINT) { return; }
+      try {
+        fetch(SHEET_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(data)
+        }).catch(function () {});
+      } catch (err) { /* réseau indisponible : ne pas bloquer l'utilisateur */ }
+    }
+  })();
+  </script>
