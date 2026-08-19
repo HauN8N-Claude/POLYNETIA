@@ -1,5 +1,5 @@
 <!-- ============================================================================
-  PolynetIA — Local Partner · Landing page BTP (Tahiti)
+  PolynetIA — Local Partner · Landing page BTP (Tahiti)  ·  ÉDITION PREMIUM
   À coller dans un bloc « Code HTML brut » de Systeme.io.
 
   TOUT est encapsulé sous .pnia-lp : aucun style ne déborde sur le reste
@@ -16,496 +16,530 @@
 
 /* ============================ TOKENS (scopés) ============================ */
 .pnia-lp{
-  /* Surfaces — béton clair, teinte froide biaisée vers le bleu de plan */
-  --paper:   #edeff2;
-  --paper-2: #f6f7f9;
-  --card:    #ffffff;
-  --tint:    #e9edf4;   /* voile bleuté doux */
+  /* Surfaces — béton / plan d'architecte, plus profondes et chaudes */
+  --paper:   #e6e8ec;
+  --paper-2: #eef0f3;
+  --card:    #fbfbfc;
+  --card-2:  #ffffff;
+  --tint:    #e4e9f1;
 
   /* Encres */
-  --ink:   #1e232b;     /* acier / béton mouillé */
-  --ink-2: #363d48;
-  --muted: #5b626d;
+  --ink:   #14181f;
+  --ink-2: #2f3742;
+  --muted: #626a76;
 
   /* Traits */
-  --line:   #dde1e8;
-  --line-2: #c8cdd7;
+  --line:   #d7dae1;
+  --line-2: #c4c9d3;
+  --hair:   rgba(20,24,31,.08);
 
-  /* Bleu de plan (accent typographique) */
-  --accent:      #2c519b;
-  --accent-ink:  #234382;
-  --accent-soft: #e7eef9;
+  /* Bleu de plan (accent typographique) — plus profond */
+  --accent:      #223f73;
+  --accent-2:    #2d5399;   /* liens / accents plus lumineux */
+  --accent-ink:  #1d375f;
+  --accent-soft: #e6ecf6;
 
-  /* Ambre chantier (action / boutons) — le seul geste vif */
-  --action:      #e8720f;
-  --action-dark: #c85f08;
-  --action-soft: #fceede;
+  /* Ambre chantier (action / CTA) — profondeur par dégradé */
+  --amber:       #e67e14;
+  --amber-2:     #f0912a;
+  --amber-dark:  #c4610a;
+  --amber-soft:  #f8ebd8;
+  --amber-line:  #eecb9c;
 
-  /* Vert sécurité (validations) */
-  --ok:      #2e9e5b;
-  --ok-soft: #e5f3ec;
+  /* Vert sécurité */
+  --ok:      #2c8a53;
+  --ok-2:    #37a866;
+  --ok-soft: #e4f1ea;
 
-  /* Rouge caution (bandeau + refus) */
-  --warn:      #c23b2b;
-  --warn-soft: #fbe8e5;
+  /* Rouge caution */
+  --warn:      #b83a2b;
+  --warn-soft: #f7e6e2;
+
+  /* Ombres feuilletées */
+  --sh-1: 0 1px 2px rgba(18,24,33,.05), 0 3px 8px rgba(18,24,33,.05);
+  --sh-2: 0 4px 14px -6px rgba(18,24,33,.12), 0 14px 34px -18px rgba(18,24,33,.18);
+  --sh-3: 0 10px 26px -10px rgba(18,24,33,.18), 0 30px 70px -26px rgba(18,24,33,.28);
+  --sh-amber: 0 10px 24px -8px rgba(196,97,10,.5);
 
   --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --sans:  'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --mono:  'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
-  --radius: 10px;
-  --maxw: 664px;
+  --maxw: 700px;
 
-  background: var(--paper);
+  /* Coins « plan » réutilisables (repères d'angle) */
+  --tick-tl: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Cpath d='M1 8V1h7' fill='none' stroke='%23223f73' stroke-width='1.4' stroke-opacity='.4'/%3E%3C/svg%3E");
+  --tick-tr: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Cpath d='M17 8V1h-7' fill='none' stroke='%23223f73' stroke-width='1.4' stroke-opacity='.4'/%3E%3C/svg%3E");
+  --tick-bl: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Cpath d='M1 10v7h7' fill='none' stroke='%23223f73' stroke-width='1.4' stroke-opacity='.4'/%3E%3C/svg%3E");
+  --tick-br: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Cpath d='M17 10v7h-7' fill='none' stroke='%23223f73' stroke-width='1.4' stroke-opacity='.4'/%3E%3C/svg%3E");
+
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(120% 80% at 50% -8%, rgba(45,83,153,.07), transparent 60%),
+    radial-gradient(90% 60% at 100% 100%, rgba(230,126,20,.05), transparent 55%);
   color: var(--ink-2);
   font-family: var(--sans);
-  font-size: 17px;
-  line-height: 1.62;
+  font-size: 17.5px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 .pnia-lp *{ box-sizing: border-box; }
 .pnia-lp img{ max-width: 100%; display: block; }
+.pnia-lp ::selection{ background: rgba(45,83,153,.18); }
+
+/* Cadre « repères d'angle » */
+.pnia-lp .pn-frame{
+  background-image: var(--tick-tl), var(--tick-tr), var(--tick-bl), var(--tick-br);
+  background-position: 11px 11px, right 11px top 11px, 11px bottom 11px, right 11px bottom 11px;
+  background-repeat: no-repeat;
+}
 
 /* Colonne éditoriale */
 .pnia-lp .lp-inner{
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 0 22px;
+  padding: 0 24px;
   display: flex;
   flex-direction: column;
-  gap: clamp(40px, 8.5vw, 68px);
+  gap: clamp(54px, 9vw, 88px);
 }
 .pnia-lp .lp-inner > *{ min-width: 0; }
 
 /* ============================ TYPOGRAPHIE ============================ */
 .pnia-lp .lp-eyebrow{
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0 0 14px;
+  display: inline-flex; align-items: center; gap: 11px;
+  font-family: var(--sans); font-size: 12px; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--accent-2);
+  margin: 0 0 4px;
 }
+.pnia-lp .lp-eyebrow::before{ content:""; width: 26px; height: 1.5px; background: currentColor; opacity: .6; }
+.pnia-lp .lp-eyebrow.c{ }
+.pnia-lp .lp-eyebrow.c::after{ content:""; width: 26px; height: 1.5px; background: currentColor; opacity: .6; }
+
 .pnia-lp .lp-h1{
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(31px, 6.6vw, 47px);
-  line-height: 1.08;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-  margin: 0;
-  text-wrap: balance;
+  font-family: var(--serif); font-weight: 500;
+  font-size: clamp(34px, 7.2vw, 55px);
+  line-height: 1.04; letter-spacing: -0.022em;
+  color: var(--ink); margin: 0; text-wrap: balance;
 }
 .pnia-lp .lp-h1 .l2{ color: var(--accent-ink); }
 .pnia-lp .lp-h2{
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(24px, 4.7vw, 34px);
-  line-height: 1.16;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin: 0;
-  text-wrap: balance;
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(26px, 5vw, 39px);
+  line-height: 1.12; letter-spacing: -0.016em;
+  color: var(--ink); margin: 0; text-wrap: balance;
 }
 .pnia-lp .lp-h3{
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(20px, 3vw, 25px);
-  line-height: 1.28;
-  color: var(--ink);
-  margin: 0;
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(20px, 3vw, 26px);
+  line-height: 1.26; color: var(--ink); margin: 0;
 }
 .pnia-lp .lp-lead{
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(18px, 2.6vw, 21px);
-  line-height: 1.48;
-  color: var(--ink-2);
-  margin: 0;
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(18.5px, 2.6vw, 22px);
+  line-height: 1.5; color: var(--ink-2); margin: 0;
 }
-.pnia-lp p{ margin: 0 0 .95em; }
+.pnia-lp p{ margin: 0 0 1em; }
 .pnia-lp p:last-child{ margin-bottom: 0; }
 .pnia-lp .lp-p{ color: var(--ink-2); }
 .pnia-lp .lp-center{ text-align: center; }
 .pnia-lp strong{ color: var(--ink); font-weight: 700; }
-.pnia-lp .lp-accent{ color: var(--accent); font-weight: 700; }
+.pnia-lp .lp-accent{ color: var(--accent-2); font-weight: 700; }
 .pnia-lp em{ font-style: italic; }
-.pnia-lp .lp-emoji{ font-style: normal; font-family: var(--sans); }
 
 /* Section générique */
-.pnia-lp .lp-sec{ display: flex; flex-direction: column; gap: 18px; }
+.pnia-lp .lp-sec{ display: flex; flex-direction: column; gap: 20px; }
 .pnia-lp .lp-sec.lp-center{ align-items: center; }
-.pnia-lp .lp-sec.lp-center > *{ max-width: 100%; }
+.pnia-lp .lp-sec.lp-center .lp-eyebrow{ align-self: center; }
+.pnia-lp .lp-sec-head{ display: flex; flex-direction: column; gap: 14px; }
+.pnia-lp .lp-sec.lp-center .lp-sec-head{ align-items: center; text-align: center; }
 
 /* Filet décoratif « plan » */
-.pnia-lp .lp-rule{
-  display: flex; align-items: center; justify-content: center;
-  gap: 12px; color: var(--line-2);
-}
+.pnia-lp .lp-rule{ display: flex; align-items: center; justify-content: center; gap: 14px; color: var(--line-2); }
 .pnia-lp .lp-rule::before,
-.pnia-lp .lp-rule::after{ content:""; height:1px; width:min(90px,22vw); background: var(--line-2); }
-.pnia-lp .lp-rule i{ width:6px; height:6px; transform: rotate(45deg); background: var(--accent); opacity:.55; }
+.pnia-lp .lp-rule::after{ content:""; height:1px; width:min(120px,26vw); }
+.pnia-lp .lp-rule::before{ background: linear-gradient(90deg, transparent, var(--line-2)); }
+.pnia-lp .lp-rule::after{ background: linear-gradient(90deg, var(--line-2), transparent); }
+.pnia-lp .lp-rule i{ width:7px; height:7px; transform: rotate(45deg); background: var(--card-2); border:1.5px solid var(--accent); opacity:.7; }
 
 /* Icônes */
-.pnia-lp .lp-ic{ width: 1em; height: 1em; display: inline-block; vertical-align: -0.13em; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.pnia-lp .lp-ic{ width: 1em; height: 1em; display: inline-block; vertical-align: -0.13em; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ============================ BANDEAU ============================ */
 .pnia-lp .lp-banner{
-  background: var(--warn-soft);
-  border-bottom: 1px solid #f0cfc9;
-  color: var(--warn);
-  text-align: center;
-  padding: 11px 18px;
+  background: linear-gradient(180deg, #f7e7e3, #f4e0db);
+  border-bottom: 1px solid #ecccc4;
+  color: var(--warn); text-align: center;
+  padding: 12px 18px;
   font-size: clamp(11px, 2.4vw, 12.5px);
-  font-weight: 700;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-  line-height: 1.4;
+  font-weight: 700; letter-spacing: .09em; text-transform: uppercase; line-height: 1.4;
 }
 
 /* ============================ EN-TÊTE / LOGO ============================ */
-.pnia-lp .lp-top{ padding-top: 30px; }
+.pnia-lp .lp-top{ padding-top: 34px; }
 .pnia-lp .lp-brand{
-  display: inline-flex; align-items: center; gap: 11px;
-  padding: 9px 16px 9px 12px;
-  border: 1px solid var(--line-2);
-  border-radius: 12px;
-  background: var(--card);
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 10px 18px 10px 13px;
+  border: 1px solid var(--line-2); border-radius: 14px;
+  background: var(--card-2); box-shadow: var(--sh-1);
 }
-.pnia-lp .lp-brand svg{ width: 30px; height: 30px; display: block; }
+.pnia-lp .lp-brand svg{ width: 32px; height: 32px; display: block; }
 .pnia-lp .lp-brand .wm{ display: flex; flex-direction: column; line-height: 1; text-align: left; }
-.pnia-lp .lp-brand .wm b{ font-family: var(--sans); font-weight: 700; font-size: 15px; letter-spacing: .16em; color: var(--ink); }
-.pnia-lp .lp-brand .wm span{ font-family: var(--sans); font-weight: 600; font-size: 9.5px; letter-spacing: .22em; color: var(--accent); margin-top: 4px; text-transform: uppercase; }
+.pnia-lp .lp-brand .wm b{ font-family: var(--sans); font-weight: 700; font-size: 15px; letter-spacing: .18em; color: var(--ink); }
+.pnia-lp .lp-brand .wm span{ font-family: var(--sans); font-weight: 600; font-size: 9.5px; letter-spacing: .24em; color: var(--accent-2); margin-top: 5px; text-transform: uppercase; }
 
 /* Hero */
-.pnia-lp .lp-hero{ text-align: center; padding-top: 30px; display:flex; flex-direction:column; gap: 22px; align-items:center; }
+.pnia-lp .lp-hero{ position: relative; text-align: center; padding-top: 34px; display:flex; flex-direction:column; gap: 26px; align-items:center; }
+.pnia-lp .lp-hero::before{
+  content:""; position: absolute; left: 50%; top: -30px; transform: translateX(-50%);
+  width: min(760px, 116%); height: 560px; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(34,63,115,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34,63,115,.05) 1px, transparent 1px);
+  background-size: 38px 38px;
+  -webkit-mask-image: radial-gradient(58% 52% at 50% 34%, #000 0%, transparent 72%);
+          mask-image: radial-gradient(58% 52% at 50% 34%, #000 0%, transparent 72%);
+}
+.pnia-lp .lp-hero > *{ position: relative; z-index: 1; }
 .pnia-lp .lp-hero .lp-h1{ max-width: 15ch; }
-.pnia-lp .lp-hero .lp-lead{ max-width: 54ch; }
+.pnia-lp .lp-hero .lp-lead{ max-width: 55ch; }
 
 /* Encart « Avec Local Partner » */
 .pnia-lp .lp-promise{
-  border: 1px solid var(--line);
-  border-left: 4px solid var(--accent);
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 20px 22px;
-  max-width: 58ch;
-  text-align: left;
+  position: relative;
+  border: 1px solid var(--line); border-radius: 16px;
+  background: linear-gradient(180deg, var(--card-2), var(--card));
+  padding: 26px 28px; max-width: 60ch; text-align: left;
+  box-shadow: var(--sh-2);
 }
-.pnia-lp .lp-promise .lp-h3{ font-weight: 500; }
+.pnia-lp .lp-promise::before{
+  content:""; position:absolute; left:0; top:18px; bottom:18px; width:4px; border-radius: 4px;
+  background: linear-gradient(180deg, var(--accent-2), var(--accent));
+}
+.pnia-lp .lp-promise .lp-h3{ font-weight: 500; padding-left: 8px; }
 
-/* Les 3 « Sans… » */
-.pnia-lp .lp-sans{ display: flex; flex-direction: column; gap: 10px; align-items: center; }
-.pnia-lp .lp-sans-item{ display: inline-flex; align-items: center; gap: 10px; font-weight: 500; color: var(--ink-2); font-size: 16px; }
-.pnia-lp .lp-sans-item .lp-ic{ color: var(--warn); font-size: 19px; flex: none; }
+/* Les 3 « Sans… » — rangée technique */
+.pnia-lp .lp-sans{ display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.pnia-lp .lp-sans-item{ display: inline-flex; align-items: center; gap: 11px; font-weight: 500; color: var(--ink-2); font-size: 16px; }
+.pnia-lp .lp-sans-item .lp-ic{ color: var(--warn); font-size: 20px; flex: none; opacity: .85; }
 
 /* ============================ VIDÉO ============================ */
 .pnia-lp .lp-pointer{
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(20px, 3.2vw, 26px);
-  color: var(--ink);
-  text-align: center;
-  margin: 0;
-  line-height: 1.25;
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(21px, 3.2vw, 27px); color: var(--ink);
+  text-align: center; margin: 0; line-height: 1.24;
 }
+.pnia-lp .lp-video-wrap{ position: relative; padding: 8px; border-radius: 22px;
+  background: linear-gradient(180deg, rgba(45,83,153,.14), rgba(20,24,31,.05)); box-shadow: var(--sh-3); }
 .pnia-lp .lp-video{
-  position: relative;
-  aspect-ratio: 16 / 9;
-  border-radius: 14px;
-  overflow: hidden;
-  background:
-    radial-gradient(120% 120% at 50% 0%, #223049 0%, #141a26 55%, #0e131c 100%);
-  border: 1px solid #26303f;
-  box-shadow: 0 24px 50px -30px rgba(20,26,38,.7);
-  display: grid; place-items: center;
-  text-align: center;
-  padding: 22px;
+  position: relative; aspect-ratio: 16 / 9; border-radius: 15px; overflow: hidden;
+  background: radial-gradient(120% 130% at 50% 0%, #2a3a55 0%, #16202f 55%, #0d131d 100%);
+  border: 1px solid #2a3547; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; padding: 22px;
 }
 .pnia-lp .lp-video::after{
   content:""; position:absolute; inset:0;
   background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size: 34px 34px;
-  mask-image: radial-gradient(120% 120% at 50% 40%, #000 30%, transparent 75%);
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 36px 36px;
+  -webkit-mask-image: radial-gradient(120% 120% at 50% 42%, #000 26%, transparent 74%);
+          mask-image: radial-gradient(120% 120% at 50% 42%, #000 26%, transparent 74%);
   pointer-events: none;
 }
 .pnia-lp .lp-video .play{
-  position: relative; z-index: 1;
-  width: 74px; height: 74px; border-radius: 50%;
-  background: var(--action); color: #fff;
+  position: relative; z-index: 1; flex: none; width: 78px; height: 78px; border-radius: 50%;
+  background: linear-gradient(180deg, var(--amber-2), var(--amber-dark)); color: #fff;
   display: grid; place-items: center;
-  box-shadow: 0 10px 26px -6px rgba(232,114,15,.6);
+  box-shadow: 0 12px 30px -6px rgba(230,126,20,.6), inset 0 1px 0 rgba(255,255,255,.35);
 }
+.pnia-lp .lp-video .play::before{ content:""; position:absolute; inset:-9px; border-radius:50%; border:1.5px solid rgba(240,145,42,.4); }
 .pnia-lp .lp-video .play .lp-ic{ width: 30px; height: 30px; fill: #fff; stroke: none; margin-left: 4px; }
-.pnia-lp .lp-video .cap{ position:relative; z-index:1; margin-top: 14px; color:#aeb8c9; font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; max-width: 90%; }
-/* Astuce : masquez l'habillage ci-dessus en insérant votre <iframe> à la place. */
+.pnia-lp .lp-video .cap{ position:relative; z-index:1; margin-top: 16px; color:#a9b4c6; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
 
 /* ============================ AVANTAGES ============================ */
-.pnia-lp .lp-benefits{ display: flex; flex-direction: column; gap: 4px; }
+.pnia-lp .lp-benefits{
+  display: flex; flex-direction: column;
+  background: linear-gradient(180deg, var(--card-2), var(--card));
+  border: 1px solid var(--line); border-radius: 18px;
+  padding: 8px clamp(18px, 3.5vw, 30px); box-shadow: var(--sh-2);
+}
 .pnia-lp .lp-benefit{
-  display: grid;
-  grid-template-columns: 30px 1fr;
-  gap: 15px;
-  padding: 20px 0;
-  border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: 34px 1fr; gap: 17px;
+  padding: 22px 6px; border-top: 1px solid var(--hair);
 }
-.pnia-lp .lp-benefit:first-child{ border-top: none; padding-top: 4px; }
+.pnia-lp .lp-benefit:first-child{ border-top: none; }
 .pnia-lp .lp-check{
-  width: 26px; height: 26px; border-radius: 50%;
-  background: var(--ok-soft); color: var(--ok);
-  display: grid; place-items: center; margin-top: 2px;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: radial-gradient(120% 120% at 30% 20%, var(--ok-2), var(--ok));
+  color: #fff; display: grid; place-items: center; margin-top: 2px;
+  box-shadow: 0 4px 10px -3px rgba(44,138,83,.5), inset 0 1px 0 rgba(255,255,255,.4);
 }
-.pnia-lp .lp-check .lp-ic{ width: 15px; height: 15px; stroke-width: 2.4; }
-.pnia-lp .lp-benefit-t{ font-family: var(--serif); font-weight: 600; font-size: 19px; line-height: 1.3; color: var(--ink); margin: 0 0 5px; }
-.pnia-lp .lp-benefit-d{ font-size: 16px; color: var(--muted); margin: 0; line-height: 1.55; }
+.pnia-lp .lp-check .lp-ic{ width: 16px; height: 16px; stroke-width: 2.6; }
+.pnia-lp .lp-benefit-t{ font-family: var(--serif); font-weight: 600; font-size: 19.5px; line-height: 1.3; color: var(--ink); margin: 0 0 6px; }
+.pnia-lp .lp-benefit-d{ font-size: 16px; color: var(--muted); margin: 0; line-height: 1.56; }
 .pnia-lp .lp-benefit-d q{ quotes: none; color: var(--ink-2); font-style: italic; }
 
 /* ============================ CARTE CTA ============================ */
 .pnia-lp .lp-ctacard{
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-top: 4px solid var(--action);
-  border-radius: 14px;
-  padding: clamp(24px, 4.5vw, 38px);
-  text-align: center;
-  display: flex; flex-direction: column; align-items: center; gap: 16px;
-  box-shadow: 0 20px 44px -34px rgba(30,35,43,.5);
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(120% 120% at 50% -20%, rgba(230,126,20,.10), transparent 55%),
+    linear-gradient(180deg, var(--card-2), var(--card));
+  border: 1px solid var(--amber-line); border-radius: 20px;
+  padding: clamp(28px, 5vw, 46px); text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+  box-shadow: var(--sh-3);
+}
+.pnia-lp .lp-ctacard::before{
+  content:""; position:absolute; left:0; right:0; top:0; height:5px;
+  background: linear-gradient(90deg, var(--amber-2), var(--amber), var(--amber-dark));
+}
+.pnia-lp .lp-kicker{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--amber-dark);
+  background: var(--amber-soft); border: 1px solid var(--amber-line);
+  padding: 6px 13px; border-radius: 999px;
 }
 .pnia-lp .lp-ctacard .lp-lead{ max-width: 52ch; }
-.pnia-lp .lp-mini{
-  list-style: none; margin: 0; padding: 0;
-  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 8px 10px;
-  max-width: 50ch;
-}
+.pnia-lp .lp-mini{ list-style: none; margin: 0; padding: 0; display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 9px 11px; max-width: 52ch; }
 .pnia-lp .lp-mini li{
-  display: inline-flex; align-items: center; gap: 7px;
-  background: var(--tint); border: 1px solid var(--line);
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--card-2); border: 1px solid var(--line);
   color: var(--ink-2); font-size: 14px; font-weight: 500;
-  padding: 6px 12px; border-radius: 999px;
+  padding: 7px 14px; border-radius: 999px; box-shadow: var(--sh-1);
 }
-.pnia-lp .lp-mini li::before{ content:""; width:5px; height:5px; border-radius:50%; background: var(--accent); flex:none; }
+.pnia-lp .lp-mini li::before{ content:""; width:6px; height:6px; border-radius:50%; background: var(--accent-2); flex:none; }
 
 /* Bouton */
 .pnia-lp .lp-btn{
-  -webkit-appearance:none; appearance:none; cursor:pointer;
-  display: inline-flex; align-items: center; justify-content:center; gap: 11px;
-  background: var(--action); color: #fff !important;
-  font-family: var(--sans); font-weight: 700; font-size: 16px;
-  letter-spacing: .01em; text-decoration: none;
-  padding: 17px 30px; border: none; border-radius: 7px;
-  box-shadow: 0 12px 24px -10px rgba(232,114,15,.65);
-  transition: transform .16s ease, background .16s ease, box-shadow .16s ease;
+  -webkit-appearance:none; appearance:none; cursor:pointer; position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content:center; gap: 12px;
+  background: linear-gradient(180deg, var(--amber-2), var(--amber-dark)); color: #fff !important;
+  font-family: var(--sans); font-weight: 700; font-size: 16.5px; letter-spacing: .01em; text-decoration: none;
+  padding: 18px 34px; border: none; border-radius: 10px;
+  box-shadow: var(--sh-amber), inset 0 1px 0 rgba(255,255,255,.28);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
   text-align:center; line-height: 1.2;
 }
-.pnia-lp .lp-btn .lp-ic{ width: 18px; height: 18px; stroke-width: 2.2; }
-.pnia-lp .lp-btn:hover{ background: var(--action-dark); transform: translateY(-2px); box-shadow: 0 16px 30px -10px rgba(200,95,8,.6); }
-.pnia-lp .lp-btn:focus-visible{ outline: 3px solid var(--accent); outline-offset: 3px; }
-.pnia-lp .lp-btn.wide{ width: 100%; max-width: 420px; }
+.pnia-lp .lp-btn .lp-ic{ width: 18px; height: 18px; stroke-width: 2.3; transition: transform .18s ease; }
+.pnia-lp .lp-btn::after{
+  content:""; position:absolute; top:0; left:-70%; width:45%; height:100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
+  transform: skewX(-20deg); transition: left .6s ease;
+}
+.pnia-lp .lp-btn:hover{ transform: translateY(-2px); filter: brightness(1.03); box-shadow: 0 16px 32px -8px rgba(196,97,10,.55), inset 0 1px 0 rgba(255,255,255,.28); }
+.pnia-lp .lp-btn:hover .lp-ic{ transform: translateX(3px); }
+.pnia-lp .lp-btn:hover::after{ left: 130%; }
+.pnia-lp .lp-btn:focus-visible{ outline: 3px solid var(--accent-2); outline-offset: 3px; }
+.pnia-lp .lp-btn.wide{ width: 100%; max-width: 440px; }
 
 /* ============================ GRILLE « C'EST POUR VOUS SI » ============================ */
-.pnia-lp .lp-grid{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.pnia-lp .lp-grid{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 .pnia-lp .lp-reason{
-  background: var(--card); border: 1px solid var(--line);
-  border-radius: 14px; padding: 22px 22px 24px;
-  display: flex; flex-direction: column; gap: 12px;
+  position: relative; background: linear-gradient(180deg, var(--card-2), var(--card));
+  border: 1px solid var(--line); border-radius: 16px; padding: 26px 24px 26px;
+  display: flex; flex-direction: column; gap: 13px; box-shadow: var(--sh-1);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
+.pnia-lp .lp-reason:hover{ transform: translateY(-3px); box-shadow: var(--sh-2); border-color: var(--line-2); }
+.pnia-lp .lp-reason .ridx{ position:absolute; top:16px; right:18px; font-family: var(--mono); font-size: 12px; color: var(--line-2); letter-spacing: .1em; }
 .pnia-lp .lp-reason .ricon{
-  width: 44px; height: 44px; border-radius: 11px;
-  background: var(--accent-soft); color: var(--accent);
+  width: 50px; height: 50px; border-radius: 13px;
+  background: linear-gradient(180deg, var(--accent-soft), #dde5f3); color: var(--accent);
   display: grid; place-items: center; flex: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 4px 10px -6px rgba(34,63,115,.4);
 }
-.pnia-lp .lp-reason .ricon .lp-ic{ width: 24px; height: 24px; }
-.pnia-lp .lp-reason h3{
-  font-family: var(--serif); font-weight: 600; font-size: 19px; line-height: 1.26;
-  color: var(--accent-ink); margin: 0;
-}
-.pnia-lp .lp-reason p{ font-size: 15.5px; color: var(--muted); margin: 0; line-height: 1.55; }
-.pnia-lp .lp-reason .qmark{ display:block; font-style: italic; color: var(--ink-2); margin-top: 8px; }
-.pnia-lp .lp-chips{ display: flex; flex-wrap: wrap; gap: 7px; }
+.pnia-lp .lp-reason .ricon .lp-ic{ width: 26px; height: 26px; }
+.pnia-lp .lp-reason h3{ font-family: var(--serif); font-weight: 600; font-size: 20px; line-height: 1.24; color: var(--accent-ink); margin: 2px 0 0; }
+.pnia-lp .lp-reason p{ font-size: 15.5px; color: var(--muted); margin: 0; line-height: 1.56; }
+.pnia-lp .lp-reason .qmark{ display:block; font-style: italic; color: var(--ink-2); margin-top: 9px; }
+.pnia-lp .lp-chips{ display: flex; flex-wrap: wrap; gap: 8px; }
 .pnia-lp .lp-chips span{
   font-family: var(--mono); font-size: 12.5px; font-weight: 500;
-  background: var(--tint); border: 1px solid var(--line);
-  color: var(--ink-2); padding: 4px 9px; border-radius: 6px;
+  background: var(--card-2); border: 1px solid var(--line); color: var(--ink-2);
+  padding: 5px 10px; border-radius: 7px; box-shadow: var(--sh-1);
 }
-.pnia-lp .lp-plus{ list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
-.pnia-lp .lp-plus li{ position: relative; padding-left: 16px; font-size: 15px; color: var(--muted); }
-.pnia-lp .lp-plus li::before{ content:"+"; position: absolute; left: 0; color: var(--action); font-weight: 700; }
+.pnia-lp .lp-plus{ list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.pnia-lp .lp-plus li{ position: relative; padding-left: 18px; font-size: 15px; color: var(--muted); }
+.pnia-lp .lp-plus li::before{ content:"+"; position: absolute; left: 0; color: var(--amber); font-weight: 700; }
 
-/* ============================ DÉMO (message → fiche → statuts) ============================ */
-.pnia-lp .lp-demo{ display: flex; flex-direction: column; gap: 20px; }
-.pnia-lp .lp-steps{ display: flex; flex-direction: column; gap: 14px; }
+/* ============================ DÉMO ============================ */
+.pnia-lp .lp-demo{ display: flex; flex-direction: column; gap: 22px; }
+.pnia-lp .lp-steps{ display: flex; flex-direction: column; gap: 16px; }
 
 .pnia-lp .lp-msg{
-  align-self: flex-start; max-width: 88%;
-  background: var(--card); border: 1px solid var(--line);
-  border-radius: 4px 16px 16px 16px;
-  padding: 15px 18px;
-  box-shadow: 0 10px 26px -20px rgba(30,35,43,.5);
+  align-self: flex-start; max-width: 90%;
+  background: linear-gradient(180deg, var(--card-2), var(--card));
+  border: 1px solid var(--line); border-radius: 5px 18px 18px 18px;
+  padding: 16px 20px; box-shadow: var(--sh-2);
 }
-.pnia-lp .lp-msg .who{ display:flex; align-items:center; gap:8px; font-family: var(--mono); font-size: 11px; letter-spacing:.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-.pnia-lp .lp-msg .who .dot{ width:7px; height:7px; border-radius:50%; background: var(--ok); flex:none; }
-.pnia-lp .lp-msg .txt{ font-family: var(--serif); font-style: italic; font-size: 18px; line-height: 1.4; color: var(--ink); }
+.pnia-lp .lp-msg .who{ display:flex; align-items:center; gap:9px; font-family: var(--mono); font-size: 11px; letter-spacing:.13em; text-transform: uppercase; color: var(--muted); margin-bottom: 9px; }
+.pnia-lp .lp-msg .who .dot{ width:8px; height:8px; border-radius:50%; background: var(--ok-2); flex:none; box-shadow: 0 0 0 3px rgba(55,168,102,.18); }
+.pnia-lp .lp-msg .txt{ font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.4; color: var(--ink); }
 
-.pnia-lp .lp-ask{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.pnia-lp .lp-ask li{ position: relative; padding-left: 22px; color: var(--ink-2); }
-.pnia-lp .lp-ask li::before{ content:""; position:absolute; left:2px; top:.62em; width:8px; height:8px; border:1.6px solid var(--accent); border-radius:2px; }
+.pnia-lp .lp-ask{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.pnia-lp .lp-ask li{ position: relative; padding-left: 24px; color: var(--ink-2); }
+.pnia-lp .lp-ask li::before{ content:""; position:absolute; left:2px; top:.6em; width:9px; height:9px; border:1.7px solid var(--accent-2); border-radius:2px; }
 
-/* Fiche client (relevé structuré) */
+/* Fiche client */
 .pnia-lp .lp-fiche{
-  background: var(--card); border: 1px solid var(--line-2);
-  border-radius: 12px; overflow: hidden;
-  box-shadow: 0 18px 40px -28px rgba(30,35,43,.6);
+  position: relative; background: var(--card-2);
+  border: 1px solid var(--line-2); border-radius: 14px; overflow: hidden;
+  box-shadow: var(--sh-3);
 }
 .pnia-lp .lp-fiche .fhead{
   display: flex; align-items: center; justify-content: space-between;
-  background: var(--ink); color: #eef1f6;
-  padding: 11px 16px;
-  font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  background: linear-gradient(180deg, #1b212b, #12171f); color: #eef1f6;
+  padding: 12px 18px; font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
 }
-.pnia-lp .lp-fiche .fhead .lights{ display:inline-flex; gap:5px; }
-.pnia-lp .lp-fiche .fhead .lights i{ width:9px; height:9px; border-radius:50%; background: rgba(255,255,255,.28); }
-.pnia-lp .lp-fiche .fhead .lights i:first-child{ background: var(--action); }
-.pnia-lp .lp-fiche .fbody{ padding: 8px 18px 16px; }
-.pnia-lp .lp-fiche .fname{ font-family: var(--serif); font-weight: 600; font-size: 22px; color: var(--ink); padding: 12px 0; border-bottom: 1px dashed var(--line-2); }
-.pnia-lp .lp-fiche .frow{ display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px dashed var(--line); font-family: var(--mono); font-size: 15px; color: var(--ink-2); }
+.pnia-lp .lp-fiche .fhead .lights{ display:inline-flex; gap:6px; }
+.pnia-lp .lp-fiche .fhead .lights i{ width:9px; height:9px; border-radius:50%; background: rgba(255,255,255,.26); }
+.pnia-lp .lp-fiche .fhead .lights i:first-child{ background: var(--amber); }
+.pnia-lp .lp-fiche .fbody{ padding: 6px 20px 18px; }
+.pnia-lp .lp-fiche .fname{ display:flex; align-items:center; gap:12px; font-family: var(--serif); font-weight: 600; font-size: 23px; color: var(--ink); padding: 15px 0; border-bottom: 1px dashed var(--line-2); }
+.pnia-lp .lp-fiche .fname .av{ width:34px; height:34px; border-radius:50%; background: linear-gradient(180deg,var(--accent-2),var(--accent)); color:#fff; display:grid; place-items:center; font-family:var(--sans); font-weight:700; font-size:13px; letter-spacing:.02em; flex:none; }
+.pnia-lp .lp-fiche .frow{ display: flex; align-items: center; gap: 13px; padding: 12px 0; border-bottom: 1px dashed var(--line); font-family: var(--mono); font-size: 15px; color: var(--ink-2); }
 .pnia-lp .lp-fiche .frow:last-child{ border-bottom: none; }
 .pnia-lp .lp-fiche .frow .ico{ font-family: var(--sans); font-size: 17px; width: 22px; text-align: center; flex: none; }
-.pnia-lp .lp-demo .caption{ font-size: 16px; color: var(--muted); text-align: center; max-width: 52ch; margin: 4px auto 0; }
+.pnia-lp .lp-fiche .frow .lbl{ color: var(--muted); font-size: 10.5px; letter-spacing:.14em; text-transform: uppercase; width: 74px; flex:none; }
+.pnia-lp .lp-demo .caption{ font-size: 16px; color: var(--muted); text-align: center; max-width: 54ch; margin: 4px auto 0; }
 
 /* Statuts de devis */
-.pnia-lp .lp-status{ display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.pnia-lp .lp-status{ display: flex; flex-wrap: wrap; gap: 11px; justify-content: center; }
 .pnia-lp .lp-pill{
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-flex; align-items: center; gap: 9px;
   font-family: var(--mono); font-weight: 500; font-size: 13.5px;
-  padding: 8px 14px; border-radius: 999px; border: 1px solid;
+  padding: 9px 15px; border-radius: 999px; border: 1px solid; box-shadow: var(--sh-1);
 }
 .pnia-lp .lp-pill .d{ width: 8px; height: 8px; border-radius: 50%; flex: none; }
-.pnia-lp .lp-pill.s-sent{ color: var(--accent-ink); background: var(--accent-soft); border-color: #c6d7f1; }
-.pnia-lp .lp-pill.s-sent .d{ background: var(--accent); }
-.pnia-lp .lp-pill.s-call{ color: var(--action-dark); background: var(--action-soft); border-color: #f3d3aa; }
-.pnia-lp .lp-pill.s-call .d{ background: var(--action); }
+.pnia-lp .lp-pill.s-sent{ color: var(--accent-ink); background: var(--accent-soft); border-color: #c4d5f0; }
+.pnia-lp .lp-pill.s-sent .d{ background: var(--accent-2); }
+.pnia-lp .lp-pill.s-call{ color: var(--amber-dark); background: var(--amber-soft); border-color: var(--amber-line); }
+.pnia-lp .lp-pill.s-call .d{ background: var(--amber); }
 .pnia-lp .lp-pill.s-wait{ color: var(--muted); background: var(--paper-2); border-color: var(--line-2); }
 .pnia-lp .lp-pill.s-wait .d{ background: #9aa1ac; }
-.pnia-lp .lp-pill.s-ok{ color: #1e7a44; background: var(--ok-soft); border-color: #bfe3cd; }
-.pnia-lp .lp-pill.s-ok .d{ background: var(--ok); }
-.pnia-lp .lp-pill.s-no{ color: var(--warn); background: var(--warn-soft); border-color: #f0cbc4; }
+.pnia-lp .lp-pill.s-ok{ color: #1f7a48; background: var(--ok-soft); border-color: #bde0cc; }
+.pnia-lp .lp-pill.s-ok .d{ background: var(--ok-2); }
+.pnia-lp .lp-pill.s-no{ color: var(--warn); background: var(--warn-soft); border-color: #eecbc4; }
 .pnia-lp .lp-pill.s-no .d{ background: var(--warn); }
 
 /* Les 3 grands mots */
-.pnia-lp .lp-big3{ display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
-.pnia-lp .lp-big3 span{
-  font-family: var(--serif); font-weight: 600;
-  font-size: clamp(30px, 7vw, 46px); line-height: 1.1; color: var(--ink);
-  letter-spacing: -0.015em;
-}
+.pnia-lp .lp-big3{ display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; padding: 8px 0; }
+.pnia-lp .lp-big3 span{ font-family: var(--serif); font-weight: 600; font-size: clamp(32px, 7.2vw, 50px); line-height: 1.08; color: var(--ink); letter-spacing: -0.02em; }
 .pnia-lp .lp-big3 span:nth-child(2){ color: var(--accent-ink); }
-.pnia-lp .lp-big3 span:nth-child(3){ color: var(--action); }
+.pnia-lp .lp-big3 span:nth-child(3){ color: var(--amber-dark); }
 
 /* Listes courantes */
-.pnia-lp .lp-ul{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
-.pnia-lp .lp-ul li{ position: relative; padding-left: 20px; color: var(--ink-2); }
-.pnia-lp .lp-ul li::before{ content:""; position:absolute; left:0; top:.65em; width:9px; height:2px; background: var(--accent); }
-.pnia-lp .lp-ul.two{ display: grid; grid-template-columns: repeat(2,1fr); gap: 9px 24px; }
+.pnia-lp .lp-ul{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.pnia-lp .lp-ul li{ position: relative; padding-left: 22px; color: var(--ink-2); }
+.pnia-lp .lp-ul li::before{ content:""; position:absolute; left:0; top:.62em; width:10px; height:2px; background: var(--accent-2); }
+.pnia-lp .lp-ul.two{ display: grid; grid-template-columns: repeat(2,1fr); gap: 10px 26px; }
 
-/* Ligne d'objets emoji (téléphone / mémoire / notes) */
-.pnia-lp .lp-tools{ display: flex; flex-wrap: wrap; gap: 10px; }
+/* Ligne d'objets emoji */
+.pnia-lp .lp-tools{ display: flex; flex-wrap: wrap; gap: 11px; }
 .pnia-lp .lp-tools span{
-  display: inline-flex; align-items: center; gap: 9px;
-  background: var(--card); border: 1px solid var(--line);
-  padding: 9px 15px; border-radius: 999px; color: var(--ink-2); font-weight: 500; font-size: 15px;
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(180deg, var(--card-2), var(--card)); border: 1px solid var(--line);
+  padding: 10px 17px; border-radius: 999px; color: var(--ink-2); font-weight: 500; font-size: 15px; box-shadow: var(--sh-1);
 }
-.pnia-lp .lp-tools span b{ font-family: var(--sans); font-size: 17px; font-weight: 400; }
+.pnia-lp .lp-tools span b{ font-family: var(--sans); font-size: 18px; font-weight: 400; }
 
 /* ============================ 5 QUESTIONS ============================ */
-.pnia-lp .lp-questions{ display: flex; flex-direction: column; gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--card); }
-.pnia-lp .lp-q{ display: grid; grid-template-columns: 52px 1fr; gap: 6px; align-items: baseline; padding: 18px 22px; border-top: 1px solid var(--line); }
+.pnia-lp .lp-questions{ display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: linear-gradient(180deg, var(--card-2), var(--card)); box-shadow: var(--sh-2); }
+.pnia-lp .lp-q{ display: grid; grid-template-columns: 58px 1fr; gap: 8px; align-items: baseline; padding: 20px 26px; border-top: 1px solid var(--hair); transition: background .18s ease; }
 .pnia-lp .lp-q:first-child{ border-top: none; }
-.pnia-lp .lp-q .num{ font-family: var(--serif); font-weight: 600; font-size: 26px; color: var(--accent); line-height: 1; }
-.pnia-lp .lp-q .qt{ font-size: 17px; color: var(--ink); font-weight: 500; line-height: 1.4; }
+.pnia-lp .lp-q:hover{ background: rgba(45,83,153,.04); }
+.pnia-lp .lp-q .num{ font-family: var(--serif); font-weight: 600; font-size: 30px; color: var(--accent-2); line-height: 1; letter-spacing: -0.02em; }
+.pnia-lp .lp-q .qt{ font-size: 17.5px; color: var(--ink); font-weight: 500; line-height: 1.42; }
 
 /* ============================ FAQ ============================ */
-.pnia-lp .lp-faq{ display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--line); }
-.pnia-lp .lp-acc{ border-bottom: 1px solid var(--line); }
+.pnia-lp .lp-faq{ display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--card-2); box-shadow: var(--sh-2); }
+.pnia-lp .lp-acc{ border-top: 1px solid var(--hair); }
+.pnia-lp .lp-acc:first-child{ border-top: none; }
 .pnia-lp .lp-acc summary{
-  list-style: none; cursor: pointer;
-  display: flex; align-items: center; gap: 14px;
-  padding: 18px 6px;
-  font-family: var(--serif); font-weight: 600; font-size: clamp(17px, 2.6vw, 20px);
-  color: var(--ink);
+  list-style: none; cursor: pointer; display: flex; align-items: center; gap: 15px;
+  padding: 21px clamp(18px, 3vw, 26px);
+  font-family: var(--serif); font-weight: 600; font-size: clamp(17px, 2.6vw, 20px); color: var(--ink);
+  transition: background .18s ease;
 }
+.pnia-lp .lp-acc summary:hover{ background: rgba(45,83,153,.03); }
 .pnia-lp .lp-acc summary::-webkit-details-marker{ display: none; }
-.pnia-lp .lp-acc summary .qm{ color: var(--accent); font-family: var(--sans); font-weight: 700; flex: none; }
-.pnia-lp .lp-acc summary .plus{ margin-left: auto; flex: none; width: 22px; height: 22px; position: relative; transition: transform .25s ease; color: var(--muted); }
+.pnia-lp .lp-acc summary .qm{ color: var(--accent-2); font-family: var(--sans); font-weight: 700; flex: none; font-size: 18px; }
+.pnia-lp .lp-acc summary .plus{ margin-left: auto; flex: none; width: 22px; height: 22px; position: relative; transition: transform .28s ease; color: var(--muted); }
 .pnia-lp .lp-acc summary .plus::before,
 .pnia-lp .lp-acc summary .plus::after{ content:""; position:absolute; background: currentColor; border-radius: 2px; }
 .pnia-lp .lp-acc summary .plus::before{ top:50%; left:2px; right:2px; height:2px; transform: translateY(-50%); }
-.pnia-lp .lp-acc summary .plus::after{ left:50%; top:2px; bottom:2px; width:2px; transform: translateX(-50%); transition: opacity .25s ease; }
+.pnia-lp .lp-acc summary .plus::after{ left:50%; top:2px; bottom:2px; width:2px; transform: translateX(-50%); transition: opacity .28s ease; }
+.pnia-lp .lp-acc[open] summary .plus{ transform: rotate(90deg); color: var(--amber-dark); }
 .pnia-lp .lp-acc[open] summary .plus::after{ opacity: 0; }
-.pnia-lp .lp-acc[open] summary .plus{ color: var(--action); }
-.pnia-lp .lp-acc summary:focus-visible{ outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
-.pnia-lp .lp-acc .ans{ padding: 0 6px 20px; color: var(--muted); font-size: 16px; line-height: 1.6; }
+.pnia-lp .lp-acc summary:focus-visible{ outline: 3px solid var(--accent-2); outline-offset: -3px; }
+.pnia-lp .lp-acc .ans{ padding: 0 clamp(18px, 3vw, 26px) 22px calc(clamp(18px, 3vw, 26px) + 33px); color: var(--muted); font-size: 16px; line-height: 1.62; }
 .pnia-lp .lp-acc .ans p{ margin: 0 0 .6em; }
 
 /* ============================ FINAL ============================ */
 .pnia-lp .lp-final{
-  background: var(--ink);
-  color: #dfe4ec;
-  border-radius: 18px;
-  padding: clamp(30px, 6vw, 52px) clamp(22px, 5vw, 44px);
-  text-align: center;
-  display: flex; flex-direction: column; align-items: center; gap: 20px;
-  position: relative; overflow: hidden;
+  position: relative; overflow: hidden; border-radius: 22px;
+  background: radial-gradient(130% 100% at 50% 0%, #1e2735 0%, #141a24 45%, #0f141c 100%);
+  color: #dfe4ec; padding: clamp(34px, 6vw, 60px) clamp(24px, 5vw, 50px);
+  text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px;
+  box-shadow: var(--sh-3);
 }
 .pnia-lp .lp-final::before{
   content:""; position:absolute; inset:0;
   background-image:
-    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
-  background-size: 40px 40px;
-  mask-image: radial-gradient(120% 90% at 50% 0%, #000 20%, transparent 70%);
+    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 18%, transparent 68%);
+          mask-image: radial-gradient(120% 90% at 50% 0%, #000 18%, transparent 68%);
   pointer-events: none;
+}
+.pnia-lp .lp-final::after{
+  content:""; position:absolute; left:50%; top:-40%; width:70%; height:80%; transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(230,126,20,.16), transparent 62%); pointer-events:none;
 }
 .pnia-lp .lp-final > *{ position: relative; z-index: 1; }
 .pnia-lp .lp-final .lp-h2{ color: #fff; }
-.pnia-lp .lp-final .flist{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; text-align: left; max-width: 44ch; width: 100%; }
-.pnia-lp .lp-final .flist li{ display: flex; align-items: flex-start; gap: 12px; color: #cfd6e1; }
-.pnia-lp .lp-final .flist .lp-check{ background: rgba(46,158,91,.18); color: #6ee69f; }
-.pnia-lp .lp-final .boss{ font-family: var(--serif); font-weight: 600; font-size: clamp(26px, 5.4vw, 38px); color: #fff; line-height: 1.12; }
-.pnia-lp .lp-final .boss-sub{ font-family: var(--serif); font-size: clamp(18px, 3vw, 22px); color: #aeb8c9; font-weight: 400; max-width: 40ch; }
-.pnia-lp .lp-final .fbrand{ display:flex; align-items:center; gap:10px; color:#fff; }
-.pnia-lp .lp-final .fbrand svg{ width: 26px; height: 26px; }
-.pnia-lp .lp-final .fbrand b{ font-family: var(--sans); font-weight: 700; letter-spacing: .16em; font-size: 15px; }
-.pnia-lp .lp-final .fbrand span{ font-family: var(--sans); font-weight: 600; letter-spacing: .18em; font-size: 11px; color: var(--action); }
-.pnia-lp .lp-final .flead{ color: #cfd6e1; font-family: var(--serif); font-size: clamp(17px, 2.6vw, 20px); line-height: 1.4; max-width: 46ch; }
+.pnia-lp .lp-final .flist{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 13px; text-align: left; max-width: 46ch; width: 100%; }
+.pnia-lp .lp-final .flist li{ display: flex; align-items: flex-start; gap: 13px; color: #d3dae5; }
+.pnia-lp .lp-final .flist .lp-check{ background: radial-gradient(120% 120% at 30% 20%, #47c47e, #2c8a53); box-shadow: 0 4px 10px -3px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.3); }
+.pnia-lp .lp-final .boss{ font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 5.6vw, 41px); color: #fff; line-height: 1.1; letter-spacing: -0.015em; }
+.pnia-lp .lp-final .boss-sub{ font-family: var(--serif); font-size: clamp(18px, 3vw, 22px); color: #a9b4c6; font-weight: 400; max-width: 42ch; }
+.pnia-lp .lp-final .fdiv{ width: 46px; height: 2px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); }
+.pnia-lp .lp-final .fbrand{ display:flex; align-items:center; gap:11px; color:#fff; }
+.pnia-lp .lp-final .fbrand svg{ width: 28px; height: 28px; }
+.pnia-lp .lp-final .fbrand b{ font-family: var(--sans); font-weight: 700; letter-spacing: .18em; font-size: 15px; }
+.pnia-lp .lp-final .fbrand span{ font-family: var(--sans); font-weight: 600; letter-spacing: .2em; font-size: 11px; color: var(--amber-2); }
+.pnia-lp .lp-final .flead{ color: #cdd5e1; font-family: var(--serif); font-size: clamp(17px, 2.6vw, 20px); line-height: 1.4; max-width: 48ch; }
 
 /* Pied */
-.pnia-lp .lp-foot{ text-align: center; color: var(--muted); font-size: 13px; padding: 4px 0 40px; }
-.pnia-lp .lp-foot b{ color: var(--ink-2); letter-spacing: .14em; font-weight: 700; }
+.pnia-lp .lp-foot{ text-align: center; color: var(--muted); font-size: 13px; padding: 6px 0 44px; letter-spacing: .02em; }
+.pnia-lp .lp-foot b{ color: var(--ink-2); letter-spacing: .16em; font-weight: 700; }
 
 /* ============================ RÉVÉLATION AU SCROLL ============================ */
-.pnia-lp.js .lp-reveal{ opacity: 0; transform: translateY(18px); }
-.pnia-lp.js .lp-reveal.is-in{ opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.pnia-lp.js .lp-reveal{ opacity: 0; transform: translateY(22px); }
+.pnia-lp.js .lp-reveal.is-in{ opacity: 1; transform: none; transition: opacity .8s ease, transform .8s cubic-bezier(.2,.75,.25,1); }
 @media (prefers-reduced-motion: reduce){
   .pnia-lp.js .lp-reveal{ opacity: 1 !important; transform: none !important; }
-  .pnia-lp *{ scroll-behavior: auto !important; }
+  .pnia-lp *{ transition: none !important; }
 }
 
 /* ============================ RESPONSIVE ============================ */
-@media (max-width: 560px){
+@media (max-width: 580px){
   .pnia-lp .lp-grid{ grid-template-columns: 1fr; }
   .pnia-lp .lp-ul.two{ grid-template-columns: 1fr; }
-  .pnia-lp .lp-benefit{ grid-template-columns: 26px 1fr; gap: 13px; }
-  .pnia-lp .lp-q{ grid-template-columns: 40px 1fr; padding: 16px 16px; }
+  .pnia-lp .lp-benefit{ grid-template-columns: 30px 1fr; gap: 14px; }
+  .pnia-lp .lp-q{ grid-template-columns: 46px 1fr; padding: 18px 18px; }
+  .pnia-lp .lp-fiche .frow .lbl{ display: none; }
 }
 </style>
 
 <div class="pnia-lp">
 
-  <!-- Sprite d'icônes (invisible) -->
+  <!-- Sprite d'icônes -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="pn-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
     <symbol id="pn-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="5.6" y1="5.6" x2="18.4" y2="18.4"/></symbol>
@@ -525,16 +559,17 @@
     <!-- LOGO -->
     <div class="lp-top lp-center lp-reveal">
       <span class="lp-brand">
-        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2.5" y="2.5" width="35" height="35" rx="9" fill="none" stroke="#2c519b" stroke-width="2"/><path d="M13 13 27 13 20 27Z" fill="none" stroke="#2c519b" stroke-width="1.8" stroke-linejoin="round"/><circle cx="13" cy="13" r="2.6" fill="#2c519b"/><circle cx="27" cy="13" r="2.6" fill="#2c519b"/><circle cx="20" cy="27" r="3" fill="#e8720f"/></svg>
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2.5" y="2.5" width="35" height="35" rx="9" fill="none" stroke="#223f73" stroke-width="2"/><path d="M13 13 27 13 20 27Z" fill="none" stroke="#223f73" stroke-width="1.8" stroke-linejoin="round"/><circle cx="13" cy="13" r="2.6" fill="#223f73"/><circle cx="27" cy="13" r="2.6" fill="#223f73"/><circle cx="20" cy="27" r="3" fill="#e67e14"/></svg>
         <span class="wm"><b>POLYNETIA</b><span>Local Partner</span></span>
       </span>
     </div>
 
     <!-- HERO -->
     <header class="lp-hero lp-reveal">
+      <span class="lp-eyebrow c">Gestion client · BTP · Tahiti</span>
       <h1 class="lp-h1">Vous êtes sur chantier.<br><span class="l2">Les clients, eux, continuent d’appeler.</span></h1>
       <p class="lp-lead">Découvrez comment mieux gérer vos demandes, vos rendez-vous et vos devis sans passer votre journée sur le téléphone… ni vos soirées à essayer de vous rappeler qui vous devez rappeler.</p>
-      <div class="lp-promise">
+      <div class="lp-promise pn-frame">
         <p class="lp-h3">Avec <span class="lp-accent">PolynetIA Local Partner</span>, vous gardez le contrôle sur vos clients et vos devis, même quand vous êtes occupé sur vos chantiers.</p>
       </div>
       <div class="lp-sans">
@@ -548,9 +583,11 @@
     <section class="lp-sec lp-center lp-reveal">
       <p class="lp-pointer">👇 Regardez comment ça marche 👇</p>
       <!-- À REMPLACER : collez ici votre <iframe> YouTube/Vimeo à la place du bloc .lp-video -->
-      <div class="lp-video" role="img" aria-label="Vidéo de démonstration">
-        <div class="play"><svg class="lp-ic"><use href="#pn-play"/></svg></div>
-        <div class="cap">Vidéo de démonstration</div>
+      <div class="lp-video-wrap">
+        <div class="lp-video" role="img" aria-label="Vidéo de démonstration">
+          <div class="play"><svg class="lp-ic"><use href="#pn-play"/></svg></div>
+          <div class="cap">Vidéo de démonstration</div>
+        </div>
       </div>
     </section>
 
@@ -558,7 +595,10 @@
 
     <!-- AVANTAGES -->
     <section class="lp-sec lp-reveal">
-      <h2 class="lp-h2 lp-center">Les avantages concrets pour vous…</h2>
+      <div class="lp-sec-head lp-center">
+        <span class="lp-eyebrow c">Ce que ça change</span>
+        <h2 class="lp-h2">Les avantages concrets pour vous…</h2>
+      </div>
       <div class="lp-benefits">
 
         <div class="lp-benefit">
@@ -623,6 +663,7 @@
     <!-- CTA 1 -->
     <section class="lp-reveal">
       <div class="lp-ctacard">
+        <span class="lp-kicker">Gratuit · 20 minutes</span>
         <p class="lp-pointer">👇 Faites gratuitement le point sur votre organisation 👇</p>
         <p class="lp-lead">En 20 minutes, regardons simplement comment vous gérez aujourd’hui :</p>
         <ul class="lp-mini">
@@ -642,10 +683,14 @@
 
     <!-- C'EST POUR VOUS SI -->
     <section class="lp-sec lp-reveal">
-      <h2 class="lp-h2 lp-center">PolynetIA Local Partner est fait pour vous si…</h2>
+      <div class="lp-sec-head lp-center">
+        <span class="lp-eyebrow c">Reconnaissez-vous ?</span>
+        <h2 class="lp-h2">PolynetIA Local Partner est fait pour vous si…</h2>
+      </div>
       <div class="lp-grid">
 
         <article class="lp-reason">
+          <span class="ridx">01</span>
           <span class="ricon"><svg class="lp-ic"><use href="#pn-helmet"/></svg></span>
           <h3>Vous êtes souvent sur chantier quand les clients appellent.</h3>
           <p>Vous ne pouvez pas lâcher vos outils ou votre équipe à chaque fois que le téléphone sonne. Alors vous vous dites : <span class="qmark">« Je rappellerai après. »</span></p>
@@ -653,6 +698,7 @@
         </article>
 
         <article class="lp-reason">
+          <span class="ridx">02</span>
           <span class="ricon"><svg class="lp-ic"><use href="#pn-hub"/></svg></span>
           <h3>Vos demandes arrivent de partout.</h3>
           <div class="lp-chips">
@@ -662,6 +708,7 @@
         </article>
 
         <article class="lp-reason">
+          <span class="ridx">03</span>
           <span class="ricon"><svg class="lp-ic"><use href="#pn-growth"/></svg></span>
           <h3>Votre entreprise a grandi… mais tout continue de passer par vous.</h3>
           <p>Quand vous étiez seul, ce n’était pas un problème. Vous aviez tout dans votre téléphone et dans votre tête. Mais aujourd’hui il y a :</p>
@@ -676,6 +723,7 @@
         </article>
 
         <article class="lp-reason">
+          <span class="ridx">04</span>
           <span class="ricon"><svg class="lp-ic"><use href="#pn-doc"/></svg></span>
           <h3>Vous avez plusieurs devis dehors et vous voulez savoir où vous en êtes.</h3>
           <p>Qui a répondu ? Qui hésite ? Qui faut-il rappeler ? Quel devis attend depuis une semaine ? Lequel peut réellement se signer ?</p>
@@ -689,7 +737,10 @@
 
     <!-- DÉMO -->
     <section class="lp-sec lp-reveal">
-      <h2 class="lp-h2 lp-center">Votre entreprise peut être plus simple à gérer.</h2>
+      <div class="lp-sec-head lp-center">
+        <span class="lp-eyebrow c">La méthode, concrètement</span>
+        <h2 class="lp-h2">Votre entreprise peut être plus simple à gérer.</h2>
+      </div>
       <div class="lp-demo">
         <div class="lp-steps">
           <p class="lp-p">Imaginez une nouvelle demande. Un client vous écrit :</p>
@@ -710,11 +761,11 @@
         <div class="lp-fiche">
           <div class="fhead"><span>Fiche client</span><span class="lights"><i></i><i></i><i></i></span></div>
           <div class="fbody">
-            <div class="fname">Jean Dupont</div>
-            <div class="frow"><span class="ico">📍</span> Punaauia</div>
-            <div class="frow"><span class="ico">🔨</span> Rénovation salle de bain</div>
-            <div class="frow"><span class="ico">📞</span> 87 XX XX XX</div>
-            <div class="frow"><span class="ico">📅</span> Rendez-vous mardi à 14 h</div>
+            <div class="fname"><span class="av">JD</span> Jean Dupont</div>
+            <div class="frow"><span class="ico">📍</span><span class="lbl">Commune</span> Punaauia</div>
+            <div class="frow"><span class="ico">🔨</span><span class="lbl">Travaux</span> Rénovation salle de bain</div>
+            <div class="frow"><span class="ico">📞</span><span class="lbl">Contact</span> 87 XX XX XX</div>
+            <div class="frow"><span class="ico">📅</span><span class="lbl">RDV</span> Rendez-vous mardi à 14 h</div>
           </div>
         </div>
 
@@ -724,7 +775,10 @@
 
     <!-- APRÈS LE RDV -->
     <section class="lp-sec lp-center lp-reveal">
-      <h2 class="lp-h2">Et après le rendez-vous ?</h2>
+      <div class="lp-sec-head lp-center">
+        <span class="lp-eyebrow c">Le suivi des devis</span>
+        <h2 class="lp-h2">Et après le rendez-vous ?</h2>
+      </div>
       <p class="lp-lead">Vous envoyez votre devis. Puis vous voyez simplement :</p>
       <div class="lp-status">
         <span class="lp-pill s-sent"><span class="d"></span> Devis envoyé</span>
@@ -782,7 +836,10 @@
 
     <!-- 5 QUESTIONS -->
     <section class="lp-sec lp-reveal">
-      <h2 class="lp-h2 lp-center">Posez-vous simplement ces 5 questions</h2>
+      <div class="lp-sec-head lp-center">
+        <span class="lp-eyebrow c">Auto-diagnostic</span>
+        <h2 class="lp-h2">Posez-vous simplement ces 5 questions</h2>
+      </div>
       <div class="lp-questions">
         <div class="lp-q"><span class="num">1</span><span class="qt">Quand vous ratez un appel, êtes-vous sûr de rappeler tout le monde ?</span></div>
         <div class="lp-q"><span class="num">2</span><span class="qt">Pouvez-vous voir rapidement tous les devis qui attendent une réponse ?</span></div>
@@ -796,6 +853,7 @@
     <!-- CTA 2 -->
     <section class="lp-reveal">
       <div class="lp-ctacard">
+        <span class="lp-kicker">Sans engagement</span>
         <p class="lp-pointer">👇 Faisons le point ensemble 👇</p>
         <p class="lp-lead">Pendant cet échange gratuit, nous regardons comment vous travaillez aujourd’hui.</p>
         <p class="lp-p"><strong>Pas de grand discours. Pas de logiciel imposé.</strong> On regarde simplement :</p>
@@ -816,7 +874,10 @@
 
     <!-- FAQ -->
     <section class="lp-sec lp-reveal">
-      <h2 class="lp-h2 lp-center">Questions fréquentes</h2>
+      <div class="lp-sec-head lp-center">
+        <span class="lp-eyebrow c">On vous répond</span>
+        <h2 class="lp-h2">Questions fréquentes</h2>
+      </div>
       <div class="lp-faq">
 
         <details class="lp-acc">
@@ -882,10 +943,11 @@
           <li><span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span> Votre équipe peut retrouver les informations.</li>
           <li><span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span> Et vous savez où vous en êtes.</li>
         </ul>
+        <div class="fdiv"></div>
         <div class="boss">Vous restez le patron.</div>
         <div class="boss-sub">Mais vous n’avez plus besoin de tout garder dans votre tête.</div>
         <div class="fbrand">
-          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2.5" y="2.5" width="35" height="35" rx="9" fill="none" stroke="#ffffff" stroke-width="2"/><path d="M13 13 27 13 20 27Z" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round"/><circle cx="13" cy="13" r="2.6" fill="#ffffff"/><circle cx="27" cy="13" r="2.6" fill="#ffffff"/><circle cx="20" cy="27" r="3" fill="#e8720f"/></svg>
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2.5" y="2.5" width="35" height="35" rx="9" fill="none" stroke="#ffffff" stroke-width="2"/><path d="M13 13 27 13 20 27Z" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round"/><circle cx="13" cy="13" r="2.6" fill="#ffffff"/><circle cx="27" cy="13" r="2.6" fill="#ffffff"/><circle cx="20" cy="27" r="3" fill="#e67e14"/></svg>
           <b>POLYNETIA</b><span>Local Partner</span>
         </div>
         <p class="flead">👇 Faites le point gratuitement sur votre façon de gérer vos demandes et vos devis 👇</p>
@@ -910,11 +972,7 @@
 
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var items = root.querySelectorAll('.lp-reveal');
-
-  if (reduce || !('IntersectionObserver' in window)) {
-    // Pas d'animation : tout reste visible (aucune classe .js ajoutée).
-    return;
-  }
+  if (reduce || !('IntersectionObserver' in window)) return;
 
   root.classList.add('js');
   var io = new IntersectionObserver(function (entries) {
@@ -922,10 +980,7 @@
       if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-
   items.forEach(function (el) { io.observe(el); });
-
-  // Filet de sécurité : tout révéler après 2,5 s si l'observer ne se déclenche pas.
   setTimeout(function () { items.forEach(function (el) { el.classList.add('is-in'); }); }, 2500);
 })();
 </script>
