@@ -1,0 +1,931 @@
+<!-- ============================================================================
+  PolynetIA — Local Partner · Landing page BTP (Tahiti)
+  À coller dans un bloc « Code HTML brut » de Systeme.io.
+
+  TOUT est encapsulé sous .pnia-lp : aucun style ne déborde sur le reste
+  de votre page Systeme.io. Aucune dépendance externe hormis Google Fonts.
+
+  ▸ 3 choses à personnaliser (cherchez « À REMPLACER ») :
+    1. La vidéo de démonstration  (bloc .lp-video)
+    2. Les liens des boutons       (href="#rdv" → votre lien de réservation)
+    3. Rien d'autre n'est requis.
+  ============================================================================ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Spline+Sans+Mono:wght@400;500;600&display=swap');
+
+/* ============================ TOKENS (scopés) ============================ */
+.pnia-lp{
+  /* Surfaces — béton clair, teinte froide biaisée vers le bleu de plan */
+  --paper:   #edeff2;
+  --paper-2: #f6f7f9;
+  --card:    #ffffff;
+  --tint:    #e9edf4;   /* voile bleuté doux */
+
+  /* Encres */
+  --ink:   #1e232b;     /* acier / béton mouillé */
+  --ink-2: #363d48;
+  --muted: #5b626d;
+
+  /* Traits */
+  --line:   #dde1e8;
+  --line-2: #c8cdd7;
+
+  /* Bleu de plan (accent typographique) */
+  --accent:      #2c519b;
+  --accent-ink:  #234382;
+  --accent-soft: #e7eef9;
+
+  /* Ambre chantier (action / boutons) — le seul geste vif */
+  --action:      #e8720f;
+  --action-dark: #c85f08;
+  --action-soft: #fceede;
+
+  /* Vert sécurité (validations) */
+  --ok:      #2e9e5b;
+  --ok-soft: #e5f3ec;
+
+  /* Rouge caution (bandeau + refus) */
+  --warn:      #c23b2b;
+  --warn-soft: #fbe8e5;
+
+  --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --sans:  'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --mono:  'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --radius: 10px;
+  --maxw: 664px;
+
+  background: var(--paper);
+  color: var(--ink-2);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.pnia-lp *{ box-sizing: border-box; }
+.pnia-lp img{ max-width: 100%; display: block; }
+
+/* Colonne éditoriale */
+.pnia-lp .lp-inner{
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 22px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(40px, 8.5vw, 68px);
+}
+.pnia-lp .lp-inner > *{ min-width: 0; }
+
+/* ============================ TYPOGRAPHIE ============================ */
+.pnia-lp .lp-eyebrow{
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 14px;
+}
+.pnia-lp .lp-h1{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(31px, 6.6vw, 47px);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: balance;
+}
+.pnia-lp .lp-h1 .l2{ color: var(--accent-ink); }
+.pnia-lp .lp-h2{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(24px, 4.7vw, 34px);
+  line-height: 1.16;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: balance;
+}
+.pnia-lp .lp-h3{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(20px, 3vw, 25px);
+  line-height: 1.28;
+  color: var(--ink);
+  margin: 0;
+}
+.pnia-lp .lp-lead{
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(18px, 2.6vw, 21px);
+  line-height: 1.48;
+  color: var(--ink-2);
+  margin: 0;
+}
+.pnia-lp p{ margin: 0 0 .95em; }
+.pnia-lp p:last-child{ margin-bottom: 0; }
+.pnia-lp .lp-p{ color: var(--ink-2); }
+.pnia-lp .lp-center{ text-align: center; }
+.pnia-lp strong{ color: var(--ink); font-weight: 700; }
+.pnia-lp .lp-accent{ color: var(--accent); font-weight: 700; }
+.pnia-lp em{ font-style: italic; }
+.pnia-lp .lp-emoji{ font-style: normal; font-family: var(--sans); }
+
+/* Section générique */
+.pnia-lp .lp-sec{ display: flex; flex-direction: column; gap: 18px; }
+.pnia-lp .lp-sec.lp-center{ align-items: center; }
+.pnia-lp .lp-sec.lp-center > *{ max-width: 100%; }
+
+/* Filet décoratif « plan » */
+.pnia-lp .lp-rule{
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; color: var(--line-2);
+}
+.pnia-lp .lp-rule::before,
+.pnia-lp .lp-rule::after{ content:""; height:1px; width:min(90px,22vw); background: var(--line-2); }
+.pnia-lp .lp-rule i{ width:6px; height:6px; transform: rotate(45deg); background: var(--accent); opacity:.55; }
+
+/* Icônes */
+.pnia-lp .lp-ic{ width: 1em; height: 1em; display: inline-block; vertical-align: -0.13em; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ============================ BANDEAU ============================ */
+.pnia-lp .lp-banner{
+  background: var(--warn-soft);
+  border-bottom: 1px solid #f0cfc9;
+  color: var(--warn);
+  text-align: center;
+  padding: 11px 18px;
+  font-size: clamp(11px, 2.4vw, 12.5px);
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* ============================ EN-TÊTE / LOGO ============================ */
+.pnia-lp .lp-top{ padding-top: 30px; }
+.pnia-lp .lp-brand{
+  display: inline-flex; align-items: center; gap: 11px;
+  padding: 9px 16px 9px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  background: var(--card);
+}
+.pnia-lp .lp-brand svg{ width: 30px; height: 30px; display: block; }
+.pnia-lp .lp-brand .wm{ display: flex; flex-direction: column; line-height: 1; text-align: left; }
+.pnia-lp .lp-brand .wm b{ font-family: var(--sans); font-weight: 700; font-size: 15px; letter-spacing: .16em; color: var(--ink); }
+.pnia-lp .lp-brand .wm span{ font-family: var(--sans); font-weight: 600; font-size: 9.5px; letter-spacing: .22em; color: var(--accent); margin-top: 4px; text-transform: uppercase; }
+
+/* Hero */
+.pnia-lp .lp-hero{ text-align: center; padding-top: 30px; display:flex; flex-direction:column; gap: 22px; align-items:center; }
+.pnia-lp .lp-hero .lp-h1{ max-width: 15ch; }
+.pnia-lp .lp-hero .lp-lead{ max-width: 54ch; }
+
+/* Encart « Avec Local Partner » */
+.pnia-lp .lp-promise{
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  max-width: 58ch;
+  text-align: left;
+}
+.pnia-lp .lp-promise .lp-h3{ font-weight: 500; }
+
+/* Les 3 « Sans… » */
+.pnia-lp .lp-sans{ display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.pnia-lp .lp-sans-item{ display: inline-flex; align-items: center; gap: 10px; font-weight: 500; color: var(--ink-2); font-size: 16px; }
+.pnia-lp .lp-sans-item .lp-ic{ color: var(--warn); font-size: 19px; flex: none; }
+
+/* ============================ VIDÉO ============================ */
+.pnia-lp .lp-pointer{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(20px, 3.2vw, 26px);
+  color: var(--ink);
+  text-align: center;
+  margin: 0;
+  line-height: 1.25;
+}
+.pnia-lp .lp-video{
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 120% at 50% 0%, #223049 0%, #141a26 55%, #0e131c 100%);
+  border: 1px solid #26303f;
+  box-shadow: 0 24px 50px -30px rgba(20,26,38,.7);
+  display: grid; place-items: center;
+  text-align: center;
+  padding: 22px;
+}
+.pnia-lp .lp-video::after{
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(120% 120% at 50% 40%, #000 30%, transparent 75%);
+  pointer-events: none;
+}
+.pnia-lp .lp-video .play{
+  position: relative; z-index: 1;
+  width: 74px; height: 74px; border-radius: 50%;
+  background: var(--action); color: #fff;
+  display: grid; place-items: center;
+  box-shadow: 0 10px 26px -6px rgba(232,114,15,.6);
+}
+.pnia-lp .lp-video .play .lp-ic{ width: 30px; height: 30px; fill: #fff; stroke: none; margin-left: 4px; }
+.pnia-lp .lp-video .cap{ position:relative; z-index:1; margin-top: 14px; color:#aeb8c9; font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; max-width: 90%; }
+/* Astuce : masquez l'habillage ci-dessus en insérant votre <iframe> à la place. */
+
+/* ============================ AVANTAGES ============================ */
+.pnia-lp .lp-benefits{ display: flex; flex-direction: column; gap: 4px; }
+.pnia-lp .lp-benefit{
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 15px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+.pnia-lp .lp-benefit:first-child{ border-top: none; padding-top: 4px; }
+.pnia-lp .lp-check{
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--ok-soft); color: var(--ok);
+  display: grid; place-items: center; margin-top: 2px;
+}
+.pnia-lp .lp-check .lp-ic{ width: 15px; height: 15px; stroke-width: 2.4; }
+.pnia-lp .lp-benefit-t{ font-family: var(--serif); font-weight: 600; font-size: 19px; line-height: 1.3; color: var(--ink); margin: 0 0 5px; }
+.pnia-lp .lp-benefit-d{ font-size: 16px; color: var(--muted); margin: 0; line-height: 1.55; }
+.pnia-lp .lp-benefit-d q{ quotes: none; color: var(--ink-2); font-style: italic; }
+
+/* ============================ CARTE CTA ============================ */
+.pnia-lp .lp-ctacard{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--action);
+  border-radius: 14px;
+  padding: clamp(24px, 4.5vw, 38px);
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  box-shadow: 0 20px 44px -34px rgba(30,35,43,.5);
+}
+.pnia-lp .lp-ctacard .lp-lead{ max-width: 52ch; }
+.pnia-lp .lp-mini{
+  list-style: none; margin: 0; padding: 0;
+  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 8px 10px;
+  max-width: 50ch;
+}
+.pnia-lp .lp-mini li{
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--tint); border: 1px solid var(--line);
+  color: var(--ink-2); font-size: 14px; font-weight: 500;
+  padding: 6px 12px; border-radius: 999px;
+}
+.pnia-lp .lp-mini li::before{ content:""; width:5px; height:5px; border-radius:50%; background: var(--accent); flex:none; }
+
+/* Bouton */
+.pnia-lp .lp-btn{
+  -webkit-appearance:none; appearance:none; cursor:pointer;
+  display: inline-flex; align-items: center; justify-content:center; gap: 11px;
+  background: var(--action); color: #fff !important;
+  font-family: var(--sans); font-weight: 700; font-size: 16px;
+  letter-spacing: .01em; text-decoration: none;
+  padding: 17px 30px; border: none; border-radius: 7px;
+  box-shadow: 0 12px 24px -10px rgba(232,114,15,.65);
+  transition: transform .16s ease, background .16s ease, box-shadow .16s ease;
+  text-align:center; line-height: 1.2;
+}
+.pnia-lp .lp-btn .lp-ic{ width: 18px; height: 18px; stroke-width: 2.2; }
+.pnia-lp .lp-btn:hover{ background: var(--action-dark); transform: translateY(-2px); box-shadow: 0 16px 30px -10px rgba(200,95,8,.6); }
+.pnia-lp .lp-btn:focus-visible{ outline: 3px solid var(--accent); outline-offset: 3px; }
+.pnia-lp .lp-btn.wide{ width: 100%; max-width: 420px; }
+
+/* ============================ GRILLE « C'EST POUR VOUS SI » ============================ */
+.pnia-lp .lp-grid{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.pnia-lp .lp-reason{
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 14px; padding: 22px 22px 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.pnia-lp .lp-reason .ricon{
+  width: 44px; height: 44px; border-radius: 11px;
+  background: var(--accent-soft); color: var(--accent);
+  display: grid; place-items: center; flex: none;
+}
+.pnia-lp .lp-reason .ricon .lp-ic{ width: 24px; height: 24px; }
+.pnia-lp .lp-reason h3{
+  font-family: var(--serif); font-weight: 600; font-size: 19px; line-height: 1.26;
+  color: var(--accent-ink); margin: 0;
+}
+.pnia-lp .lp-reason p{ font-size: 15.5px; color: var(--muted); margin: 0; line-height: 1.55; }
+.pnia-lp .lp-reason .qmark{ display:block; font-style: italic; color: var(--ink-2); margin-top: 8px; }
+.pnia-lp .lp-chips{ display: flex; flex-wrap: wrap; gap: 7px; }
+.pnia-lp .lp-chips span{
+  font-family: var(--mono); font-size: 12.5px; font-weight: 500;
+  background: var(--tint); border: 1px solid var(--line);
+  color: var(--ink-2); padding: 4px 9px; border-radius: 6px;
+}
+.pnia-lp .lp-plus{ list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+.pnia-lp .lp-plus li{ position: relative; padding-left: 16px; font-size: 15px; color: var(--muted); }
+.pnia-lp .lp-plus li::before{ content:"+"; position: absolute; left: 0; color: var(--action); font-weight: 700; }
+
+/* ============================ DÉMO (message → fiche → statuts) ============================ */
+.pnia-lp .lp-demo{ display: flex; flex-direction: column; gap: 20px; }
+.pnia-lp .lp-steps{ display: flex; flex-direction: column; gap: 14px; }
+
+.pnia-lp .lp-msg{
+  align-self: flex-start; max-width: 88%;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 4px 16px 16px 16px;
+  padding: 15px 18px;
+  box-shadow: 0 10px 26px -20px rgba(30,35,43,.5);
+}
+.pnia-lp .lp-msg .who{ display:flex; align-items:center; gap:8px; font-family: var(--mono); font-size: 11px; letter-spacing:.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.pnia-lp .lp-msg .who .dot{ width:7px; height:7px; border-radius:50%; background: var(--ok); flex:none; }
+.pnia-lp .lp-msg .txt{ font-family: var(--serif); font-style: italic; font-size: 18px; line-height: 1.4; color: var(--ink); }
+
+.pnia-lp .lp-ask{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.pnia-lp .lp-ask li{ position: relative; padding-left: 22px; color: var(--ink-2); }
+.pnia-lp .lp-ask li::before{ content:""; position:absolute; left:2px; top:.62em; width:8px; height:8px; border:1.6px solid var(--accent); border-radius:2px; }
+
+/* Fiche client (relevé structuré) */
+.pnia-lp .lp-fiche{
+  background: var(--card); border: 1px solid var(--line-2);
+  border-radius: 12px; overflow: hidden;
+  box-shadow: 0 18px 40px -28px rgba(30,35,43,.6);
+}
+.pnia-lp .lp-fiche .fhead{
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--ink); color: #eef1f6;
+  padding: 11px 16px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+}
+.pnia-lp .lp-fiche .fhead .lights{ display:inline-flex; gap:5px; }
+.pnia-lp .lp-fiche .fhead .lights i{ width:9px; height:9px; border-radius:50%; background: rgba(255,255,255,.28); }
+.pnia-lp .lp-fiche .fhead .lights i:first-child{ background: var(--action); }
+.pnia-lp .lp-fiche .fbody{ padding: 8px 18px 16px; }
+.pnia-lp .lp-fiche .fname{ font-family: var(--serif); font-weight: 600; font-size: 22px; color: var(--ink); padding: 12px 0; border-bottom: 1px dashed var(--line-2); }
+.pnia-lp .lp-fiche .frow{ display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px dashed var(--line); font-family: var(--mono); font-size: 15px; color: var(--ink-2); }
+.pnia-lp .lp-fiche .frow:last-child{ border-bottom: none; }
+.pnia-lp .lp-fiche .frow .ico{ font-family: var(--sans); font-size: 17px; width: 22px; text-align: center; flex: none; }
+.pnia-lp .lp-demo .caption{ font-size: 16px; color: var(--muted); text-align: center; max-width: 52ch; margin: 4px auto 0; }
+
+/* Statuts de devis */
+.pnia-lp .lp-status{ display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.pnia-lp .lp-pill{
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-weight: 500; font-size: 13.5px;
+  padding: 8px 14px; border-radius: 999px; border: 1px solid;
+}
+.pnia-lp .lp-pill .d{ width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.pnia-lp .lp-pill.s-sent{ color: var(--accent-ink); background: var(--accent-soft); border-color: #c6d7f1; }
+.pnia-lp .lp-pill.s-sent .d{ background: var(--accent); }
+.pnia-lp .lp-pill.s-call{ color: var(--action-dark); background: var(--action-soft); border-color: #f3d3aa; }
+.pnia-lp .lp-pill.s-call .d{ background: var(--action); }
+.pnia-lp .lp-pill.s-wait{ color: var(--muted); background: var(--paper-2); border-color: var(--line-2); }
+.pnia-lp .lp-pill.s-wait .d{ background: #9aa1ac; }
+.pnia-lp .lp-pill.s-ok{ color: #1e7a44; background: var(--ok-soft); border-color: #bfe3cd; }
+.pnia-lp .lp-pill.s-ok .d{ background: var(--ok); }
+.pnia-lp .lp-pill.s-no{ color: var(--warn); background: var(--warn-soft); border-color: #f0cbc4; }
+.pnia-lp .lp-pill.s-no .d{ background: var(--warn); }
+
+/* Les 3 grands mots */
+.pnia-lp .lp-big3{ display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+.pnia-lp .lp-big3 span{
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(30px, 7vw, 46px); line-height: 1.1; color: var(--ink);
+  letter-spacing: -0.015em;
+}
+.pnia-lp .lp-big3 span:nth-child(2){ color: var(--accent-ink); }
+.pnia-lp .lp-big3 span:nth-child(3){ color: var(--action); }
+
+/* Listes courantes */
+.pnia-lp .lp-ul{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.pnia-lp .lp-ul li{ position: relative; padding-left: 20px; color: var(--ink-2); }
+.pnia-lp .lp-ul li::before{ content:""; position:absolute; left:0; top:.65em; width:9px; height:2px; background: var(--accent); }
+.pnia-lp .lp-ul.two{ display: grid; grid-template-columns: repeat(2,1fr); gap: 9px 24px; }
+
+/* Ligne d'objets emoji (téléphone / mémoire / notes) */
+.pnia-lp .lp-tools{ display: flex; flex-wrap: wrap; gap: 10px; }
+.pnia-lp .lp-tools span{
+  display: inline-flex; align-items: center; gap: 9px;
+  background: var(--card); border: 1px solid var(--line);
+  padding: 9px 15px; border-radius: 999px; color: var(--ink-2); font-weight: 500; font-size: 15px;
+}
+.pnia-lp .lp-tools span b{ font-family: var(--sans); font-size: 17px; font-weight: 400; }
+
+/* ============================ 5 QUESTIONS ============================ */
+.pnia-lp .lp-questions{ display: flex; flex-direction: column; gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--card); }
+.pnia-lp .lp-q{ display: grid; grid-template-columns: 52px 1fr; gap: 6px; align-items: baseline; padding: 18px 22px; border-top: 1px solid var(--line); }
+.pnia-lp .lp-q:first-child{ border-top: none; }
+.pnia-lp .lp-q .num{ font-family: var(--serif); font-weight: 600; font-size: 26px; color: var(--accent); line-height: 1; }
+.pnia-lp .lp-q .qt{ font-size: 17px; color: var(--ink); font-weight: 500; line-height: 1.4; }
+
+/* ============================ FAQ ============================ */
+.pnia-lp .lp-faq{ display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--line); }
+.pnia-lp .lp-acc{ border-bottom: 1px solid var(--line); }
+.pnia-lp .lp-acc summary{
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 6px;
+  font-family: var(--serif); font-weight: 600; font-size: clamp(17px, 2.6vw, 20px);
+  color: var(--ink);
+}
+.pnia-lp .lp-acc summary::-webkit-details-marker{ display: none; }
+.pnia-lp .lp-acc summary .qm{ color: var(--accent); font-family: var(--sans); font-weight: 700; flex: none; }
+.pnia-lp .lp-acc summary .plus{ margin-left: auto; flex: none; width: 22px; height: 22px; position: relative; transition: transform .25s ease; color: var(--muted); }
+.pnia-lp .lp-acc summary .plus::before,
+.pnia-lp .lp-acc summary .plus::after{ content:""; position:absolute; background: currentColor; border-radius: 2px; }
+.pnia-lp .lp-acc summary .plus::before{ top:50%; left:2px; right:2px; height:2px; transform: translateY(-50%); }
+.pnia-lp .lp-acc summary .plus::after{ left:50%; top:2px; bottom:2px; width:2px; transform: translateX(-50%); transition: opacity .25s ease; }
+.pnia-lp .lp-acc[open] summary .plus::after{ opacity: 0; }
+.pnia-lp .lp-acc[open] summary .plus{ color: var(--action); }
+.pnia-lp .lp-acc summary:focus-visible{ outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+.pnia-lp .lp-acc .ans{ padding: 0 6px 20px; color: var(--muted); font-size: 16px; line-height: 1.6; }
+.pnia-lp .lp-acc .ans p{ margin: 0 0 .6em; }
+
+/* ============================ FINAL ============================ */
+.pnia-lp .lp-final{
+  background: var(--ink);
+  color: #dfe4ec;
+  border-radius: 18px;
+  padding: clamp(30px, 6vw, 52px) clamp(22px, 5vw, 44px);
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  position: relative; overflow: hidden;
+}
+.pnia-lp .lp-final::before{
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(120% 90% at 50% 0%, #000 20%, transparent 70%);
+  pointer-events: none;
+}
+.pnia-lp .lp-final > *{ position: relative; z-index: 1; }
+.pnia-lp .lp-final .lp-h2{ color: #fff; }
+.pnia-lp .lp-final .flist{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; text-align: left; max-width: 44ch; width: 100%; }
+.pnia-lp .lp-final .flist li{ display: flex; align-items: flex-start; gap: 12px; color: #cfd6e1; }
+.pnia-lp .lp-final .flist .lp-check{ background: rgba(46,158,91,.18); color: #6ee69f; }
+.pnia-lp .lp-final .boss{ font-family: var(--serif); font-weight: 600; font-size: clamp(26px, 5.4vw, 38px); color: #fff; line-height: 1.12; }
+.pnia-lp .lp-final .boss-sub{ font-family: var(--serif); font-size: clamp(18px, 3vw, 22px); color: #aeb8c9; font-weight: 400; max-width: 40ch; }
+.pnia-lp .lp-final .fbrand{ display:flex; align-items:center; gap:10px; color:#fff; }
+.pnia-lp .lp-final .fbrand svg{ width: 26px; height: 26px; }
+.pnia-lp .lp-final .fbrand b{ font-family: var(--sans); font-weight: 700; letter-spacing: .16em; font-size: 15px; }
+.pnia-lp .lp-final .fbrand span{ font-family: var(--sans); font-weight: 600; letter-spacing: .18em; font-size: 11px; color: var(--action); }
+.pnia-lp .lp-final .flead{ color: #cfd6e1; font-family: var(--serif); font-size: clamp(17px, 2.6vw, 20px); line-height: 1.4; max-width: 46ch; }
+
+/* Pied */
+.pnia-lp .lp-foot{ text-align: center; color: var(--muted); font-size: 13px; padding: 4px 0 40px; }
+.pnia-lp .lp-foot b{ color: var(--ink-2); letter-spacing: .14em; font-weight: 700; }
+
+/* ============================ RÉVÉLATION AU SCROLL ============================ */
+.pnia-lp.js .lp-reveal{ opacity: 0; transform: translateY(18px); }
+.pnia-lp.js .lp-reveal.is-in{ opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+@media (prefers-reduced-motion: reduce){
+  .pnia-lp.js .lp-reveal{ opacity: 1 !important; transform: none !important; }
+  .pnia-lp *{ scroll-behavior: auto !important; }
+}
+
+/* ============================ RESPONSIVE ============================ */
+@media (max-width: 560px){
+  .pnia-lp .lp-grid{ grid-template-columns: 1fr; }
+  .pnia-lp .lp-ul.two{ grid-template-columns: 1fr; }
+  .pnia-lp .lp-benefit{ grid-template-columns: 26px 1fr; gap: 13px; }
+  .pnia-lp .lp-q{ grid-template-columns: 40px 1fr; padding: 16px 16px; }
+}
+</style>
+
+<div class="pnia-lp">
+
+  <!-- Sprite d'icônes (invisible) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="pn-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="pn-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="5.6" y1="5.6" x2="18.4" y2="18.4"/></symbol>
+    <symbol id="pn-play" viewBox="0 0 24 24"><path d="M9 7.3v9.4l8-4.7z"/></symbol>
+    <symbol id="pn-arrow" viewBox="0 0 24 24"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/></symbol>
+    <symbol id="pn-helmet" viewBox="0 0 24 24"><path d="M3.6 16.4h16.8"/><path d="M6 16a6 6 0 0 1 12 0"/><path d="M12 4.2v3.2"/><path d="M8.5 7.4c.9 1.3 2 1.9 3.5 1.9s2.6-.6 3.5-1.9"/></symbol>
+    <symbol id="pn-hub" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.4"/><circle cx="5" cy="5" r="1.6"/><circle cx="19" cy="5" r="1.6"/><circle cx="5" cy="19" r="1.6"/><circle cx="19" cy="19" r="1.6"/><path d="M10.3 10.3 6.2 6.2M13.7 10.3 17.8 6.2M10.3 13.7 6.2 17.8M13.7 13.7 17.8 17.8"/></symbol>
+    <symbol id="pn-growth" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6.5 20v-5"/><path d="M11 20v-8"/><path d="M15.5 20V9"/><path d="M20 20V6"/></symbol>
+    <symbol id="pn-doc" viewBox="0 0 24 24"><path d="M7 3.5h6.2L18 8.3V20.5H7z"/><path d="M13 3.6V8.4H17.9"/><path d="M9.5 12.5h6M9.5 15.5h6M9.5 9.6h2.6"/></symbol>
+  </svg>
+
+  <!-- BANDEAU -->
+  <div class="lp-banner">🔨 Pour les patrons du BTP à Tahiti qui en ont marre de tout gérer eux-mêmes 🔨</div>
+
+  <div class="lp-inner">
+
+    <!-- LOGO -->
+    <div class="lp-top lp-center lp-reveal">
+      <span class="lp-brand">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2.5" y="2.5" width="35" height="35" rx="9" fill="none" stroke="#2c519b" stroke-width="2"/><path d="M13 13 27 13 20 27Z" fill="none" stroke="#2c519b" stroke-width="1.8" stroke-linejoin="round"/><circle cx="13" cy="13" r="2.6" fill="#2c519b"/><circle cx="27" cy="13" r="2.6" fill="#2c519b"/><circle cx="20" cy="27" r="3" fill="#e8720f"/></svg>
+        <span class="wm"><b>POLYNETIA</b><span>Local Partner</span></span>
+      </span>
+    </div>
+
+    <!-- HERO -->
+    <header class="lp-hero lp-reveal">
+      <h1 class="lp-h1">Vous êtes sur chantier.<br><span class="l2">Les clients, eux, continuent d’appeler.</span></h1>
+      <p class="lp-lead">Découvrez comment mieux gérer vos demandes, vos rendez-vous et vos devis sans passer votre journée sur le téléphone… ni vos soirées à essayer de vous rappeler qui vous devez rappeler.</p>
+      <div class="lp-promise">
+        <p class="lp-h3">Avec <span class="lp-accent">PolynetIA Local Partner</span>, vous gardez le contrôle sur vos clients et vos devis, même quand vous êtes occupé sur vos chantiers.</p>
+      </div>
+      <div class="lp-sans">
+        <span class="lp-sans-item"><svg class="lp-ic"><use href="#pn-ban"/></svg> Sans embaucher quelqu’un juste pour répondre au téléphone.</span>
+        <span class="lp-sans-item"><svg class="lp-ic"><use href="#pn-ban"/></svg> Sans changer toutes vos habitudes.</span>
+        <span class="lp-sans-item"><svg class="lp-ic"><use href="#pn-ban"/></svg> Sans ajouter encore plus de travail.</span>
+      </div>
+    </header>
+
+    <!-- VIDÉO -->
+    <section class="lp-sec lp-center lp-reveal">
+      <p class="lp-pointer">👇 Regardez comment ça marche 👇</p>
+      <!-- À REMPLACER : collez ici votre <iframe> YouTube/Vimeo à la place du bloc .lp-video -->
+      <div class="lp-video" role="img" aria-label="Vidéo de démonstration">
+        <div class="play"><svg class="lp-ic"><use href="#pn-play"/></svg></div>
+        <div class="cap">Vidéo de démonstration</div>
+      </div>
+    </section>
+
+    <div class="lp-rule" aria-hidden="true"><i></i></div>
+
+    <!-- AVANTAGES -->
+    <section class="lp-sec lp-reveal">
+      <h2 class="lp-h2 lp-center">Les avantages concrets pour vous…</h2>
+      <div class="lp-benefits">
+
+        <div class="lp-benefit">
+          <span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span>
+          <div>
+            <p class="lp-benefit-t">Vous pouvez rester concentré sur votre chantier même quand une nouvelle demande arrive.</p>
+            <p class="lp-benefit-d">La personne reçoit une première réponse et vous récupérez les informations dont vous avez besoin pour savoir ce qu’elle veut.</p>
+          </div>
+        </div>
+
+        <div class="lp-benefit">
+          <span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span>
+          <div>
+            <p class="lp-benefit-t">Vous savez qui vous a contacté et pour quoi.</p>
+            <p class="lp-benefit-d">Plus besoin de chercher dans vos appels, vos SMS, WhatsApp, Messenger ou vos mails pour retrouver une demande.</p>
+          </div>
+        </div>
+
+        <div class="lp-benefit">
+          <span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span>
+          <div>
+            <p class="lp-benefit-t">Vous perdez moins de temps avec les demandes qui ne correspondent pas à votre travail.</p>
+            <p class="lp-benefit-d">Vous pouvez connaître le type de travaux, la commune, le délai et les principales informations avant de rappeler.</p>
+          </div>
+        </div>
+
+        <div class="lp-benefit">
+          <span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span>
+          <div>
+            <p class="lp-benefit-t">Vos rendez-vous sont plus simples à organiser.</p>
+            <p class="lp-benefit-d">Vous évitez une partie des allers-retours juste pour trouver un jour et une heure qui conviennent.</p>
+          </div>
+        </div>
+
+        <div class="lp-benefit">
+          <span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span>
+          <div>
+            <p class="lp-benefit-t">Vous voyez les devis qui attendent une réponse.</p>
+            <p class="lp-benefit-d">Vous savez qui rappeler et vous évitez le fameux : <q>Mince… je devais le rappeler celui-là.</q></p>
+          </div>
+        </div>
+
+        <div class="lp-benefit">
+          <span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span>
+          <div>
+            <p class="lp-benefit-t">Vous avez toutes les informations utiles au même endroit.</p>
+            <p class="lp-benefit-d">Le nom du client, son numéro, sa demande, son rendez-vous, son devis et ce qu’il reste à faire.</p>
+          </div>
+        </div>
+
+        <div class="lp-benefit">
+          <span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span>
+          <div>
+            <p class="lp-benefit-t">Vous pouvez avoir une équipe plus grande sans que tout continue de passer par vous.</p>
+            <p class="lp-benefit-d">Vos gars peuvent travailler, vos clients peuvent être suivis et vous gardez une vue claire sur ce qui se passe.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA 1 -->
+    <section class="lp-reveal">
+      <div class="lp-ctacard">
+        <p class="lp-pointer">👇 Faites gratuitement le point sur votre organisation 👇</p>
+        <p class="lp-lead">En 20 minutes, regardons simplement comment vous gérez aujourd’hui :</p>
+        <ul class="lp-mini">
+          <li>les nouvelles demandes</li>
+          <li>les appels manqués</li>
+          <li>les rendez-vous</li>
+          <li>les devis</li>
+          <li>les clients à rappeler</li>
+        </ul>
+        <p class="lp-p"><strong>Et voyons s’il y a des choses simples à améliorer.</strong></p>
+        <!-- À REMPLACER : href="#rdv" → votre lien de réservation -->
+        <a class="lp-btn wide" href="#rdv">Faire le point gratuitement <svg class="lp-ic"><use href="#pn-arrow"/></svg></a>
+      </div>
+    </section>
+
+    <div class="lp-rule" aria-hidden="true"><i></i></div>
+
+    <!-- C'EST POUR VOUS SI -->
+    <section class="lp-sec lp-reveal">
+      <h2 class="lp-h2 lp-center">PolynetIA Local Partner est fait pour vous si…</h2>
+      <div class="lp-grid">
+
+        <article class="lp-reason">
+          <span class="ricon"><svg class="lp-ic"><use href="#pn-helmet"/></svg></span>
+          <h3>Vous êtes souvent sur chantier quand les clients appellent.</h3>
+          <p>Vous ne pouvez pas lâcher vos outils ou votre équipe à chaque fois que le téléphone sonne. Alors vous vous dites : <span class="qmark">« Je rappellerai après. »</span></p>
+          <p>Mais après, il y a toujours autre chose.</p>
+        </article>
+
+        <article class="lp-reason">
+          <span class="ricon"><svg class="lp-ic"><use href="#pn-hub"/></svg></span>
+          <h3>Vos demandes arrivent de partout.</h3>
+          <div class="lp-chips">
+            <span>Téléphone</span><span>WhatsApp</span><span>Messenger</span><span>Facebook</span><span>SMS</span><span>Mail</span><span>Formulaire du site</span>
+          </div>
+          <p>Et parfois, quelques jours plus tard, vous vous demandez : <span class="qmark">« Il m’avait contacté où déjà ? »</span></p>
+        </article>
+
+        <article class="lp-reason">
+          <span class="ricon"><svg class="lp-ic"><use href="#pn-growth"/></svg></span>
+          <h3>Votre entreprise a grandi… mais tout continue de passer par vous.</h3>
+          <p>Quand vous étiez seul, ce n’était pas un problème. Vous aviez tout dans votre téléphone et dans votre tête. Mais aujourd’hui il y a :</p>
+          <ul class="lp-plus">
+            <li>plus de chantiers</li>
+            <li>plus de clients</li>
+            <li>plus de devis</li>
+            <li>plus de salariés</li>
+            <li>plus de choses à penser</li>
+          </ul>
+          <p>Et dès que quelqu’un a une question… <strong>on appelle le patron.</strong></p>
+        </article>
+
+        <article class="lp-reason">
+          <span class="ricon"><svg class="lp-ic"><use href="#pn-doc"/></svg></span>
+          <h3>Vous avez plusieurs devis dehors et vous voulez savoir où vous en êtes.</h3>
+          <p>Qui a répondu ? Qui hésite ? Qui faut-il rappeler ? Quel devis attend depuis une semaine ? Lequel peut réellement se signer ?</p>
+          <p>Vous voulez pouvoir le voir rapidement. <strong>Pas passer une heure à rechercher les informations.</strong></p>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="lp-rule" aria-hidden="true"><i></i></div>
+
+    <!-- DÉMO -->
+    <section class="lp-sec lp-reveal">
+      <h2 class="lp-h2 lp-center">Votre entreprise peut être plus simple à gérer.</h2>
+      <div class="lp-demo">
+        <div class="lp-steps">
+          <p class="lp-p">Imaginez une nouvelle demande. Un client vous écrit :</p>
+          <div class="lp-msg">
+            <div class="who"><span class="dot"></span> Nouveau message</div>
+            <div class="txt">Bonjour, je cherche quelqu’un pour refaire ma salle de bain.</div>
+          </div>
+          <p class="lp-p">Il reçoit une réponse. On lui demande :</p>
+          <ul class="lp-ask">
+            <li>où se trouve le chantier ;</li>
+            <li>ce qu’il souhaite faire ;</li>
+            <li>quand il veut commencer ;</li>
+            <li>comment le joindre.</li>
+          </ul>
+          <p class="lp-p">Puis il choisit un rendez-vous. Quand vous êtes disponible, vous retrouvez directement :</p>
+        </div>
+
+        <div class="lp-fiche">
+          <div class="fhead"><span>Fiche client</span><span class="lights"><i></i><i></i><i></i></span></div>
+          <div class="fbody">
+            <div class="fname">Jean Dupont</div>
+            <div class="frow"><span class="ico">📍</span> Punaauia</div>
+            <div class="frow"><span class="ico">🔨</span> Rénovation salle de bain</div>
+            <div class="frow"><span class="ico">📞</span> 87 XX XX XX</div>
+            <div class="frow"><span class="ico">📅</span> Rendez-vous mardi à 14 h</div>
+          </div>
+        </div>
+
+        <p class="caption">Vous n’avez pas eu besoin de passer dix messages avec lui juste pour comprendre sa demande.</p>
+      </div>
+    </section>
+
+    <!-- APRÈS LE RDV -->
+    <section class="lp-sec lp-center lp-reveal">
+      <h2 class="lp-h2">Et après le rendez-vous ?</h2>
+      <p class="lp-lead">Vous envoyez votre devis. Puis vous voyez simplement :</p>
+      <div class="lp-status">
+        <span class="lp-pill s-sent"><span class="d"></span> Devis envoyé</span>
+        <span class="lp-pill s-call"><span class="d"></span> À rappeler vendredi</span>
+        <span class="lp-pill s-wait"><span class="d"></span> En attente du client</span>
+        <span class="lp-pill s-ok"><span class="d"></span> Accepté</span>
+        <span class="lp-pill s-no"><span class="d"></span> Refusé</span>
+      </div>
+      <p class="lp-p">C’est tout. Pas besoin de mots compliqués. Vous savez juste :</p>
+      <div class="lp-big3">
+        <span>Qui rappeler.</span>
+        <span>Quand.</span>
+        <span>Et pourquoi.</span>
+      </div>
+    </section>
+
+    <div class="lp-rule" aria-hidden="true"><i></i></div>
+
+    <!-- GRANDIR -->
+    <section class="lp-sec lp-reveal">
+      <h2 class="lp-h2 lp-center">Si votre entreprise grandit, votre façon de travailler doit aussi évoluer.</h2>
+      <p class="lp-p">Au début :</p>
+      <div class="lp-tools">
+        <span><b>📱</b> un téléphone</span>
+        <span><b>🧠</b> une bonne mémoire</span>
+        <span><b>📒</b> quelques notes</span>
+      </div>
+      <p class="lp-p">…ça peut suffire.</p>
+      <p class="lp-p">Mais lorsque vous commencez à avoir plusieurs salariés, plusieurs chantiers et plusieurs devis en même temps… <strong>la tête du patron ne peut pas rester le seul endroit où toutes les informations sont rangées.</strong></p>
+    </section>
+
+    <!-- PAS VOUS REMPLACER -->
+    <section class="lp-sec lp-reveal">
+      <h2 class="lp-h2 lp-center">Le but n’est pas de vous remplacer.</h2>
+      <p class="lp-p">Vous restez celui qui :</p>
+      <ul class="lp-ul two">
+        <li>parle aux vrais clients ;</li>
+        <li>visite les chantiers ;</li>
+        <li>donne les conseils ;</li>
+        <li>fait les prix ;</li>
+        <li>décide ;</li>
+        <li>dirige son équipe.</li>
+      </ul>
+      <p class="lp-p">PolynetIA s’occupe surtout de vous aider à <strong>ne rien laisser traîner derrière vous</strong>.</p>
+    </section>
+
+    <!-- PAS BESOIN DE PLUS DE CLIENTS -->
+    <section class="lp-sec lp-center lp-reveal">
+      <h2 class="lp-h2">Vous n’avez peut-être même pas besoin de plus de clients.</h2>
+      <p class="lp-lead">Si votre carnet est déjà bien rempli, vous n’avez pas forcément besoin de faire plus de publicité. Vous avez peut-être surtout besoin de mieux gérer les demandes que vous avez déjà.</p>
+      <p class="lp-p">Parce qu’avant de chercher encore plus de travail… <strong>autant être sûr de bien suivre celui qui arrive déjà.</strong></p>
+    </section>
+
+    <div class="lp-rule" aria-hidden="true"><i></i></div>
+
+    <!-- 5 QUESTIONS -->
+    <section class="lp-sec lp-reveal">
+      <h2 class="lp-h2 lp-center">Posez-vous simplement ces 5 questions</h2>
+      <div class="lp-questions">
+        <div class="lp-q"><span class="num">1</span><span class="qt">Quand vous ratez un appel, êtes-vous sûr de rappeler tout le monde ?</span></div>
+        <div class="lp-q"><span class="num">2</span><span class="qt">Pouvez-vous voir rapidement tous les devis qui attendent une réponse ?</span></div>
+        <div class="lp-q"><span class="num">3</span><span class="qt">Savez-vous exactement qui vous devez rappeler aujourd’hui ?</span></div>
+        <div class="lp-q"><span class="num">4</span><span class="qt">Quand un client vous écrit sur WhatsApp ou Messenger, son message est-il facile à retrouver une semaine plus tard ?</span></div>
+        <div class="lp-q"><span class="num">5</span><span class="qt">Si vous êtes absent demain, quelqu’un peut-il savoir où en sont vos demandes et vos devis ?</span></div>
+      </div>
+      <p class="lp-p lp-center">Si vous avez répondu <strong>« pas toujours »</strong> à plusieurs questions… il y a probablement des choses à simplifier.</p>
+    </section>
+
+    <!-- CTA 2 -->
+    <section class="lp-reveal">
+      <div class="lp-ctacard">
+        <p class="lp-pointer">👇 Faisons le point ensemble 👇</p>
+        <p class="lp-lead">Pendant cet échange gratuit, nous regardons comment vous travaillez aujourd’hui.</p>
+        <p class="lp-p"><strong>Pas de grand discours. Pas de logiciel imposé.</strong> On regarde simplement :</p>
+        <ul class="lp-mini">
+          <li>Comment vos clients vous contactent</li>
+          <li>Comment vous organisez vos rendez-vous</li>
+          <li>Comment vous suivez vos devis</li>
+          <li>Comment vous savez qui rappeler</li>
+          <li>Et ce qui vous fait perdre du temps</li>
+        </ul>
+        <p class="lp-p">Ensuite, nous vous disons clairement si PolynetIA peut vous être utile.</p>
+        <!-- À REMPLACER : href="#rdv" → votre lien de réservation -->
+        <a class="lp-btn wide" href="#rdv">Je veux faire le point <svg class="lp-ic"><use href="#pn-arrow"/></svg></a>
+      </div>
+    </section>
+
+    <div class="lp-rule" aria-hidden="true"><i></i></div>
+
+    <!-- FAQ -->
+    <section class="lp-sec lp-reveal">
+      <h2 class="lp-h2 lp-center">Questions fréquentes</h2>
+      <div class="lp-faq">
+
+        <details class="lp-acc">
+          <summary><span class="qm">?</span> « J’ai déjà assez de travail. »<span class="plus" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>C’est justement pour cela que PolynetIA peut être utile.</p>
+            <p>Le but n’est pas forcément de vous envoyer davantage de clients. Le but peut simplement être de mieux gérer ceux qui vous contactent déjà et de vous éviter de perdre du temps.</p>
+          </div>
+        </details>
+
+        <details class="lp-acc">
+          <summary><span class="qm">?</span> « J’ai déjà un logiciel pour mes devis. »<span class="plus" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>Aucun problème. Si votre logiciel fait bien son travail, on le garde.</p>
+            <p>Nous ne sommes pas là pour remplacer ce qui fonctionne.</p>
+          </div>
+        </details>
+
+        <details class="lp-acc">
+          <summary><span class="qm">?</span> « Je ne suis pas très à l’aise avec l’informatique. »<span class="plus" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>Vous n’avez pas besoin de devenir informaticien.</p>
+            <p>L’objectif est justement que ce soit plus simple pour vous, pas plus compliqué.</p>
+          </div>
+        </details>
+
+        <details class="lp-acc">
+          <summary><span class="qm">?</span> « Je préfère parler moi-même à mes clients. »<span class="plus" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>Et c’est normal. Quand une vraie discussion est nécessaire, c’est vous qui prenez la main.</p>
+            <p>PolynetIA vous aide surtout à récupérer les premières informations et à garder le suivi.</p>
+          </div>
+        </details>
+
+        <details class="lp-acc">
+          <summary><span class="qm">?</span> « Je ne veux pas qu’un robot parle n’importe comment à mes clients. »<span class="plus" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>Nous non plus. Ce qui est mis en place est préparé en fonction de votre entreprise, de votre façon de travailler et des questions que vos clients posent réellement.</p>
+            <p>Et vous gardez toujours la main.</p>
+          </div>
+        </details>
+
+        <details class="lp-acc">
+          <summary><span class="qm">?</span> « Combien ça coûte ? »<span class="plus" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>Cela dépend de ce qu’il faut réellement mettre en place dans votre entreprise.</p>
+            <p>C’est pour cela que nous préférons d’abord regarder comment vous travaillez aujourd’hui plutôt que de vous vendre la même chose qu’à tout le monde.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- FINAL -->
+    <section class="lp-reveal">
+      <div class="lp-final">
+        <h2 class="lp-h2">Au final, vous voulez surtout pouvoir partir sur chantier en sachant que…</h2>
+        <ul class="flist">
+          <li><span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span> Les nouvelles demandes ne sont pas oubliées.</li>
+          <li><span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span> Les rendez-vous sont organisés.</li>
+          <li><span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span> Les clients à rappeler sont visibles.</li>
+          <li><span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span> Les devis en attente ne disparaissent pas.</li>
+          <li><span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span> Votre équipe peut retrouver les informations.</li>
+          <li><span class="lp-check"><svg class="lp-ic"><use href="#pn-check"/></svg></span> Et vous savez où vous en êtes.</li>
+        </ul>
+        <div class="boss">Vous restez le patron.</div>
+        <div class="boss-sub">Mais vous n’avez plus besoin de tout garder dans votre tête.</div>
+        <div class="fbrand">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2.5" y="2.5" width="35" height="35" rx="9" fill="none" stroke="#ffffff" stroke-width="2"/><path d="M13 13 27 13 20 27Z" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round"/><circle cx="13" cy="13" r="2.6" fill="#ffffff"/><circle cx="27" cy="13" r="2.6" fill="#ffffff"/><circle cx="20" cy="27" r="3" fill="#e8720f"/></svg>
+          <b>POLYNETIA</b><span>Local Partner</span>
+        </div>
+        <p class="flead">👇 Faites le point gratuitement sur votre façon de gérer vos demandes et vos devis 👇</p>
+        <!-- À REMPLACER : href="#rdv" → votre lien de réservation -->
+        <a class="lp-btn wide" href="#rdv">Faire le point avec PolynetIA <svg class="lp-ic"><use href="#pn-arrow"/></svg></a>
+      </div>
+    </section>
+
+    <div class="lp-foot"><b>POLYNETIA</b> · Local Partner — Polynésie française</div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.currentScript && document.currentScript.previousElementSibling;
+  if (!root || !root.classList || !root.classList.contains('pnia-lp')) {
+    var all = document.querySelectorAll('.pnia-lp');
+    root = all[all.length - 1];
+  }
+  if (!root) return;
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = root.querySelectorAll('.lp-reveal');
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    // Pas d'animation : tout reste visible (aucune classe .js ajoutée).
+    return;
+  }
+
+  root.classList.add('js');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+  items.forEach(function (el) { io.observe(el); });
+
+  // Filet de sécurité : tout révéler après 2,5 s si l'observer ne se déclenche pas.
+  setTimeout(function () { items.forEach(function (el) { el.classList.add('is-in'); }); }, 2500);
+})();
+</script>
