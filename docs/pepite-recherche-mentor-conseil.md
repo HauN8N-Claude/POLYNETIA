@@ -144,3 +144,18 @@ Les deux sont cumulables dans le cadre Pépite (mentor + référent). Si un seul
 - CRA : cra.asso.fr (240 délégués bénévoles anciens dirigeants), Bpifrance.
 - IME : Wikipédia, cci-paris-idf.fr (critères d'éligibilité).
 - Polynésie : ccism.pf (CAGEST, offre TPE, partenariat experts-comptables 2017, permanences dans les îles), eightpeasconsulting.com.
+
+---
+
+## Annexe — Profils LinkedIn (vérifiés le 11 septembre 2026)
+
+> Vérifie toujours que le titre du profil correspond bien à l'entreprise indiquée avant d'écrire : LinkedIn compte beaucoup d'homonymes.
+
+| Personne | Profil LinkedIn | Fiabilité |
+|---|---|---|
+| Lionel Valdan (Rivalis) | https://www.linkedin.com/in/lionel-valdan-60410128/ | Confirmé : titre « Rivalis » |
+| Damien Valdan (Rivalis) | https://fr.linkedin.com/in/damienvaldan | Confirmé : titre « Groupe Rivalis » |
+| Frédéric Liotard (Prospactive / Groupeactive) | https://www.linkedin.com/in/fr%C3%A9d%C3%A9ric-liotard-31678910/ | Confirmé : titre « GROUPEACTIVE » |
+| Bruno Doron (Bras Droit des Dirigeants) | https://www.linkedin.com/in/doron-bruno/ | Confirmé : titre « Bras Droit des Dirigeants Corporate » |
+| Chantal Dagnaud (CINOV Conseil) | https://fr.linkedin.com/in/chantal-dagnaud-7848724 (probable) | À vérifier : titre « Institutions & Stratégies », cohérent avec sa présidence CINOV Conseil, mais deux autres profils homonymes existent |
+| Jacques Benn (ex-président national DCF) | https://fr.linkedin.com/in/jacques-benn-9949ab298 | Confirmé : titre « DCF — Limoges », il dirige le congrès national DCF 2026 à Limoges |

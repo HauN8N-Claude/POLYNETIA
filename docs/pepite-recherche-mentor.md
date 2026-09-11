@@ -143,3 +143,23 @@ Un bon mentor répond à la question 1 avec des anecdotes, pas avec des généra
 - Distributeurs régionaux : pv magazine France, série « Portrait distributeur » (février-avril 2024).
 - Mentorat : pepite-france.fr, egee.asso.fr, ecti.org, moovjee.fr, upf.pf (Pépite Polynésie).
 - Polynésie : ccism.pf (Label Installateur Photovoltaïque), Radio1 Tahiti et La Dépêche de Tahiti (Synergie solaire), mahanaora-api.pf, tahiti-infos.com.
+
+---
+
+## Annexe — Profils LinkedIn (vérifiés le 11 septembre 2026)
+
+> Vérifie toujours que le titre du profil correspond bien à l'entreprise indiquée avant d'écrire : LinkedIn compte beaucoup d'homonymes.
+
+| Personne | Profil LinkedIn | Fiabilité |
+|---|---|---|
+| Philippe Soret (ECE Photovoltaïque) | https://www.linkedin.com/in/philippe-soret-19336110a/ | Confirmé : titre « ELECTRO CONCEPT ENERGIE (ECE) » |
+| Marc Jedliczka (Hespul) | Aucun profil personnel trouvé | Passer par la page entreprise https://fr.linkedin.com/company/hespul/ ou l'Institut négaWatt |
+| Franc Raffalli (ex-GMPV-FFB, Sys EnR) | https://fr.linkedin.com/in/franc-raffalli-50444a23 | Confirmé : titre « Sys EnR » |
+| Anthony Néel (fondateur Alliantz) | https://www.linkedin.com/in/anthony-neel-1b369045/ | Confirmé. Info à vérifier sur le profil : il aurait quitté Alliantz et cofondé Hokta (drones/robotique) avec Cédric Botella, donc libéré de Sonepar mais occupé ailleurs |
+| Paul Toulouse (ex-DG Systovi) | https://www.linkedin.com/in/paul-toulouse-92114223/ | Confirmé : posts Systovi 2024 |
+| Richard Loyen (Enerplan) | https://www.linkedin.com/in/richard-loyen-0167bb12/ | Confirmé : titre « Enerplan » |
+| Alain Ricaud (Cythelia) | https://fr.linkedin.com/in/alain-ricaud-18555b116 | Confirmé : titre « Retraité chez CYTHELIA » |
+| David Trebosc (GPPEP) | https://fr.linkedin.com/in/trebosc (probable, profil Toulouse) | À vérifier : au moins trois homonymes. Plus sûr : le contacter via gppep.org ou forum-photovoltaique.fr |
+| Éric Laborde / Thierry Chaix (ex-Soleil en Tête) | Non identifiés avec certitude | Homonymes nombreux ; piste C, passer par Pappers (Solepi) si besoin |
+| Thierry Dugué (formation CCISM, Polynésie) | https://www.linkedin.com/in/thierry-dugu%C3%A9-287432b0/ | Confirmé : titre « EURL ACTE » (bureau de contrôle agréé en Polynésie), cohérent avec son rôle de formateur |
+| Jimmy Wong (Sunzil, Synergie solaire) | https://pf.linkedin.com/in/jimmy-wong-17a208100 | Confirmé : titre « Directeur Général — SUNZIL POLYNESIE » |
