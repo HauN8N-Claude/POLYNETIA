@@ -1,5 +1,7 @@
 # Recherche de mentor Pépite n°2 — le métier du conseil aux TPE
 
+> **Priorisation mise à jour (12/09/2026) : P2 — actif.** Stratégie locale validée : voir `pepite-strategie-mentorat.md`. Ce mentor métier se cherche en France, en visio, en parallèle du parrain local.
+>
 > Complément du premier dossier (`pepite-recherche-mentor.md`). Le mentor **filière** connaît les installateurs solaire. Le mentor **métier** cherché ici a passé sa carrière à **vendre et livrer du conseil ou des services récurrents à des patrons de petites boîtes**. C'est lui qui peut apprendre à tarifer l'offre, vendre le diagnostic, tenir un client à l'abonnement et gérer une tournée de patrons méfiants.
 >
 > Recherches du 11 septembre 2026, sources publiques. Aucun critère n'ayant été fourni, les critères du §1 ont été définis à partir du contexte PolynetIA : service productisé (Local Partner), clients TPE artisanales, vente en direct par le fondateur, livraison à distance depuis le fenua.

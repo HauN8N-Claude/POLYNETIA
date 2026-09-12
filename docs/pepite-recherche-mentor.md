@@ -1,5 +1,7 @@
 # Recherche de mentor Pépite — petits installateurs solaire
 
+> **Priorisation mise à jour (12/09/2026) : P4 — réserve.** Stratégie locale validée : voir `pepite-strategie-mentorat.md`. Ce dossier s'active au lancement de la niche solaire (mois 9-12) ; son volet Polynésie reste utilisable dès maintenant.
+>
 > Document de travail, recherches effectuées le 11 septembre 2026 à partir de sources publiques (presse filière, sites des fédérations, LinkedIn, registres). Les statuts « retraité / entreprise vendue » sont ceux annoncés publiquement : à re-vérifier sur LinkedIn ou par un premier échange avant de s'engager.
 
 ---

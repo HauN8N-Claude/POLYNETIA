@@ -1,5 +1,7 @@
 # Recherche de mentor Pépite n°3 — le grand réseau multi-métiers
 
+> **Priorisation mise à jour (12/09/2026) : P3 — dormant.** Stratégie locale validée : voir `pepite-strategie-mentorat.md`. Les têtes de réseau France de ce dossier ne redeviennent prioritaires qu'en cas d'expansion métropole ; son volet Polynésie est absorbé par la stratégie locale.
+>
 > Objectif reformulé : tu ne veux plus un mentor par niche, tu veux **un carnet d'adresses qui couvre plusieurs métiers d'artisans TPE/PME à la fois** (garages, clim, solaire, plomberie, électricité, maçonnerie…). Le critère n°1 devient la **largeur** du réseau, pas sa profondeur dans une filière.
 >
 > Recherches du 11 septembre 2026, sources publiques. Ce dossier complète les dossiers n°1 (filière solaire) et n°2 (métier du conseil).
