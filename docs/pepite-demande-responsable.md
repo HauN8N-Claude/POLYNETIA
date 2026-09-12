@@ -50,6 +50,7 @@ En parallèle, côté **réseau Pépite national** : je cherche aussi un mentor 
 | Éric Malmezac | Ancien colistier consulaire 2023 (industrie), dirigeant de plusieurs sociétés | LinkedIn : linkedin.com/in/éric-malmezac-020155b0 |
 | Patrick Bagur | Past-président du MEDEF PF, président du syndicat des prestataires de services (SPSPF) | LinkedIn : pf.linkedin.com/in/patrick-bagur-2962a41a |
 | Wendy Mou Kui | Directrice ADIE Polynésie | LinkedIn : pf.linkedin.com/in/wendymoukui |
+| Steeve Hamblin | Président du MEDEF PF, fondateur de la Business Maker Academy | Via le MEDEF PF ou la Business Maker Academy (pas de LinkedIn identifié) |
 | Christophe Plée | Président CPME PF | LinkedIn : pf.linkedin.com/in/christophe-plee-914367196 |
 
 Je peux contacter Éric Malmezac et Patrick Bagur directement, mais un mot de ta part en amont, au nom de Pépite, changera l'accueil.
